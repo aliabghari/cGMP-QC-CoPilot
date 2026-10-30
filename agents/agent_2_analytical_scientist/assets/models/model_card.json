@@ -1,0 +1,111 @@
+{
+  "model_name": "Hybrid Lumry-Eyring + BoundedKineticMLP Deep Ensemble",
+  "version": "1.0.0-non-gmp",
+  "intended_use": "Non-GMP technical decision-support prototype for biologics thermal excursion evaluation, dynamic Out-of-Trend (OOT) stability band construction, and ICH Q1E shelf-life comparison on synthetic stability data. Requires human QA review and approval.",
+  "out_of_scope_and_limitations": [
+    "Never makes automatic lot release or disposition decisions.",
+    "Trained exclusively on synthetic data (SYNTHETIC - NOT GMP DATA).",
+    "SEC alone cannot separate reversible conformational stress from sub-detectable irreversible nucleation.",
+    "Latent unfolded fraction f_U(t) is prior-driven from configured K_u(5C) and dH_u bounds unless constrained by orthogonal DSC/DSF/HDX-MS data.",
+    "Constant-rate Lumry-Eyring fitted model does not include a dynamic polysorbate-80 (PS80) depletion state; structurally mismatched lots with late-time PS80 depletion exhibit higher late-time errors at 25/40C."
+  ],
+  "architecture": {
+    "mlp_input_features": [
+      "ph",
+      "ionic_strength_mm",
+      "surfactant_pct",
+      "protein_conc_mg_ml",
+      "headspace_index",
+      "container_syringe_flag",
+      "initial_afuc_glycan_pct",
+      "initial_acidic_pct",
+      "initial_hmw_pct",
+      "initial_lmw_pct",
+      "(ph - 6.0)^2"
+    ],
+    "mlp_hidden_dims": [
+      32,
+      32
+    ],
+    "activation": "SiLU",
+    "predicted_bounded_parameters": [
+      "dG_eff_ref_kj_mol",
+      "dH_agg_ref_kj_mol",
+      "ku_ref_5c",
+      "dH_u_kj_mol",
+      "dG_frag_ref_kj_mol",
+      "ea_frag_kj_mol",
+      "dG_acidic_ref_kj_mol",
+      "ea_acidic_kj_mol",
+      "log_sigma_adj"
+    ],
+    "ode_integrator": "4th-order Runge-Kutta (RK4) on rapid pre-equilibrium Lumry-Eyring + secondary LMW/Acidic pathways",
+    "ensemble_size": 25,
+    "resampling": "Lot-level bootstrap across 100 training lots per ensemble member"
+  },
+  "artifacts": {
+    "hybrid_ensemble_weights.npz": "1ff79c0e68ddb072756b70a5846ebee73100423f55ffcb0e64b676d7a5330f4d",
+    "hybrid_ensemble_checkpoint.pt": "1ca1d7ecc30e5669087be4275cb6535f3ac638e48aadb997e4247b5964246fb8",
+    "hybrid_config.json": "7cf861c64dee8fe001ffe8fcbaee77016fb439a9f13dff85a4ca614be36d0e60",
+    "calibration_bundle.json": "c5352cbeda99a9dfb4eabcc01acffb1acd37c3a17b9176df40242eda9444e3cb",
+    "phase4_uncertainty_report.json": "ead50893a574a59a723352ed9e255f32f8c33d6d182e41053b648b6c4df106b2",
+    "synth_observations.csv": "9d2d4285ea78bbf0e3eb92bb712c6b16324d71f8de57ab9d3e4d9adcf9333474"
+  },
+  "validation_performance_summary": {
+    "overall": {
+      "lots_count": 40,
+      "observations_count": 712,
+      "hmw_rmse_pp": 0.25857,
+      "hmw_mae_pp": 0.12188,
+      "dG_eff_ref_mae_kj_mol": 0.1247,
+      "apparent_ea_5_40c_mae_kj_mol": 1.5328,
+      "k_eff_5c_mape_pct": 5.38,
+      "k_eff_25c_mape_pct": 7.98,
+      "k_eff_40c_mape_pct": 10.57
+    },
+    "matched": {
+      "lots_count": 28,
+      "observations_count": 498,
+      "hmw_rmse_pp": 0.19565,
+      "hmw_mae_pp": 0.10278,
+      "dG_eff_ref_mae_kj_mol": 0.121,
+      "apparent_ea_5_40c_mae_kj_mol": 1.5075,
+      "k_eff_5c_mape_pct": 5.21,
+      "k_eff_25c_mape_pct": 8.45,
+      "k_eff_40c_mape_pct": 11.25
+    },
+    "mismatched": {
+      "lots_count": 12,
+      "observations_count": 214,
+      "hmw_rmse_pp": 0.3652,
+      "hmw_mae_pp": 0.16632,
+      "dG_eff_ref_mae_kj_mol": 0.1333,
+      "apparent_ea_5_40c_mae_kj_mol": 1.5916,
+      "k_eff_5c_mape_pct": 5.79,
+      "k_eff_25c_mape_pct": 6.89,
+      "k_eff_40c_mape_pct": 8.99
+    },
+    "mismatched_ps80_only": {
+      "lots_count": 6,
+      "observations_count": 108,
+      "hmw_rmse_pp": 0.37957,
+      "hmw_mae_pp": 0.1754,
+      "dG_eff_ref_mae_kj_mol": 0.1574,
+      "apparent_ea_5_40c_mae_kj_mol": 1.5988,
+      "k_eff_5c_mape_pct": 6.84,
+      "k_eff_25c_mape_pct": 7.11,
+      "k_eff_40c_mape_pct": 8.7
+    },
+    "mismatched_full": {
+      "lots_count": 6,
+      "observations_count": 106,
+      "hmw_rmse_pp": 0.34994,
+      "hmw_mae_pp": 0.15707,
+      "dG_eff_ref_mae_kj_mol": 0.1093,
+      "apparent_ea_5_40c_mae_kj_mol": 1.5845,
+      "k_eff_5c_mape_pct": 4.75,
+      "k_eff_25c_mape_pct": 6.67,
+      "k_eff_40c_mape_pct": 9.27
+    }
+  }
+}

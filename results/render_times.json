@@ -1,0 +1,27 @@
+{
+  "timestamp_utc": "2026-10-27T05:34:38Z",
+  "sla_target_ms": 3000.0,
+  "all_under_3s_sla": true,
+  "timings_ms": {
+    "tab_0_guided_tour": 0.0,
+    "tab_1_capacity_and_schedule_risk": 41.01,
+    "tab_2_pm_operating_layer": 6.29,
+    "tab_3_quality_intelligence_spc_capa": 11.6,
+    "tab_4_analytical_kinetics_excursion_oot": 214.42,
+    "tab_5_local_mso_oos_fmea": 6.29,
+    "tab_6_stakeholder_communications": 254.65,
+    "edit_duration_cpm_simulation_roundtrip": 16.37
+  },
+  "timings_seconds": {
+    "tab_0_guided_tour": 0.0,
+    "tab_1_capacity_and_schedule_risk": 0.041,
+    "tab_2_pm_operating_layer": 0.006,
+    "tab_3_quality_intelligence_spc_capa": 0.012,
+    "tab_4_analytical_kinetics_excursion_oot": 0.214,
+    "tab_5_local_mso_oos_fmea": 0.006,
+    "tab_6_stakeholder_communications": 0.255,
+    "edit_duration_cpm_simulation_roundtrip": 0.016
+  },
+  "warnings": [],
+  "status": "PASS"
+}

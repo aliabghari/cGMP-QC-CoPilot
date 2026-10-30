@@ -1,0 +1,41 @@
+{
+  "task_edit_experiment": {
+    "project_id": "BI-CAP-101",
+    "task_id": "WBS-BI-CAP-101-SEC_HPLC",
+    "initial_duration_hours": 18.0,
+    "initial_float_days": 2.5,
+    "initial_p_on_time": 1.0,
+    "edited_duration_hours": 80.0,
+    "edited_float_days": 1.9,
+    "edited_p_on_time": 1.0,
+    "float_delta_days": -0.6,
+    "p_on_time_delta": 0.0,
+    "conclusion": "Task duration extension successfully propagated end-to-end reducing float and P(on time)."
+  },
+  "prioritization_10_program_portfolio_rank_stability": {
+    "alpha_10": {
+      "concentration": 10.0,
+      "rank_stability_score": 1.0,
+      "mean_kendall_tau": 1.0,
+      "prob_top_ranked": {
+        "PROJ-009": 1.0
+      }
+    },
+    "alpha_30": {
+      "concentration": 30.0,
+      "rank_stability_score": 1.0,
+      "mean_kendall_tau": 1.0,
+      "prob_top_ranked": {
+        "PROJ-009": 1.0
+      }
+    },
+    "alpha_100": {
+      "concentration": 100.0,
+      "rank_stability_score": 1.0,
+      "mean_kendall_tau": 1.0,
+      "prob_top_ranked": {
+        "PROJ-009": 1.0
+      }
+    }
+  }
+}

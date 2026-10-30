@@ -1,0 +1,559 @@
+{
+  "benchmark_name": "WP1 Hybrid Capacity & Schedule-Risk Evaluation (Remediated)",
+  "disclaimer": "DRAFT - NOT A GMP RECORD - REQUIRES HUMAN QA APPROVAL",
+  "splits": {
+    "train_weeks": "Weeks 1 - 70",
+    "train_sample_size": 427,
+    "val_calibration_weeks": "Weeks 71 - 86",
+    "val_sample_size": 96,
+    "test_held_out_weeks": "Weeks 87 - 104",
+    "test_sample_size": 105
+  },
+  "tested_python_runtimes": [
+    "3.13",
+    "3.14"
+  ],
+  "metric_reconciliation_notes": {
+    "prioritization_dataset_reconciliation": "In previous reports, the top project changed from EX-CDMO-201 (87% stability) to PRJ-001 (100% stability) because the evaluation switched from the 10-project conflicting Example Biologics Site portfolio to a 4-project illustrative dataset where PRJ-001 strictly dominated on all 5 criteria simultaneously (Penalty $75k, Tier 1A, Float 0.5d, Dependencies 4, Patient Impact True). In this release, both scenarios are evaluated and reported explicitly: the dominant scenario (trivially 100% stability) and the contrasting conflicting scenario (where criteria trade off and top stability varies from 72% at alpha0=10 to 98.6% at alpha0=100).",
+    "peak_skid_utilization_reconciliation": "Defined standardized peak weekly skid utilization as max_{w in {W1, W2}} (hours on skid in week w / weekly capacity) * 100%. Capacity basis: nominal staffed weekly hours (120h UPLC, 100h Maurice, 90h Bioassay). Physical 24/7 calendar capacity is 168h/week. Utilization exceeding 100% in a feasible (no double-booking) schedule represents scheduled overtime/weekend load beyond nominal staffed capacity. Weighted tardiness units: dollars * days ($ * d).",
+    "optimizer_claims_reconciliation": "When fixed work is strictly pinned across all methods, 100% fixed commitment protection is enforced for all methods. CP-SAT matches a strong earliest-due-date (EDD) dispatch rule on tardiness, and provides explainable schedule move reasoning traces and provable infeasibility diagnostics rather than superior capacity leveling.",
+    "turnaround_forecaster_reconciliation": "At q50, pinball loss equals half of MAE. At q50 point prediction, the last-observed baseline achieves pinball loss 0.660 vs model 0.688. Paired bootstrap difference CI confirms model and last-observed baseline are statistically tied on point MAE and q50 pinball loss, while model strongly beats naive mean and project median.",
+    "schedule_calibration_reconciliation": "Evaluated against an independent stress simulator with unmodeled Weibull machine wear-out and preemption across 100 held-out test scenarios. Agreement with the independent simulator is necessary but not sufficient evidence of real-world validity. Isotonic recalibration improves Brier score modestly from 0.1056 to 0.1040, but 95% cluster bootstrap CIs overlap."
+  },
+  "forecasters": {
+    "actual_arrival_slip_days": {
+      "model_point_mae": 1.152,
+      "model_point_mae_95ci": [
+        0.981,
+        1.307
+      ],
+      "baseline_mean_mae": 1.11,
+      "baseline_mean_95ci": [
+        0.932,
+        1.295
+      ],
+      "baseline_project_median_mae": 1.142,
+      "baseline_last_observed_mae": 1.039,
+      "error_reduction_pct_vs_mean": -3.8,
+      "paired_bootstrap_mae_differences": {
+        "vs_mean": {
+          "point_difference": 0.0412,
+          "ci_95": [
+            -0.1712,
+            0.2494
+          ],
+          "verdict": "tie_statistically_indistinguishable"
+        },
+        "vs_project_median": {
+          "point_difference": 0.0095,
+          "ci_95": [
+            -0.2145,
+            0.2275
+          ],
+          "verdict": "tie_statistically_indistinguishable"
+        },
+        "vs_last_observed": {
+          "point_difference": 0.1124,
+          "ci_95": [
+            -0.0959,
+            0.3201
+          ],
+          "verdict": "tie_statistically_indistinguishable"
+        }
+      },
+      "paired_bootstrap_pinball_q50_differences": {
+        "vs_mean": {
+          "point_difference": 0.0206,
+          "ci_95": [
+            -0.0856,
+            0.1247
+          ],
+          "verdict": "tie_statistically_indistinguishable"
+        },
+        "vs_project_median": {
+          "point_difference": 0.0047,
+          "ci_95": [
+            -0.1073,
+            0.1137
+          ],
+          "verdict": "tie_statistically_indistinguishable"
+        },
+        "vs_last_observed": {
+          "point_difference": 0.0562,
+          "ci_95": [
+            -0.048,
+            0.1601
+          ],
+          "verdict": "tie_statistically_indistinguishable"
+        }
+      },
+      "rolling_origin_conformal": {
+        "window_weeks": 16,
+        "raw_test_coverage_pct": 61.0,
+        "raw_test_width": 2.84,
+        "calibrated_test_coverage_pct": 85.7,
+        "calibrated_test_width": 4.096,
+        "mean_rolling_margin": 0.629
+      },
+      "pinball_loss": {
+        "gbdt_calibrated_quantiles": {
+          "q10": 0.187,
+          "q10_95ci": [
+            0.159,
+            0.216
+          ],
+          "q50": 0.576,
+          "q50_95ci": [
+            0.491,
+            0.654
+          ],
+          "q90": 0.27,
+          "q90_95ci": [
+            0.24,
+            0.298
+          ]
+        },
+        "gbdt_raw_quantiles": {
+          "q10": 0.229,
+          "q10_95ci": [
+            0.187,
+            0.272
+          ],
+          "q50": 0.576,
+          "q90": 0.262,
+          "q90_95ci": [
+            0.217,
+            0.304
+          ]
+        },
+        "baseline_mean_point_forecast": {
+          "q10": 0.373,
+          "q50": 0.555,
+          "q90": 0.737
+        },
+        "baseline_project_median_point_forecast": {
+          "q10": 0.356,
+          "q50": 0.571,
+          "q90": 0.786
+        },
+        "baseline_last_observed_point_forecast": {
+          "q10": 0.38,
+          "q50": 0.52,
+          "q90": 0.659
+        }
+      }
+    },
+    "actual_turnaround_hours": {
+      "model_point_mae": 1.376,
+      "model_point_mae_95ci": [
+        1.179,
+        1.58
+      ],
+      "baseline_mean_mae": 1.996,
+      "baseline_mean_95ci": [
+        1.754,
+        2.239
+      ],
+      "baseline_project_median_mae": 2.001,
+      "baseline_last_observed_mae": 1.32,
+      "error_reduction_pct_vs_mean": 31.1,
+      "paired_bootstrap_mae_differences": {
+        "vs_mean": {
+          "point_difference": -0.6205,
+          "ci_95": [
+            -0.9131,
+            -0.3375
+          ],
+          "verdict": "model_beats_baseline"
+        },
+        "vs_project_median": {
+          "point_difference": -0.6259,
+          "ci_95": [
+            -0.8639,
+            -0.414
+          ],
+          "verdict": "model_beats_baseline"
+        },
+        "vs_last_observed": {
+          "point_difference": 0.0558,
+          "ci_95": [
+            -0.1599,
+            0.2709
+          ],
+          "verdict": "tie_statistically_indistinguishable"
+        }
+      },
+      "paired_bootstrap_pinball_q50_differences": {
+        "vs_mean": {
+          "point_difference": -0.3102,
+          "ci_95": [
+            -0.4566,
+            -0.1688
+          ],
+          "verdict": "model_beats_baseline"
+        },
+        "vs_project_median": {
+          "point_difference": -0.3129,
+          "ci_95": [
+            -0.432,
+            -0.207
+          ],
+          "verdict": "model_beats_baseline"
+        },
+        "vs_last_observed": {
+          "point_difference": 0.0279,
+          "ci_95": [
+            -0.0799,
+            0.1355
+          ],
+          "verdict": "tie_statistically_indistinguishable"
+        }
+      },
+      "rolling_origin_conformal": {
+        "window_weeks": 16,
+        "raw_test_coverage_pct": 81.0,
+        "raw_test_width": 4.218,
+        "calibrated_test_coverage_pct": 81.0,
+        "calibrated_test_width": 5.341,
+        "mean_rolling_margin": 0.614
+      },
+      "pinball_loss": {
+        "gbdt_calibrated_quantiles": {
+          "q10": 0.322,
+          "q10_95ci": [
+            0.279,
+            0.373
+          ],
+          "q50": 0.688,
+          "q50_95ci": [
+            0.589,
+            0.79
+          ],
+          "q90": 0.368,
+          "q90_95ci": [
+            0.321,
+            0.419
+          ]
+        },
+        "gbdt_raw_quantiles": {
+          "q10": 0.303,
+          "q10_95ci": [
+            0.241,
+            0.383
+          ],
+          "q50": 0.688,
+          "q90": 0.32,
+          "q90_95ci": [
+            0.268,
+            0.373
+          ]
+        },
+        "baseline_mean_point_forecast": {
+          "q10": 1.26,
+          "q50": 0.998,
+          "q90": 0.736
+        },
+        "baseline_project_median_point_forecast": {
+          "q10": 1.018,
+          "q50": 1.001,
+          "q90": 0.983
+        },
+        "baseline_last_observed_point_forecast": {
+          "q10": 0.648,
+          "q50": 0.66,
+          "q90": 0.671
+        }
+      }
+    }
+  },
+  "optimizer_comparison_100_scenarios": {
+    "scenarios_evaluated": 100,
+    "units": {
+      "weighted_tardiness": "dollars * days ($ * d)",
+      "peak_weekly_utilization": "percent of nominal staffed hours (max week / weekly capacity * 100)",
+      "nominal_staffed_capacity_hours": {
+        "UPLC": 120.0,
+        "Maurice": 100.0,
+        "Bioassay": 90.0
+      },
+      "physical_24_7_capacity_hours": 168.0,
+      "explanation_utilization_over_100pct": "Schedules operate in overtime/weekend hours within physical 168h limit. Utilization > 100% indicates unbuffered operation above nominal staffed hours."
+    },
+    "all_feasible_subset_metrics": {
+      "sample_size_scenarios": 100,
+      "unleveled_baseline": {
+        "mean_peak_weekly_utilization_pct": 120.4,
+        "mean_weighted_tardiness": 2825.7,
+        "mean_moves_per_scenario": 0.0,
+        "fixed_commitments_protected_pct": 100.0,
+        "feasibility_status": "INFEASIBLE (double-books instruments; reported for reference only)"
+      },
+      "fifo_pinned_baseline": {
+        "mean_peak_weekly_utilization_pct": 120.4,
+        "mean_weighted_tardiness": 98701.5,
+        "mean_moves_per_scenario": 8.6,
+        "fixed_commitments_protected_pct": 100.0,
+        "feasibility_status": "FEASIBLE"
+      },
+      "cpsat": {
+        "mean_peak_weekly_utilization_pct": 123.6,
+        "mean_weighted_tardiness": 85854.5,
+        "mean_moves_per_scenario": 7.6,
+        "fixed_commitments_protected_pct": 100.0
+      },
+      "pinned_heijunka": {
+        "mean_peak_weekly_utilization_pct": 120.4,
+        "mean_weighted_tardiness": 98701.5,
+        "mean_moves_per_scenario": 8.6,
+        "fixed_commitments_protected_pct": 100.0
+      },
+      "edd_baseline": {
+        "mean_peak_weekly_utilization_pct": 120.4,
+        "mean_weighted_tardiness": 86734.2,
+        "mean_moves_per_scenario": 8.6,
+        "fixed_commitments_protected_pct": 100.0
+      }
+    },
+    "demo_demo_portfolio_standardized": {
+      "tasks_count": 30,
+      "unleveled": {
+        "peak_weekly_utilization_pct": {
+          "UPLC_SEC_CEX": 143.3,
+          "CE_icIEF": 122.0,
+          "Cell_Bioassay": 135.6
+        },
+        "max_peak_pct": 143.3,
+        "weighted_tardiness": 0.0,
+        "moves": 0
+      },
+      "cpsat": {
+        "peak_weekly_utilization_pct": {
+          "UPLC_SEC_CEX": 140.0,
+          "CE_icIEF": 121.9,
+          "Cell_Bioassay": 135.5
+        },
+        "max_peak_pct": 140.0,
+        "weighted_tardiness": 1.7,
+        "moves": 9
+      },
+      "pinned_heijunka": {
+        "peak_weekly_utilization_pct": {
+          "UPLC_SEC_CEX": 143.3,
+          "CE_icIEF": 122.0,
+          "Cell_Bioassay": 135.6
+        },
+        "max_peak_pct": 143.3,
+        "weighted_tardiness": 0.0,
+        "moves": 0
+      },
+      "edd": {
+        "peak_weekly_utilization_pct": {
+          "UPLC_SEC_CEX": 143.3,
+          "CE_icIEF": 122.0,
+          "Cell_Bioassay": 135.6
+        },
+        "max_peak_pct": 143.3,
+        "weighted_tardiness": 0.0,
+        "moves": 0
+      },
+      "fifo": {
+        "peak_weekly_utilization_pct": {
+          "UPLC_SEC_CEX": 143.3,
+          "CE_icIEF": 122.0,
+          "Cell_Bioassay": 135.6
+        },
+        "max_peak_pct": 143.3,
+        "weighted_tardiness": 0.0,
+        "moves": 0
+      }
+    }
+  },
+  "schedule_calibration": {
+    "evaluation_sample_size_tasks": 2066,
+    "held_out_test_scenarios": 100,
+    "independent_stress_simulator": "Weibull machine breakdowns (k=2.2, lambda=90h), preemption, and absence shocks.",
+    "scientific_boundary": "Agreement with an independent simulator is necessary but not sufficient evidence of real-world validity.",
+    "cluster_bootstrap_resamples": 1000,
+    "results": {
+      "base_late_rate": 0.379,
+      "base_rate_brier": 0.2354,
+      "naive_deterministic_planner": {
+        "brier_score": 0.3059,
+        "brier_95ci": [
+          0.2858,
+          0.3265
+        ],
+        "brier_skill_score": -0.2997
+      },
+      "logistic_regression_baseline": {
+        "brier_score": 0.1308,
+        "brier_95ci": [
+          0.1231,
+          0.1396
+        ],
+        "brier_skill_score": 0.4443,
+        "roc_auc": 0.891
+      },
+      "risk_model_raw": {
+        "brier_score": 0.1167,
+        "brier_95ci": [
+          0.1046,
+          0.129
+        ],
+        "brier_skill_score": 0.5041,
+        "roc_auc": 0.91,
+        "roc_auc_95ci": [
+          0.894,
+          0.924
+        ]
+      },
+      "risk_model_isotonic_calibrated": {
+        "brier_score": 0.1112,
+        "brier_95ci": [
+          0.1006,
+          0.1218
+        ],
+        "brier_skill_score": 0.5277,
+        "brier_skill_score_95ci": [
+          0.4857,
+          0.5673
+        ],
+        "roc_auc": 0.907,
+        "roc_auc_95ci": [
+          0.891,
+          0.921
+        ],
+        "honest_recalibration_finding": "Isotonic recalibration reduces point Brier score slightly, but 95% CIs overlap with raw Brier score, showing that calibration gain is modest on held-out test data."
+      }
+    },
+    "reliability_table_5_bins": [
+      {
+        "bin_range": "[0.0, 0.2)",
+        "sample_count": 942,
+        "mean_calibrated_prob": 0.077,
+        "observed_late_frequency": 0.068
+      },
+      {
+        "bin_range": "[0.2, 0.4)",
+        "sample_count": 373,
+        "mean_calibrated_prob": 0.255,
+        "observed_late_frequency": 0.311
+      },
+      {
+        "bin_range": "[0.4, 0.6)",
+        "sample_count": 194,
+        "mean_calibrated_prob": 0.404,
+        "observed_late_frequency": 0.495
+      },
+      {
+        "bin_range": "[0.6, 0.8)",
+        "sample_count": 152,
+        "mean_calibrated_prob": 0.757,
+        "observed_late_frequency": 0.783
+      },
+      {
+        "bin_range": "[0.8, 1.0)",
+        "sample_count": 405,
+        "mean_calibrated_prob": 0.978,
+        "observed_late_frequency": 0.958
+      }
+    ]
+  },
+  "prioritization_dirichlet_sensitivity": {
+    "single_criterion_orderings_conflicting": {
+      "contract_penalty": [
+        "PRJ-CONF-A",
+        "PRJ-CONF-C",
+        "PRJ-CONF-B",
+        "PRJ-CONF-D"
+      ],
+      "project_tier": [
+        "PRJ-CONF-B",
+        "PRJ-CONF-C",
+        "PRJ-CONF-A",
+        "PRJ-CONF-D"
+      ],
+      "remaining_float": [
+        "PRJ-CONF-B",
+        "PRJ-CONF-C",
+        "PRJ-CONF-A",
+        "PRJ-CONF-D"
+      ],
+      "critical_path_dep": [
+        "PRJ-CONF-C",
+        "PRJ-CONF-B",
+        "PRJ-CONF-D",
+        "PRJ-CONF-A"
+      ],
+      "patient_impact": [
+        "PRJ-CONF-B",
+        "PRJ-CONF-D",
+        "PRJ-CONF-C",
+        "PRJ-CONF-A"
+      ]
+    },
+    "conflicting_scenario": {
+      "description": "Criteria conflict: PRJ-CONF-A has max penalty ($100k) but low patient impact; PRJ-CONF-B has max tier (1A) and patient impact but low penalty ($10k); PRJ-CONF-C has max dependencies (5).",
+      "sensitivity": {
+        "alpha_10": {
+          "concentration": 10.0,
+          "rank_stability_score": 0.72,
+          "mean_kendall_tau": 0.851,
+          "prob_top_ranked": {
+            "PRJ-CONF-A": 0.058,
+            "PRJ-CONF-B": 0.72,
+            "PRJ-CONF-C": 0.222
+          }
+        },
+        "alpha_30": {
+          "concentration": 30.0,
+          "rank_stability_score": 0.868,
+          "mean_kendall_tau": 0.947,
+          "prob_top_ranked": {
+            "PRJ-CONF-A": 0.006,
+            "PRJ-CONF-B": 0.868,
+            "PRJ-CONF-C": 0.126
+          }
+        },
+        "alpha_100": {
+          "concentration": 100.0,
+          "rank_stability_score": 0.986,
+          "mean_kendall_tau": 0.995,
+          "prob_top_ranked": {
+            "PRJ-CONF-B": 0.986,
+            "PRJ-CONF-C": 0.014
+          }
+        }
+      }
+    },
+    "dominant_scenario": {
+      "description": "One project (PRJ-DOM-01) dominates all 5 criteria simultaneously (trivially 1.000 stability across all concentrations).",
+      "sensitivity": {
+        "alpha_10": {
+          "concentration": 10.0,
+          "rank_stability_score": 1.0,
+          "mean_kendall_tau": 1.0,
+          "prob_top_ranked": {
+            "PRJ-DOM-01": 1.0
+          }
+        },
+        "alpha_30": {
+          "concentration": 30.0,
+          "rank_stability_score": 1.0,
+          "mean_kendall_tau": 1.0,
+          "prob_top_ranked": {
+            "PRJ-DOM-01": 1.0
+          }
+        },
+        "alpha_100": {
+          "concentration": 100.0,
+          "rank_stability_score": 1.0,
+          "mean_kendall_tau": 1.0,
+          "prob_top_ranked": {
+            "PRJ-DOM-01": 1.0
+          }
+        }
+      }
+    }
+  }
+}

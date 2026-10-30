@@ -1,0 +1,63 @@
+# ==============================================================================
+# cGMP-QC-CoPilot — Git Ignore Configuration
+# ==============================================================================
+
+# Python Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# Testing, Linting & Coverage
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.hypothesis/
+
+# Local Databases & Volatile Runtime Stores
+*.db
+*.db-journal
+*.sqlite3
+data/*.db
+data/cgmp_qc.db
+
+# Test Outputs, Screenshots & Interactive HTML Render Exports
+results/screenshots/
+*.log
+
+# Build Artifacts
+build/
+dist/
+*.egg-info/
+
+# Operating System & IDE Artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+.git-backup/
+
+# Delivery Archives & Bundles
+cGMP-QC-CoPilot-Delivery.zip
+*.zip
+
+# Verification & Audit Scratch Scripts (Not for Production)
+compute_float_parity.py
+compute_hist_comparators.py
+recompute_15c_audit.py
+recompute_shelf_life_truth.py
+run_grep_audit.py
+verify_hybrid.py

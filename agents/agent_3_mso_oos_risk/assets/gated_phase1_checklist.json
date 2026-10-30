@@ -1,0 +1,108 @@
+{
+  "investigation_id": "OOS-2026-FRM-089",
+  "project_id": "PROJ-001",
+  "batch_id": "OV772-PPQ-002 (Phase III PPQ Lot #2)",
+  "test_code": "TC-CEX-204",
+  "method_name": "Cation Exchange UPLC (CEX-UPLC) Charge Variant Profile",
+  "empower_sequence_id": "SEQ_20261018_CEX_UPLC02_RUN14",
+  "reported_oos_result": "Acidic Peak Group = 28.4% (Specification: <= 25.0%)",
+  "Empower_Run_14_Telemetry_Log": [
+    {
+      "injection_no": 1,
+      "sample_name": "Mobile Phase Blank",
+      "timestamp": "2026-10-16 14:10:00",
+      "pump_pressure_bar": 142.0,
+      "autosampler_temp_c": 5.1,
+      "sequence_dwell_hours": 0.5,
+      "acidic_peak_pct": 0.0,
+      "alarm_code": "NONE"
+    },
+    {
+      "injection_no": 2,
+      "sample_name": "Reference Standard RS-04 (Bracket Start)",
+      "timestamp": "2026-10-16 14:45:00",
+      "pump_pressure_bar": 144.5,
+      "autosampler_temp_c": 5.2,
+      "sequence_dwell_hours": 1.1,
+      "acidic_peak_pct": 18.2,
+      "alarm_code": "NONE"
+    },
+    {
+      "injection_no": 8,
+      "sample_name": "IPC Control Sample",
+      "timestamp": "2026-10-16 18:20:00",
+      "pump_pressure_bar": 218.0,
+      "autosampler_temp_c": 6.4,
+      "sequence_dwell_hours": 4.7,
+      "acidic_peak_pct": 18.6,
+      "alarm_code": "WARN_PRESSURE_RISING (In-Line Filter Fouling)"
+    },
+    {
+      "injection_no": 11,
+      "sample_name": "System Pause Event — High Pressure Abort",
+      "timestamp": "2026-10-16 20:05:00",
+      "pump_pressure_bar": 310.4,
+      "autosampler_temp_c": 14.2,
+      "sequence_dwell_hours": 6.4,
+      "acidic_peak_pct": 19.8,
+      "alarm_code": "ERR_PUMP_OVERPRESSURE_310BAR (Sequence Paused 54.0h Over Weekend)"
+    },
+    {
+      "injection_no": 14,
+      "sample_name": "OV772-PPQ-002 Release Prep #1 (OOS Vial)",
+      "timestamp": "2026-10-19 02:15:00",
+      "pump_pressure_bar": 146.0,
+      "autosampler_temp_c": 17.8,
+      "sequence_dwell_hours": 60.6,
+      "acidic_peak_pct": 28.4,
+      "alarm_code": "ERR_CHILLER_PELTIER_FAULT_17.8C (54h Uncooled Vial Residence)"
+    },
+    {
+      "injection_no": 15,
+      "sample_name": "Reference Standard RS-04 (Bracket End)",
+      "timestamp": "2026-10-19 02:50:00",
+      "pump_pressure_bar": 145.2,
+      "autosampler_temp_c": 17.9,
+      "sequence_dwell_hours": 61.2,
+      "acidic_peak_pct": 26.9,
+      "alarm_code": "ERR_BRACKET_STD_DRIFT (+8.7% Acidic Artifact Confirmed)"
+    }
+  ],
+  "phase_1_checklist_items": [
+    {
+      "step_id": "P1-01",
+      "category": "Reagents & Mobile Phase",
+      "check_description": "Verify MES/NaCl Mobile Phase A & B pH (6.00 ± 0.05), conductivity, and expiration dates in LIMS.",
+      "finding": "PASS — Buffer Lot #MP-2026-88 verified at pH 6.01; within 14-day shelf life.",
+      "anomaly_detected": false
+    },
+    {
+      "step_id": "P1-02",
+      "category": "Analyst Calculation & Integration",
+      "check_description": "Audit Waters Empower 3 processing method version and verify zero manual integration overrides.",
+      "finding": "PASS — Locked ApexTrack Processing Method v3.0 used; Audit Trail shows 0 manual edits.",
+      "anomaly_detected": false
+    },
+    {
+      "step_id": "P1-03",
+      "category": "Hardware Telemetry — Pump Backpressure",
+      "check_description": "Inspect Empower pressure trace across Sequence Run #14 for blockage or flow interruption.",
+      "finding": "CRITICAL ANOMALY — Pump pressure spiked to 310.4 bar at Inj #11 due to 0.2 µm titanium in-line filter fouling, triggering a 54.0-hour automated sequence pause over the weekend.",
+      "anomaly_detected": true
+    },
+    {
+      "step_id": "P1-04",
+      "category": "Hardware Telemetry — Sample Manager Chiller",
+      "check_description": "Inspect Sample Manager Peltier temperature log and total vial residence time prior to Injection #14.",
+      "finding": "CRITICAL ANOMALY — Sample Manager chiller exhaust damper fault caused tray temperature to drift from 5.1°C to 17.8°C during the 54-hour pause (60.6h total vial residence). Pierced Vial #14 and Bracket RS-04 both experienced +8.7% to +9.9% artificial Asn-55 deamidation.",
+      "anomaly_detected": true
+    },
+    {
+      "step_id": "P1-05",
+      "category": "System Suitability Bracketing Standard",
+      "check_description": "Compare Initial vs. Closing Reference Standard RS-04 Acidic Peak % across the 54h pause.",
+      "finding": "CRITICAL ANOMALY — Closing RS-04 Acidic Peak drifted from 18.2% (Inj #2) to 26.9% (Inj #15), failing the <=20.5% System Suitability bracket criterion.",
+      "anomaly_detected": true
+    }
+  ]
+}

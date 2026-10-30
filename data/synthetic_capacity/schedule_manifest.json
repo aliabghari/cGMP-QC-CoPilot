@@ -1,0 +1,33 @@
+{
+  "suite_name": "Schedule Risk & Capacity Benchmark Dataset",
+  "default_seed": 42,
+  "is_synthetic": true,
+  "synthetic_notice": "SYNTHETIC / NOT GMP DATA \u2014 Prototype Decision-Support Modules for Demonstration Only",
+  "files_count": 3,
+  "files": [
+    {
+      "file_path": "data/synthetic_capacity/capacity_test_log.csv",
+      "file_name": "capacity_test_log.csv",
+      "sha256": "ed2c79f25e6d76b789a8cddced684c3cbab583d9c830f0e58fee39dfe3967037",
+      "size_bytes": 10736,
+      "is_synthetic": true,
+      "synthetic_label": "SYNTHETIC / NOT GMP DATA \u2014 Prototype Decision-Support Modules for Demonstration Only"
+    },
+    {
+      "file_path": "data/synthetic_capacity/capacity_train_log.csv",
+      "file_name": "capacity_train_log.csv",
+      "sha256": "d4ef433eeef8633c1f51f93aac8f61298d11f349635e5a5b7bb0318e33d1077c",
+      "size_bytes": 42595,
+      "is_synthetic": true,
+      "synthetic_label": "SYNTHETIC / NOT GMP DATA \u2014 Prototype Decision-Support Modules for Demonstration Only"
+    },
+    {
+      "file_path": "data/synthetic_capacity/capacity_val_log.csv",
+      "file_name": "capacity_val_log.csv",
+      "sha256": "ed5bdf58bab496ddf7e66c848786df686ea0c856c6dcd8a9cf336d205f103484",
+      "size_bytes": 9926,
+      "is_synthetic": true,
+      "synthetic_label": "SYNTHETIC / NOT GMP DATA \u2014 Prototype Decision-Support Modules for Demonstration Only"
+    }
+  ]
+}

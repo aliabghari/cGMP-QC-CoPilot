@@ -1,0 +1,9 @@
+data_stamp,lot_id,split,ph,ionic_strength_mm,surfactant_pct,protein_conc_mg_ml,headspace_index,container_syringe_flag,container_closure,initial_afuc_glycan_pct,initial_acidic_pct,initial_hmw_pct,initial_lmw_pct,initial_monomer_pct,temperature_c,time_months,time_hours,hmw_obs_pct,lmw_obs_pct,monomer_obs_pct,acidic_obs_pct
+ILLUSTRATIVE_DEMO_LOT - NOT USED IN TRAINING - NOT GMP DATA,NS-2026-004,illustrative_demo,5.8,150.0,0.012,100.0,0.75,0,glass_vial,6.5,15.2,0.62,0.1,99.28,5.0,0.0,0.0,0.62,0.1,99.28,15.2
+ILLUSTRATIVE_DEMO_LOT - NOT USED IN TRAINING - NOT GMP DATA,NS-2026-004,illustrative_demo,5.8,150.0,0.012,100.0,0.75,0,glass_vial,6.5,15.2,0.62,0.1,99.28,5.0,1.0,730.5,0.65,0.108,99.242,15.38
+ILLUSTRATIVE_DEMO_LOT - NOT USED IN TRAINING - NOT GMP DATA,NS-2026-004,illustrative_demo,5.8,150.0,0.012,100.0,0.75,0,glass_vial,6.5,15.2,0.62,0.1,99.28,5.0,3.0,2191.5,0.7,0.124,99.176,15.74
+ILLUSTRATIVE_DEMO_LOT - NOT USED IN TRAINING - NOT GMP DATA,NS-2026-004,illustrative_demo,5.8,150.0,0.012,100.0,0.75,0,glass_vial,6.5,15.2,0.62,0.1,99.28,5.0,6.0,4383.0,0.79,0.148,99.062,16.28
+ILLUSTRATIVE_DEMO_LOT - NOT USED IN TRAINING - NOT GMP DATA,NS-2026-004,illustrative_demo,5.8,150.0,0.012,100.0,0.75,0,glass_vial,6.5,15.2,0.62,0.1,99.28,25.0,0.0,0.0,0.62,0.1,99.28,15.2
+ILLUSTRATIVE_DEMO_LOT - NOT USED IN TRAINING - NOT GMP DATA,NS-2026-004,illustrative_demo,5.8,150.0,0.012,100.0,0.75,0,glass_vial,6.5,15.2,0.62,0.1,99.28,25.0,1.0,730.5,0.72,0.12,99.16,15.776
+ILLUSTRATIVE_DEMO_LOT - NOT USED IN TRAINING - NOT GMP DATA,NS-2026-004,illustrative_demo,5.8,150.0,0.012,100.0,0.75,0,glass_vial,6.5,15.2,0.62,0.1,99.28,25.0,3.0,2191.5,0.88,0.16,98.96,16.928
+ILLUSTRATIVE_DEMO_LOT - NOT USED IN TRAINING - NOT GMP DATA,NS-2026-004,illustrative_demo,5.8,150.0,0.012,100.0,0.75,0,glass_vial,6.5,15.2,0.62,0.1,99.28,25.0,6.0,4383.0,1.58,0.22,98.2,18.656

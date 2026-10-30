@@ -1,0 +1,341 @@
+{
+  "data_stamp": "SYNTHETIC - NOT GMP DATA",
+  "generator_version": "2.1.0-radau-3state-ps80-realistic-pulls-non-gmp",
+  "seed": 20261023,
+  "config_sha256": "e26c34e3605220b74e8f84a9882915493078ecc02936edc9c5a7bd69bafd42fc",
+  "max_observed_hmw_pct_overall": 10.1396,
+  "files": {
+    "synth_observations.csv": {
+      "sha256": "9d2d4285ea78bbf0e3eb92bb712c6b16324d71f8de57ab9d3e4d9adcf9333474",
+      "rows": 4272,
+      "columns": [
+        "data_stamp",
+        "generator_version",
+        "lot_id",
+        "split",
+        "ph",
+        "ionic_strength_mm",
+        "surfactant_pct",
+        "protein_conc_mg_ml",
+        "headspace_index",
+        "container_syringe_flag",
+        "container_closure",
+        "initial_afuc_glycan_pct",
+        "initial_acidic_pct",
+        "initial_hmw_pct",
+        "initial_lmw_pct",
+        "initial_monomer_pct",
+        "temperature_c",
+        "time_months",
+        "time_hours",
+        "hmw_obs_pct",
+        "lmw_obs_pct",
+        "monomer_obs_pct",
+        "acidic_obs_pct"
+      ]
+    },
+    "synth_excursions.csv": {
+      "sha256": "b5f1591568301374fce2f41d89dbd5111ebcb0717bb81ebf9f9f918035e77fed",
+      "rows": 120,
+      "columns": [
+        "data_stamp",
+        "excursion_id",
+        "lot_id",
+        "split",
+        "scenario_label",
+        "baseline_temp_c",
+        "peak_temp_c",
+        "duration_hours",
+        "ramp_hours",
+        "n_repeats",
+        "total_window_hours",
+        "hmw_pre_obs_pct",
+        "hmw_post_obs_pct",
+        "delta_hmw_obs_pp"
+      ]
+    },
+    "illustrative_demo_lot_NS-2026-004.csv": {
+      "sha256": "4a7507627423488a2231a98bfbf5c8ce85e00f69c4c32ea54a7fce3ccb7d436e",
+      "rows": 8,
+      "columns": [
+        "data_stamp",
+        "lot_id",
+        "split",
+        "ph",
+        "ionic_strength_mm",
+        "surfactant_pct",
+        "protein_conc_mg_ml",
+        "headspace_index",
+        "container_syringe_flag",
+        "container_closure",
+        "initial_afuc_glycan_pct",
+        "initial_acidic_pct",
+        "initial_hmw_pct",
+        "initial_lmw_pct",
+        "initial_monomer_pct",
+        "temperature_c",
+        "time_months",
+        "time_hours",
+        "hmw_obs_pct",
+        "lmw_obs_pct",
+        "monomer_obs_pct",
+        "acidic_obs_pct"
+      ]
+    },
+    "_ground_truth_do_not_read_in_train.json": {
+      "sha256": "d7b9d287a7b1dc4026bd71bd6d9624ebc320f9775b6516b3e02879019628f19f",
+      "lots_count": 240,
+      "excursions_count": 120
+    }
+  },
+  "splits": {
+    "train": {
+      "total_lots": 100,
+      "matched_lots": 70,
+      "mismatched_lots": 30,
+      "mismatched_ps80_only_lots": 15,
+      "mismatched_full_lots": 15,
+      "extended_25c_12m_lots": 40,
+      "observation_rows": 1780
+    },
+    "val": {
+      "total_lots": 40,
+      "matched_lots": 28,
+      "mismatched_lots": 12,
+      "mismatched_ps80_only_lots": 6,
+      "mismatched_full_lots": 6,
+      "extended_25c_12m_lots": 16,
+      "observation_rows": 712
+    },
+    "test": {
+      "total_lots": 100,
+      "matched_lots": 70,
+      "mismatched_lots": 30,
+      "mismatched_ps80_only_lots": 15,
+      "mismatched_full_lots": 15,
+      "extended_25c_12m_lots": 40,
+      "observation_rows": 1780
+    }
+  },
+  "hmw_obs_pct_summary_by_group_and_condition": {
+    "matched": {
+      "5C_24M": {
+        "count": 168,
+        "mean": 1.2816,
+        "std": 0.232,
+        "min": 0.7304,
+        "median": 1.278,
+        "max": 2.1164
+      },
+      "25C_6M": {
+        "count": 168,
+        "mean": 2.1528,
+        "std": 0.5665,
+        "min": 1.087,
+        "median": 2.0373,
+        "max": 4.7948
+      },
+      "25C_12M": {
+        "count": 66,
+        "mean": 3.5817,
+        "std": 0.9619,
+        "min": 1.8799,
+        "median": 3.5621,
+        "max": 6.1976
+      },
+      "40C_3M": {
+        "count": 168,
+        "mean": 3.9738,
+        "std": 1.3573,
+        "min": 1.7998,
+        "median": 3.7154,
+        "max": 10.1396
+      }
+    },
+    "mismatched": {
+      "5C_24M": {
+        "count": 72,
+        "mean": 1.2578,
+        "std": 0.2209,
+        "min": 0.7654,
+        "median": 1.2505,
+        "max": 1.8095
+      },
+      "25C_6M": {
+        "count": 72,
+        "mean": 2.3179,
+        "std": 0.5373,
+        "min": 1.2382,
+        "median": 2.2976,
+        "max": 3.7738
+      },
+      "25C_12M": {
+        "count": 30,
+        "mean": 5.1065,
+        "std": 1.2871,
+        "min": 2.4212,
+        "median": 4.9166,
+        "max": 8.1307
+      },
+      "40C_3M": {
+        "count": 72,
+        "mean": 5.4571,
+        "std": 1.7086,
+        "min": 2.3225,
+        "median": 5.0879,
+        "max": 9.3707
+      }
+    },
+    "mismatched_ps80_only": {
+      "5C_24M": {
+        "count": 36,
+        "mean": 1.2609,
+        "std": 0.2145,
+        "min": 0.8434,
+        "median": 1.2549,
+        "max": 1.8095
+      },
+      "25C_6M": {
+        "count": 36,
+        "mean": 2.3113,
+        "std": 0.5359,
+        "min": 1.2382,
+        "median": 2.3296,
+        "max": 3.7738
+      },
+      "25C_12M": {
+        "count": 16,
+        "mean": 5.1558,
+        "std": 1.1978,
+        "min": 3.1688,
+        "median": 4.9166,
+        "max": 8.0495
+      },
+      "40C_3M": {
+        "count": 36,
+        "mean": 5.3266,
+        "std": 1.6331,
+        "min": 2.3225,
+        "median": 5.0772,
+        "max": 9.3707
+      }
+    },
+    "mismatched_full": {
+      "5C_24M": {
+        "count": 36,
+        "mean": 1.2547,
+        "std": 0.2271,
+        "min": 0.7654,
+        "median": 1.2186,
+        "max": 1.6607
+      },
+      "25C_6M": {
+        "count": 36,
+        "mean": 2.3244,
+        "std": 0.5385,
+        "min": 1.3373,
+        "median": 2.2416,
+        "max": 3.3342
+      },
+      "25C_12M": {
+        "count": 14,
+        "mean": 5.0501,
+        "std": 1.3799,
+        "min": 2.4212,
+        "median": 4.7646,
+        "max": 8.1307
+      },
+      "40C_3M": {
+        "count": 36,
+        "mean": 5.5875,
+        "std": 1.7713,
+        "min": 2.5336,
+        "median": 5.2384,
+        "max": 9.2625
+      }
+    }
+  },
+  "excursion_dhmw_distribution_vs_gate": {
+    "total_excursions": 120,
+    "detection_gate_2sigma_pp": 0.09899,
+    "clearly_below_gate_lt_0.065pp": 46,
+    "near_gate_0.065_to_0.145pp": 31,
+    "clearly_above_gate_gt_0.145pp": 43,
+    "strictly_below_0.099pp_count": 62,
+    "strictly_above_0.099pp_count": 58,
+    "by_scenario": {
+      "short_2h_28C": {
+        "count": 20,
+        "min_pp": 0.00277,
+        "median_pp": 0.00506,
+        "mean_pp": 0.00529,
+        "max_pp": 0.00967
+      },
+      "cold_chain_36h_28C": {
+        "count": 20,
+        "min_pp": 0.01243,
+        "median_pp": 0.02198,
+        "mean_pp": 0.02276,
+        "max_pp": 0.0405
+      },
+      "near_gate_60h_40C": {
+        "count": 20,
+        "min_pp": 0.04617,
+        "median_pp": 0.09568,
+        "mean_pp": 0.09778,
+        "max_pp": 0.18027
+      },
+      "near_gate_72h_40C": {
+        "count": 20,
+        "min_pp": 0.05056,
+        "median_pp": 0.10055,
+        "mean_pp": 0.10369,
+        "max_pp": 0.19344
+      },
+      "prolonged_7d_40C": {
+        "count": 20,
+        "min_pp": 0.13993,
+        "median_pp": 0.28923,
+        "mean_pp": 0.31194,
+        "max_pp": 0.77634
+      },
+      "prolonged_14d_40C": {
+        "count": 20,
+        "min_pp": 0.23224,
+        "median_pp": 0.43396,
+        "mean_pp": 0.46121,
+        "max_pp": 0.87011
+      }
+    }
+  },
+  "ground_truth_parameter_summary": {
+    "dG_eff_ref_kj_mol": {
+      "min": 119.1756288130244,
+      "median": 121.08910858252783,
+      "mean": 121.07421842766449,
+      "max": 122.54267090786917
+    },
+    "apparent_ea_5_40c_kj_mol": {
+      "min": 66.91112287615657,
+      "median": 75.52340178145849,
+      "mean": 75.4051843557575,
+      "max": 84.60522821596459
+    },
+    "k_eff_5c_per_h": {
+      "min": 2.0285925671089853e-07,
+      "median": 3.803281223532165e-07,
+      "max": 8.699406537661108e-07
+    },
+    "k_eff_25c_per_h": {
+      "min": 1.5448024835124338e-06,
+      "median": 3.374990445612694e-06,
+      "max": 9.162929104519413e-06
+    },
+    "k_eff_40c_per_h": {
+      "min": 5.887979194597474e-06,
+      "median": 1.4533810758816758e-05,
+      "max": 4.700760007594099e-05
+    }
+  },
+  "anti_inverse_crime_design_note": "All 240 synthetic lots are integrated with the 3-state stiff Radau ODE solver at finite reverse relaxation rate k_-1 (never the rapid pre-equilibrium RK4 solver used for fitting). 70% of each split ('matched': 70 train / 28 val / 70 test) use finite k_-1 in [75, 150] h^-1 with dCp_agg = 0 and no surfactant depletion. 15% of each split ('mismatched_ps80_only': 15 train / 6 val / 15 test) include ONLY late-time PS80 depletion (with dCp_agg = 0 and fast k_-1) as a clean ablation set. 15% of each split ('mismatched_full': 15 train / 6 val / 15 test) combine late-time PS80 depletion + dCp_agg in [0.05, 0.12] kJ/(mol*K) + slower k_-1 in [18, 55] h^-1. Neither structural_group nor structural_subgroup appears in synth_observations.csv or synth_excursions.csv."
+}

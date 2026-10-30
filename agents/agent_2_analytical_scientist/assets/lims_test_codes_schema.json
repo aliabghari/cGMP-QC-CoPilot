@@ -1,0 +1,121 @@
+{
+  "schema_version": "ICH-Q6B-eCTD-3.2.P.8-v2026",
+  "product_reference": "PROJ-002 / NeuroShield-mAb (IgG4, 150 kDa, 50 mg/mL)",
+  "lims_test_codes": [
+    {
+      "test_code": "TC-SEC-101",
+      "method_title": "Size Exclusion UPLC (SE-UPLC) Purity & Aggregation",
+      "instrument_platform": "Waters Acquity H-Class Bio UPLC (TUV 280 nm)",
+      "cqa_monitored": "HMW Aggregates (%) & Monomer Purity (%)",
+      "acceptance_criteria": "HMW <= 2.0%, Monomer >= 97.5%",
+      "lot_release_panel": true,
+      "stability_panel": true,
+      "ich_q6b_category": "Purity & Product-Related Impurities (Stability-Indicating)",
+      "tat_business_days": 3
+    },
+    {
+      "test_code": "TC-CEX-204",
+      "method_title": "Cation Exchange UPLC (CEX-UPLC) Charge Variant Profile",
+      "instrument_platform": "Waters Acquity H-Class Bio UPLC (BioPro IEX SF Column)",
+      "cqa_monitored": "Acidic Peak Group (%), Main Peak (%), Basic Peak Group (%)",
+      "acceptance_criteria": "Acidic <= 25.0%, Main >= 60.0%, Basic <= 18.0%",
+      "lot_release_panel": true,
+      "stability_panel": true,
+      "ich_q6b_category": "Charge Heterogeneity (Stability-Indicating)",
+      "tat_business_days": 4
+    },
+    {
+      "test_code": "TC-BIO-309",
+      "method_title": "Cell-Based FcγR/Target Reporter Gene Bioassay (4-PL)",
+      "instrument_platform": "Hamilton Microlab STAR + Molecular Devices SpectraMax i3x",
+      "cqa_monitored": "Relative Potency (% of Reference Standard RS-04)",
+      "acceptance_criteria": "70% - 130% Relative Potency; Hill Slope Ratio 0.80 - 1.25; R² >= 0.99",
+      "lot_release_panel": true,
+      "stability_panel": true,
+      "ich_q6b_category": "Potency / Biological Activity (Stability-Indicating)",
+      "tat_business_days": 5
+    },
+    {
+      "test_code": "TC-CESDS-112",
+      "method_title": "Capillary Electrophoresis SDS (Reduced & Non-Reduced)",
+      "instrument_platform": "ProteinSimple Maurice CE-SDS",
+      "cqa_monitored": "Intact IgG (%) & Heavy+Light Chain Sum (%)",
+      "acceptance_criteria": "Non-Red Intact IgG >= 95.0%; Red HC+LC >= 97.0%",
+      "lot_release_panel": true,
+      "stability_panel": true,
+      "ich_q6b_category": "Purity & Fragmentation (Stability-Indicating)",
+      "tat_business_days": 4
+    },
+    {
+      "test_code": "TC-HCP-401",
+      "method_title": "Host Cell Protein (CHO 3G) Immunoassay",
+      "instrument_platform": "Gyrolab xPand / Tecan ELISA",
+      "cqa_monitored": "Residual CHO Host Cell Protein (ng/mg = ppm)",
+      "acceptance_criteria": "<= 50 ppm (ng HCP / mg mAb)",
+      "lot_release_panel": true,
+      "stability_panel": false,
+      "ich_q6b_category": "Process-Related Impurity (Release Only per ICH Q6B)",
+      "tat_business_days": 3
+    },
+    {
+      "test_code": "TC-DNA-402",
+      "method_title": "Residual Host Cell DNA by Quantitative PCR",
+      "instrument_platform": "Applied Biosystems QuantStudio 7 Pro qPCR",
+      "cqa_monitored": "Residual CHO Genomic DNA (pg/mg)",
+      "acceptance_criteria": "<= 1.0 pg/mg",
+      "lot_release_panel": true,
+      "stability_panel": false,
+      "ich_q6b_category": "Process-Related Impurity (Release Only per ICH Q6B)",
+      "tat_business_days": 3
+    }
+  ],
+  "ectd_3_2_p_8_stability_history": {
+    "batch_id": "NS-2026-004 (Phase II Clinical Lot)",
+    "storage_condition_realtime": "5°C ± 3°C",
+    "storage_condition_accelerated": "25°C ± 2°C / 60% ± 5% RH",
+    "spec_limit_hmw_pct": 2.0,
+    "oot_alert_threshold_hmw_6m_25c": 1.25,
+    "timepoints": [
+      {
+        "month": 0,
+        "hmw_5c_pct": 0.45,
+        "hmw_25c_pct": 0.45,
+        "acidic_5c_pct": 14.2,
+        "acidic_25c_pct": 14.2,
+        "potency_5c_pct": 101.0,
+        "potency_25c_pct": 101.0,
+        "status": "PASS (Baseline T0)"
+      },
+      {
+        "month": 1,
+        "hmw_5c_pct": 0.48,
+        "hmw_25c_pct": 0.59,
+        "acidic_5c_pct": 14.4,
+        "acidic_25c_pct": 15.6,
+        "potency_5c_pct": 100.2,
+        "potency_25c_pct": 98.5,
+        "status": "PASS (Normal Trend)"
+      },
+      {
+        "month": 3,
+        "hmw_5c_pct": 0.53,
+        "hmw_25c_pct": 0.86,
+        "acidic_5c_pct": 14.7,
+        "acidic_25c_pct": 17.9,
+        "potency_5c_pct": 99.4,
+        "potency_25c_pct": 95.1,
+        "status": "PASS (Normal Trend)"
+      },
+      {
+        "month": 6,
+        "hmw_5c_pct": 0.62,
+        "hmw_25c_pct": 1.54,
+        "acidic_5c_pct": 15.1,
+        "acidic_25c_pct": 22.8,
+        "potency_5c_pct": 98.1,
+        "potency_25c_pct": 89.2,
+        "status": "OOT ALERT at 25°C (+3.1σ Slope Inflection — Within Spec <=2.0%)"
+      }
+    ]
+  }
+}

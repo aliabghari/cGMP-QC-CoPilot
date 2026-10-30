@@ -1,0 +1,94 @@
+{
+  "model_id": "schedule_risk_hybrid_v1",
+  "model_name": "Hybrid Capacity & Schedule-Risk Engine (SimPy DES + OR-Tools CP-SAT + Quantile GBDT)",
+  "version": "1.0.0-non-gmp",
+  "date": "2026-10-26",
+  "intended_use": "Non-GMP technical decision-support prototype for QC Project Management: predictive instrument skid leveling, sample-arrival risk forecasting, and milestone delivery probability estimation on synthetic biologics operations.",
+  "out_of_scope": [
+    "Autonomous schedule commitment without human QA/PM sign-off.",
+    "Official batch release date setting or regulatory disposition.",
+    "Trained exclusively on synthetic data (SYNTHETIC - NOT GMP DATA)."
+  ],
+  "training_data_summary": {
+    "dataset": "capacity_train_log.csv",
+    "synthetic": true,
+    "seed": 42,
+    "weeks_simulated": 70,
+    "records_count": 427,
+    "features": [
+      "week_of_year",
+      "project_id",
+      "stream",
+      "priority_tier",
+      "instrument_id",
+      "scheduled_duration_hours",
+      "recent_avg_arrival_slip_4w",
+      "recent_avg_turnaround_4w"
+    ]
+  },
+  "deterministic_baseline": {
+    "baseline_name": "naive_mean_and_pinned_heijunka",
+    "turnaround_mae_hours": 1.996,
+    "arrival_slip_mae_days": 1.110,
+    "base_rate_brier_score": 0.2354
+  },
+  "benchmark_results": {
+    "held_out_test_weeks": 18,
+    "turnaround_mae_hours": 1.376,
+    "turnaround_mae_95ci": [1.179, 1.58],
+    "turnaround_error_reduction_pct": 31.1,
+    "turnaround_vs_baselines": {
+      "vs_mean": "model_beats_baseline (Delta = -0.6205h, 95% CI [-0.9131, -0.3375]h)",
+      "vs_project_median": "model_beats_baseline (Delta = -0.6259h, 95% CI [-0.8639, -0.4140]h)",
+      "vs_last_observed": "tie_statistically_indistinguishable (Delta = +0.0558h, 95% CI [-0.1599, 0.2709]h; q50 pinball Delta = +0.0279, CI [-0.0799, 0.1355])"
+    },
+    "turnaround_empirical_80pct_coverage": 81.0,
+    "turnaround_mean_interval_width": 5.341,
+    "arrival_slip_mae_days": 1.152,
+    "arrival_slip_mae_95ci": [0.981, 1.307],
+    "arrival_slip_error_reduction_pct": -3.8,
+    "arrival_slip_vs_baselines": "tie_statistically_indistinguishable across mean, median, and last-observed (fat-tailed upstream shocks unobservable from lot metadata alone)",
+    "arrival_slip_empirical_80pct_coverage": 85.7,
+    "arrival_slip_mean_interval_width": 4.096,
+    "optimizer_comparison": {
+      "cpsat_mean_weighted_tardiness": 85854.5,
+      "edd_mean_weighted_tardiness": 86734.2,
+      "heijunka_mean_weighted_tardiness": 98701.5,
+      "cpsat_mean_moves": 7.6,
+      "edd_mean_moves": 8.6,
+      "heijunka_mean_moves": 8.6,
+      "fixed_commitments_protected_pct": 100.0,
+      "cpsat_value_proposition": "Matches strong EDD heuristic on tardiness while generating explainable move reasoning traces and provable infeasibility diagnostics."
+    },
+    "schedule_calibration_100_scenarios": {
+      "held_out_test_scenarios": 100,
+      "evaluation_sample_size_tasks": 2066,
+      "independent_stress_simulator": "Weibull machine breakdowns (k=2.2, lambda=90h), preemption, and absence shocks",
+      "scientific_boundary": "Agreement with an independent simulator is necessary but not sufficient evidence of real-world validity.",
+      "base_rate_brier_score": 0.2354,
+      "naive_deterministic_brier": 0.3059,
+      "logistic_regression_brier": 0.1308,
+      "raw_risk_model_brier": 0.1167,
+      "raw_risk_model_brier_95ci": [0.1046, 0.1290],
+      "calibrated_risk_model_brier": 0.1112,
+      "calibrated_risk_model_brier_95ci": [0.1006, 0.1218],
+      "brier_skill_score": 0.5277,
+      "brier_skill_score_95ci": [0.4857, 0.5673],
+      "roc_auc": 0.907,
+      "roc_auc_95ci": [0.891, 0.921],
+      "honest_recalibration_finding": "Isotonic recalibration reduces point Brier score from 0.1167 to 0.1112, but 95% cluster bootstrap CIs overlap."
+    }
+  },
+  "known_failure_modes": [
+    "Unmodeled multi-skid maintenance shutdowns degrade point arrival forecasts.",
+    "On sample-arrival slippage, heavy-tailed upstream bioreactor shocks prevent GBDT from beating simple mean; rolling-origin conformal interval is required for honest uncertainty bounds.",
+    "Small-sample projects with fewer than 5 historical batches rely heavily on global stream priors.",
+    "CP-SAT solver reports INFEASIBLE if total fixed commercial/contractual lot hours strictly exceed physical skid capacity."
+  ],
+  "negative_or_mixed_results": "On sample-arrival slippage, point predictions achieve MAE 1.152d vs 1.110d for naive mean (-3.8% improvement), statistically tied across all baselines. On turnaround time, point MAE ties the last-observed baseline (Delta = +0.056h, CI [-0.160, 0.271]h). On schedule calibration, isotonic recalibration provides modest point improvement with overlapping CIs.",
+  "regulatory_disclaimer": "DRAFT - NOT A GMP RECORD - REQUIRES HUMAN QA APPROVAL",
+  "artifacts": {
+    "wp1_metrics.json": "results/wp1_metrics.json",
+    "schedule_manifest.json": "data/synthetic_capacity/schedule_manifest.json"
+  }
+}

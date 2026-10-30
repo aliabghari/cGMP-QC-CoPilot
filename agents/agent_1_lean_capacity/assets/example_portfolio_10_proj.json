@@ -1,0 +1,252 @@
+{
+  "facility_metadata": {
+    "site_name": "Example Biologics Biomanufacturing Center",
+    "operating_model": "Dual-Stream (Captive Pipeline Pipeline + Example CDMO Client)",
+    "planning_horizon_weeks": [
+      "W42 (Oct 19 - Oct 25)",
+      "W43 (Oct 26 - Nov 01)"
+    ],
+    "skid_definitions": {
+      "UPLC_SEC_CEX": {
+        "display_name": "Waters Acquity H-Class Bio UPLC (SEC/CEX/RP)",
+        "weekly_max_hours": 120.0,
+        "lean_threshold_pct": 85.0,
+        "lean_threshold_hours": 102.0
+      },
+      "CE_icIEF": {
+        "display_name": "ProteinSimple Maurice (icIEF & CE-SDS)",
+        "weekly_max_hours": 100.0,
+        "lean_threshold_pct": 85.0,
+        "lean_threshold_hours": 85.0
+      },
+      "Cell_Bioassay": {
+        "display_name": "BSL-2 Hamilton Star / 96-Well 4-PL Potency Suite",
+        "weekly_max_hours": 90.0,
+        "lean_threshold_pct": 85.0,
+        "lean_threshold_hours": 76.5
+      }
+    }
+  },
+  "projects": [
+    {
+      "project_id": "BI-CAP-101",
+      "program_name": "Spesolimab-NextGen (Anti-IL36R mAb)",
+      "engine_type": "Captive Pipeline",
+      "phase": "Commercial / Post-Approval PAS",
+      "sample_type": "DS Lot Release (Commercial Campaign #14, fictional example)",
+      "usp_dsp_delivery_date": "2026-10-19",
+      "scheduled_week": "W42",
+      "skid_hours": {
+        "UPLC_SEC_CEX": 24.0,
+        "CE_icIEF": 16.0,
+        "Cell_Bioassay": 18.0
+      },
+      "analyst_shift": "Shift A (Day)",
+      "analyst_fte_hours": 32.0,
+      "float_days": 0,
+      "ich_pull_window_days": 0,
+      "is_critical_path": true,
+      "priority_tier": "Tier 1A",
+      "sla_due_date": "2026-10-26",
+      "notes": "Locked DP Fill-Finish slot at Biberach on Nov 02; zero float."
+    },
+    {
+      "project_id": "PROJ-001",
+      "program_name": "OncoVax-772 (Partner Bispecific T-Cell Engager)",
+      "engine_type": "Example CDMO Client",
+      "phase": "Phase III PPQ Lot #2",
+      "sample_type": "PPQ DS Release & Viral Clearance IPC",
+      "usp_dsp_delivery_date": "2026-10-19",
+      "scheduled_week": "W42",
+      "skid_hours": {
+        "UPLC_SEC_CEX": 28.0,
+        "CE_icIEF": 18.0,
+        "Cell_Bioassay": 22.0
+      },
+      "analyst_shift": "Shift A (Day)",
+      "analyst_fte_hours": 38.0,
+      "float_days": 0,
+      "ich_pull_window_days": 0,
+      "is_critical_path": true,
+      "priority_tier": "Tier 1A",
+      "sla_due_date": "2026-10-27",
+      "notes": "BLA Filing Critical Path; QTA penalty clause triggers if >10 business days TAT."
+    },
+    {
+      "project_id": "BI-CAP-102",
+      "program_name": "BI-765063 (SIRPα Antagonist mAb)",
+      "engine_type": "Captive Pipeline",
+      "phase": "Phase IIb Clinical",
+      "sample_type": "DSP UF/DF Bulk Release",
+      "usp_dsp_delivery_date": "2026-10-20",
+      "scheduled_week": "W42",
+      "skid_hours": {
+        "UPLC_SEC_CEX": 16.0,
+        "CE_icIEF": 12.0,
+        "Cell_Bioassay": 14.0
+      },
+      "analyst_shift": "Shift B (Swing)",
+      "analyst_fte_hours": 24.0,
+      "float_days": 1,
+      "ich_pull_window_days": 0,
+      "is_critical_path": true,
+      "priority_tier": "Tier 1B",
+      "sla_due_date": "2026-10-28",
+      "notes": "EU IMPD clinical depot shipment scheduled Nov 03."
+    },
+    {
+      "project_id": "PROJ-002",
+      "program_name": "NeuroShield-mAb (Partner Anti-Tau IgG4)",
+      "engine_type": "Example CDMO Client",
+      "phase": "Phase II Clinical",
+      "sample_type": "DS Lot Release + 6M 25°C OOT Investigation",
+      "usp_dsp_delivery_date": "2026-10-20",
+      "scheduled_week": "W42",
+      "skid_hours": {
+        "UPLC_SEC_CEX": 20.0,
+        "CE_icIEF": 14.0,
+        "Cell_Bioassay": 12.0
+      },
+      "analyst_shift": "Shift A (Day)",
+      "analyst_fte_hours": 28.0,
+      "float_days": 0,
+      "ich_pull_window_days": 0,
+      "is_critical_path": true,
+      "priority_tier": "Tier 1A",
+      "sla_due_date": "2026-10-26",
+      "notes": "Includes urgent 36h cold-chain excursion verification & client Joint Steering Committee."
+    },
+    {
+      "project_id": "BI-CAP-103",
+      "program_name": "BI-907828 (MDM2-p53 Biologic Conjugate)",
+      "engine_type": "Captive Pipeline",
+      "phase": "Phase III Registration",
+      "sample_type": "ICH Stability 12M Real-Time (5°C)",
+      "usp_dsp_delivery_date": "2026-10-21",
+      "scheduled_week": "W42",
+      "skid_hours": {
+        "UPLC_SEC_CEX": 18.0,
+        "CE_icIEF": 12.0,
+        "Cell_Bioassay": 10.0
+      },
+      "analyst_shift": "Shift A (Day)",
+      "analyst_fte_hours": 22.0,
+      "float_days": 7,
+      "ich_pull_window_days": 7,
+      "is_critical_path": false,
+      "priority_tier": "Tier 3",
+      "sla_due_date": "2026-11-04",
+      "notes": "12M annual stability pull; eligible for site-defined pull window shift (example ±7 d) to W43."
+    },
+    {
+      "project_id": "PROJ-003",
+      "program_name": "CardioZyme-Fc (Partner Fusion Protein)",
+      "engine_type": "Example CDMO Client",
+      "phase": "Commercial Supply",
+      "sample_type": "ICH Stability 9M Real-Time (5°C)",
+      "usp_dsp_delivery_date": "2026-10-21",
+      "scheduled_week": "W42",
+      "skid_hours": {
+        "UPLC_SEC_CEX": 16.0,
+        "CE_icIEF": 14.0,
+        "Cell_Bioassay": 12.0
+      },
+      "analyst_shift": "Shift B (Swing)",
+      "analyst_fte_hours": 20.0,
+      "float_days": 7,
+      "ich_pull_window_days": 7,
+      "is_critical_path": false,
+      "priority_tier": "Tier 3",
+      "sla_due_date": "2026-11-05",
+      "notes": "9M routine stability pull; eligible for site-defined pull window shift (example ±7 d) to W43."
+    },
+    {
+      "project_id": "BI-CAP-104",
+      "program_name": "BI-836880 (VEGF/Ang2 Nanobody)",
+      "engine_type": "Captive Pipeline",
+      "phase": "Phase II Clinical",
+      "sample_type": "ICH Stability 6M Intermediate (25°C/60% RH)",
+      "usp_dsp_delivery_date": "2026-10-22",
+      "scheduled_week": "W42",
+      "skid_hours": {
+        "UPLC_SEC_CEX": 14.0,
+        "CE_icIEF": 10.0,
+        "Cell_Bioassay": 8.0
+      },
+      "analyst_shift": "Shift A (Day)",
+      "analyst_fte_hours": 18.0,
+      "float_days": 7,
+      "ich_pull_window_days": 7,
+      "is_critical_path": false,
+      "priority_tier": "Tier 3",
+      "sla_due_date": "2026-11-06",
+      "notes": "6M stability pull; eligible for site-defined pull window shift (example ±7 d) to W43."
+    },
+    {
+      "project_id": "PROJ-004",
+      "program_name": "AutoImmune-Block (Partner Anti-CD40 mAb)",
+      "engine_type": "Example CDMO Client",
+      "phase": "Phase I First-in-Human",
+      "sample_type": "Method Tech Transfer Co-Validation",
+      "usp_dsp_delivery_date": "2026-10-26",
+      "scheduled_week": "W43",
+      "skid_hours": {
+        "UPLC_SEC_CEX": 18.0,
+        "CE_icIEF": 12.0,
+        "Cell_Bioassay": 10.0
+      },
+      "analyst_shift": "Shift B (Swing)",
+      "analyst_fte_hours": 24.0,
+      "float_days": 2,
+      "ich_pull_window_days": 0,
+      "is_critical_path": false,
+      "priority_tier": "Tier 2",
+      "sla_due_date": "2026-11-03",
+      "notes": "Client Agilent 1260 HPLC to Example Biologics Site Waters Acquity UPLC CEX transfer."
+    },
+    {
+      "project_id": "BI-CAP-105",
+      "program_name": "BI-456906 (Dual Agonist Fc-Peptide)",
+      "engine_type": "Captive Pipeline",
+      "phase": "Phase III Clinical",
+      "sample_type": "DS Lot Release (2,000L Single-Use Bioreactor)",
+      "usp_dsp_delivery_date": "2026-10-27",
+      "scheduled_week": "W43",
+      "skid_hours": {
+        "UPLC_SEC_CEX": 20.0,
+        "CE_icIEF": 14.0,
+        "Cell_Bioassay": 14.0
+      },
+      "analyst_shift": "Shift A (Day)",
+      "analyst_fte_hours": 28.0,
+      "float_days": 0,
+      "ich_pull_window_days": 0,
+      "is_critical_path": true,
+      "priority_tier": "Tier 1B",
+      "sla_due_date": "2026-11-04",
+      "notes": "Scheduled W43 baseline load."
+    },
+    {
+      "project_id": "PROJ-005",
+      "program_name": "RetinaClear-Fab (Partner Ophthalmic Fab)",
+      "engine_type": "Example CDMO Client",
+      "phase": "Phase IIb Clinical",
+      "sample_type": "DS Lot Release & Endotoxin/Bioburden Panel",
+      "usp_dsp_delivery_date": "2026-10-28",
+      "scheduled_week": "W43",
+      "skid_hours": {
+        "UPLC_SEC_CEX": 16.0,
+        "CE_icIEF": 12.0,
+        "Cell_Bioassay": 12.0
+      },
+      "analyst_shift": "Shift B (Swing)",
+      "analyst_fte_hours": 22.0,
+      "float_days": 1,
+      "ich_pull_window_days": 0,
+      "is_critical_path": true,
+      "priority_tier": "Tier 1B",
+      "sla_due_date": "2026-11-05",
+      "notes": "Scheduled W43 baseline load."
+    }
+  ]
+}

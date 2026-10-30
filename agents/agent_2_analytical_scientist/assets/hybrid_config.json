@@ -1,0 +1,168 @@
+{
+  "config_version": "1.0.0-hybrid-non-gmp",
+  "classification": "Non-GMP Decision Support Prototype on Synthetic Data — Requires Human QA Approval",
+  "units_convention": {
+    "internal_state_unit": "fraction (0.0 to 1.0, where 1.0 = 100%)",
+    "internal_rate_unit": "fraction_per_hour (h^-1)",
+    "display_state_unit": "percent (% = fraction * 100.0)",
+    "temperature_internal_unit": "Kelvin (K)",
+    "energy_unit": "kJ/mol",
+    "entropy_unit": "J/(mol*K)",
+    "dG_ref_definition": "dG_eff_ref_kj_mol describes the effective aggregation rate k_eff(T_ref) = k_agg(T_ref) * f_U(T_ref) in fraction/hour via Eyring equation k_eff(T_ref) = (kB*T_ref/h)*3600*exp(-dG_eff_ref/(R*T_ref)). Intrinsic step barrier is dG_agg_ref = dG_eff_ref + R*T_ref*ln(f_U(T_ref))."
+  },
+  "physical_constants_codata": {
+    "kB_j_per_k": 1.380649e-23,
+    "h_planck_j_s": 6.62607015e-34,
+    "R_gas_j_per_mol_k": 8.314462618,
+    "seconds_per_hour": 3600.0,
+    "hours_per_month": 730.5,
+    "t_ref_k": 278.15,
+    "t_ref_c": 5.0
+  },
+  "parameter_bounds": {
+    "dG_eff_ref_kj_mol": {
+      "min": 116.0,
+      "max": 126.0,
+      "nominal": 121.066,
+      "unit": "kJ/mol",
+      "description": "Effective Eyring free energy barrier at T_ref=278.15K (5C) for k_eff = k_agg * f_U in fraction/hour (121.066 kJ/mol gives 3.8415e-7 fraction/h = 0.0281% HMW/month)",
+      "status": "ASSUMPTION - SME to confirm"
+    },
+    "dG_agg_ref_kj_mol": {
+      "min": 98.0,
+      "max": 114.0,
+      "nominal": 105.088,
+      "unit": "kJ/mol",
+      "description": "Intrinsic Eyring free energy barrier at T_ref=278.15K (5C) for U -> HMW step k_agg(T_ref) in fraction/hour (linked via dG_eff_ref + R*T_ref*ln(f_U_ref))",
+      "status": "ASSUMPTION - SME to confirm"
+    },
+    "dH_agg_ref_kj_mol": {
+      "min": 25.0,
+      "max": 85.0,
+      "nominal": 38.0,
+      "unit": "kJ/mol",
+      "description": "Intrinsic transition-state activation enthalpy for U -> HMW aggregation step at T_ref=278.15K (implies nominal dS_agg_ref = -241.19 J/mol/K at dG_agg_ref = 105.09 kJ/mol; noted for SME review in LIMITATIONS.md, no gate)",
+      "status": "ASSUMPTION - SME to confirm"
+    },
+    "dCp_agg_kj_mol_k": {
+      "min": -0.2,
+      "max": 0.8,
+      "nominal": 0.0,
+      "unit": "kJ/(mol*K)",
+      "description": "Activation heat capacity change for aggregation step (default 0.0; optional bounded non-zero)",
+      "status": "ASSUMPTION - SME to confirm"
+    },
+    "ku_ref_5c": {
+      "min": 0.0002,
+      "max": 0.0050,
+      "nominal": 0.0010,
+      "unit": "dimensionless equilibrium ratio [U]/[N] at 5C",
+      "description": "Equilibrium constant K_u(5C) for aggregation-competent partially unfolded state U",
+      "status": "ASSUMPTION - SME to confirm"
+    },
+    "dH_u_kj_mol": {
+      "min": 20.0,
+      "max": 60.0,
+      "nominal": 34.0,
+      "unit": "kJ/mol",
+      "description": "Van 't Hoff enthalpy of local partial unfolding to aggregation-competent state U (distinct from global CH2 melting)",
+      "status": "ASSUMPTION - SME to confirm"
+    },
+    "dCp_u_kj_mol_k": {
+      "min": 0.0,
+      "max": 0.6,
+      "nominal": 0.0,
+      "unit": "kJ/(mol*K)",
+      "description": "Heat capacity change of local partial unfolding (default 0.0)",
+      "status": "ASSUMPTION - SME to confirm"
+    },
+    "k_unfold_relax_per_hour": {
+      "min": 10.0,
+      "max": 500.0,
+      "nominal": 100.0,
+      "unit": "h^-1",
+      "description": "Reverse conformational relaxation rate constant k_-1 (U -> N) for 3-state stiff Radau oracle (k_-1 >> k_agg ensures rapid pre-equilibrium validity)",
+      "status": "ASSUMPTION - SME to confirm"
+    },
+    "dG_frag_ref_kj_mol": {
+      "min": 122.0,
+      "max": 130.0,
+      "nominal": 125.8,
+      "unit": "kJ/mol",
+      "description": "Eyring free energy barrier at 5C for SEC_LMW hinge fragmentation pathway in fraction/hour",
+      "status": "ASSUMPTION - SME to confirm"
+    },
+    "ea_frag_kj_mol": {
+      "min": 65.0,
+      "max": 110.0,
+      "nominal": 78.0,
+      "unit": "kJ/mol",
+      "description": "Arrhenius activation energy for SEC_LMW fragmentation pathway",
+      "status": "ASSUMPTION - SME to confirm"
+    },
+    "dG_acidic_ref_kj_mol": {
+      "min": 115.0,
+      "max": 123.0,
+      "nominal": 118.4,
+      "unit": "kJ/mol",
+      "description": "Eyring free energy barrier at 5C for CEX_ACIDIC Asn-deamidation pathway in fraction/hour",
+      "status": "ASSUMPTION - SME to confirm"
+    },
+    "ea_acidic_kj_mol": {
+      "min": 60.0,
+      "max": 105.0,
+      "nominal": 72.0,
+      "unit": "kJ/mol",
+      "description": "Arrhenius activation energy for CEX_ACIDIC deamidation pathway",
+      "status": "ASSUMPTION - SME to confirm"
+    }
+  },
+  "sanity_gates": {
+    "apparent_ea_5_40c_min_kj_mol": 60.0,
+    "apparent_ea_5_40c_max_kj_mol": 200.0,
+    "temperature_monotonicity_range_c": [2.0, 45.0],
+    "mass_balance_tolerance_fraction": 1e-6,
+    "rk4_vs_closed_form_rel_tol": 1e-4,
+    "preeq_vs_radau_rel_tol": 5e-3,
+    "torch_vs_numpy_rel_tol": 1e-6,
+    "status": "ASSUMPTION - SME to confirm"
+  },
+  "assay_and_decision_thresholds": {
+    "sec_hmw_repeatability_sd_pct": 0.035,
+    "sec_hmw_repeatability_sd_status": "ASSUMPTION - SME to confirm; should come from method-validation intermediate precision",
+    "sec_hmw_diff_2sigma_gate_pct": 0.09899494936611666,
+    "sec_hmw_diff_z_multiplier": 2.0,
+    "sec_hmw_intermediate_precision_sd_pct": 0.055,
+    "cex_acidic_repeatability_sd_pct": 0.35,
+    "spec_limit_hmw_pct": 2.0,
+    "spec_limit_monomer_min_pct": 97.5,
+    "spec_limit_acidic_pct": 25.0,
+    "oot_prediction_interval_level": 0.95,
+    "q1e_confidence_level_one_sided": 0.95,
+    "q1e_ancova_poolability_alpha": 0.25,
+    "q1e_max_extrapolation_months_beyond_obs": 6.0,
+    "q1e_biologics_regulatory_note": "ICH Q5C is the primary regulatory standard for therapeutic biologics (requiring real-time, real-temperature stability data); ICH Q1E statistical confidence-bound and ANCOVA batch-poolability (p=0.25) methods are capped at observed_months + 6.0 months.",
+    "lot_adaptation_prior_scale_multiplier": 1.0,
+    "lot_adaptation_prior_data_conflict_n_sigma": 2.5,
+    "identifiability_rel_width_warning_threshold": 0.35,
+    "status": "ASSUMPTION - SME to confirm; should come from method-validation intermediate precision"
+  },
+  "training_and_uncertainty": {
+    "random_seed": 20261023,
+    "n_synthetic_lots": 240,
+    "n_train_lots": 100,
+    "n_val_lots": 40,
+    "n_test_lots": 100,
+    "ensemble_size": 25,
+    "mlp_hidden_dims": [32, 32],
+    "learning_rate": 0.008,
+    "weight_decay_l2": 0.0005,
+    "smoothness_lambda": 0.01,
+    "monotonicity_lambda": 1.0,
+    "max_epochs_adam": 220,
+    "lbfgs_polish_steps": 25,
+    "grad_clip_norm": 2.0,
+    "clopper_pearson_alpha": 0.05,
+    "nominal_coverage_target": 0.95
+  }
+}

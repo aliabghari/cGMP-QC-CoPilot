@@ -1,0 +1,3907 @@
+{
+  "classification": "Non-GMP Decision Support Prototype on Synthetic Data \u2014 Requires Human QA Approval",
+  "config_sha256": "7cf861c64dee8fe001ffe8fcbaee77016fb439a9f13dff85a4ca614be36d0e60",
+  "retrained_model_artifacts_sha256": {
+    "npz_weights_sha256": "1ff79c0e68ddb072756b70a5846ebee73100423f55ffcb0e64b676d7a5330f4d",
+    "pt_checkpoint_sha256": "1ca1d7ecc30e5669087be4275cb6535f3ac638e48aadb997e4247b5964246fb8",
+    "config_sha256": "e26c34e3605220b74e8f84a9882915493078ecc02936edc9c5a7bd69bafd42fc",
+    "synth_observations_sha256": "9d2d4285ea78bbf0e3eb92bb712c6b16324d71f8de57ab9d3e4d9adcf9333474",
+    "hybrid_ensemble_weights.npz": "1ff79c0e68ddb072756b70a5846ebee73100423f55ffcb0e64b676d7a5330f4d",
+    "calibration_bundle.json": "c5352cbeda99a9dfb4eabcc01acffb1acd37c3a17b9176df40242eda9444e3cb",
+    "baseline_models.npz": "d97fe5c64057b632471da0244ace9cd1d46ad7be0e75a875a4859d55c3c0ea2d"
+  },
+  "calibration_dataset_meta": {
+    "cal_seed": 20361022,
+    "n_cal_lots": 60,
+    "matched_lots": 42,
+    "mismatched_ps80_only_lots": 9,
+    "mismatched_full_lots": 9,
+    "extended_25c_12m_lots": 24,
+    "observation_rows": 1068,
+    "synth_calibration_observations_sha256": "ee48f2d4a88b2ae13fc179b5a0104cbd5dab3234b08a71e1835eb4fff0550063",
+    "calibration_ground_truth_sha256": "909195b5e4f3763ec7bd195e2d8b560dd04df14f409e92c5b6d89f6cf93a58cd"
+  },
+  "calibration_bundle": {
+    "calibration_lots_count": 60,
+    "calibration_observations_count": 1068,
+    "alpha": 0.05,
+    "gamma_lot_trajectory": 0.06,
+    "q_obs_pointwise_95": 1.87431,
+    "q_obs_simultaneous_lot_95": 5.23888,
+    "adapted_future_pi_calibration": {
+      "calibration_lots_count": 60,
+      "future_6m_9m_12m_observations_count": 288,
+      "residual_gamma_scale_factor": 0.25,
+      "q_adapted_future_overall_95": 2.04287,
+      "q_adapted_future_matched_95": 1.34132
+    },
+    "level_scaled_pi": {
+      "level_scale_beta": 0.35,
+      "q_obs_level_scaled_pointwise_95": 1.38153,
+      "q_obs_level_scaled_simultaneous_lot_95": 2.22502
+    },
+    "identifiable_parameters_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+    "identifiable_parameters": {
+      "dG_eff_ref_kj_mol": {
+        "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+        "scale_mode": "absolute",
+        "lot_effect_sd": 0.07898035991751634,
+        "conformal_multiplier_q95": 2.021637392123507,
+        "cal_rms_error": 0.1936215033427612
+      },
+      "k_eff_5c_per_h": {
+        "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+        "scale_mode": "relative",
+        "lot_effect_sd": 0.029826307380661898,
+        "conformal_multiplier_q95": 2.0495728393418746,
+        "cal_rms_error": 0.08227370053162608
+      },
+      "k_eff_25c_per_h": {
+        "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+        "scale_mode": "relative",
+        "lot_effect_sd": 0.04540406414671058,
+        "conformal_multiplier_q95": 2.0329270841484255,
+        "cal_rms_error": 0.11181922688184412
+      },
+      "k_eff_40c_per_h": {
+        "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+        "scale_mode": "relative",
+        "lot_effect_sd": 0.057298966787976864,
+        "conformal_multiplier_q95": 1.971556917891881,
+        "cal_rms_error": 0.13795553356523024
+      },
+      "apparent_ea_5_40c_kj_mol": {
+        "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+        "scale_mode": "absolute",
+        "lot_effect_sd": 1.3494047058182455,
+        "conformal_multiplier_q95": 2.0326937491991695,
+        "cal_rms_error": 1.9901912642889925
+      }
+    },
+    "excursion_calibration_from_val_lots": {
+      "calibration_source": "validation_lots_excursions_only (split='val', n=40; test lots strictly held-out, n=80)",
+      "note": "The 60 isothermal calibration lots have no excursions; excursion dHMW intervals [L95, U95] are calibrated on the 40 validation-lot excursions using score |true_dhmw_pp - mean_pp| / sqrt(ens_sd_pp^2 + (lot_rel_sd_floor * mean_pp)^2), and evaluated strictly on the 80 held-out test-lot excursions.",
+      "val_excursions_count": 40,
+      "lot_rel_sd_floor": 0.05,
+      "conformal_multiplier_q95_val_excursions": 1.90303
+    }
+  },
+  "phase3_followups_and_baselines": {
+    "train_vs_val_rmse_analysis": {
+      "ensemble_mean_prediction_rmse_pp": {
+        "train_overall": 0.30432,
+        "val_overall": 0.25857,
+        "train_matched": 0.11872,
+        "val_matched": 0.19565,
+        "train_mismatched": 0.52425,
+        "val_mismatched": 0.3652
+      },
+      "per_member_average_rmse_pp": {
+        "train_overall_mean": 0.33214,
+        "val_overall_mean": 0.30016
+      },
+      "irreducible_floors_comparison": {
+        "train_splits": {
+          "pure_sec_assay_noise_rmse_pp_matched": 0.05877,
+          "pure_sec_assay_noise_rmse_pp_mismatched": 0.08256,
+          "covariate_oracle_plus_lot_random_effect_and_sec_noise_rmse_pp_matched": 0.10607,
+          "exact_lot_param_preeq_oracle_vs_obs_rmse_pp_matched": 0.05877,
+          "exact_lot_param_preeq_oracle_vs_obs_rmse_pp_mismatched": 0.63923
+        },
+        "val_splits": {
+          "pure_sec_assay_noise_rmse_pp_matched": 0.06635,
+          "pure_sec_assay_noise_rmse_pp_mismatched": 0.06073,
+          "covariate_oracle_plus_lot_random_effect_and_sec_noise_rmse_pp_matched": 0.14116,
+          "exact_lot_param_preeq_oracle_vs_obs_rmse_pp_matched": 0.06636,
+          "exact_lot_param_preeq_oracle_vs_obs_rmse_pp_mismatched": 0.42398
+        }
+      }
+    },
+    "baseline_validation_comparison": {
+      "pooled_mean_no_ann": {
+        "overall": {
+          "hmw_rmse_pp": 0.5477,
+          "dG_eff_ref_mae_kj_mol": 0.5144,
+          "k_eff_5c_mape_pct": 22.59,
+          "k_eff_25c_mape_pct": 29.85,
+          "k_eff_40c_mape_pct": 34.6
+        },
+        "matched": {
+          "hmw_rmse_pp": 0.56963,
+          "dG_eff_ref_mae_kj_mol": 0.4919,
+          "k_eff_5c_mape_pct": 19.44,
+          "k_eff_25c_mape_pct": 24.97,
+          "k_eff_40c_mape_pct": 28.75
+        },
+        "mismatched": {
+          "hmw_rmse_pp": 0.4929,
+          "dG_eff_ref_mae_kj_mol": 0.5668,
+          "k_eff_5c_mape_pct": 29.95,
+          "k_eff_25c_mape_pct": 41.23,
+          "k_eff_40c_mape_pct": 48.25
+        }
+      },
+      "linear_ridge_on_descriptors": {
+        "overall": {
+          "hmw_rmse_pp": 0.29353,
+          "dG_eff_ref_mae_kj_mol": 0.1621,
+          "k_eff_5c_mape_pct": 6.95,
+          "k_eff_25c_mape_pct": 9.52,
+          "k_eff_40c_mape_pct": 12.03
+        },
+        "matched": {
+          "hmw_rmse_pp": 0.26298,
+          "dG_eff_ref_mae_kj_mol": 0.1504,
+          "k_eff_5c_mape_pct": 6.38,
+          "k_eff_25c_mape_pct": 9.51,
+          "k_eff_40c_mape_pct": 12.05
+        },
+        "mismatched": {
+          "hmw_rmse_pp": 0.35458,
+          "dG_eff_ref_mae_kj_mol": 0.1893,
+          "k_eff_5c_mape_pct": 8.27,
+          "k_eff_25c_mape_pct": 9.54,
+          "k_eff_40c_mape_pct": 11.97
+        }
+      },
+      "blackbox_mlp_no_physics": {
+        "search_log": [
+          {
+            "hidden_dims": [
+              32,
+              32
+            ],
+            "lr": 0.01,
+            "weight_decay": 0.0001,
+            "best_epoch": 160,
+            "best_val_rmse_pp": 0.38471
+          },
+          {
+            "hidden_dims": [
+              64,
+              64
+            ],
+            "lr": 0.008,
+            "weight_decay": 0.0001,
+            "best_epoch": 120,
+            "best_val_rmse_pp": 0.40172
+          },
+          {
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "lr": 0.012,
+            "weight_decay": 0.0005,
+            "best_epoch": 78,
+            "best_val_rmse_pp": 0.39972
+          }
+        ],
+        "selected_config": {
+          "hidden_dims": [
+            32,
+            32
+          ],
+          "lr": 0.01,
+          "weight_decay": 0.0001,
+          "best_epoch": 160
+        },
+        "overall": {
+          "hmw_rmse_pp": 0.38471
+        },
+        "matched": {
+          "hmw_rmse_pp": 0.40193
+        },
+        "mismatched": {
+          "hmw_rmse_pp": 0.3413
+        }
+      }
+    }
+  },
+  "lot_adaptation_6m_9m_12m_evaluation": {
+    "validation_lots_6m_9m_12m_forecasts": {
+      "coverage_and_rmse_by_group": {
+        "overall": {
+          "future_6m_9m_12m_observations_count": 192,
+          "without_adaptation_hmw_rmse_pp": 0.21249,
+          "with_0_1_3m_adaptation_hmw_rmse_pp": 0.22421,
+          "without_adaptation_pi95_coverage": {
+            "k": 182,
+            "n": 192,
+            "k_over_n": "182/192",
+            "observed_coverage": 0.9479,
+            "observed_coverage_pct": 94.79,
+            "clopper_pearson_l95": 0.9063,
+            "clopper_pearson_u95": 0.9747,
+            "verdict": "PASS"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_before_recal": {
+            "k": 179,
+            "n": 192,
+            "k_over_n": "179/192",
+            "observed_coverage": 0.9323,
+            "observed_coverage_pct": 93.23,
+            "clopper_pearson_l95": 0.887,
+            "clopper_pearson_u95": 0.9635,
+            "verdict": "PASS"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_recal_overall_cal": {
+            "k": 179,
+            "n": 192,
+            "k_over_n": "179/192",
+            "observed_coverage": 0.9323,
+            "observed_coverage_pct": 93.23,
+            "clopper_pearson_l95": 0.887,
+            "clopper_pearson_u95": 0.9635,
+            "verdict": "PASS"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_recal_matched_cal": {
+            "k": 169,
+            "n": 192,
+            "k_over_n": "169/192",
+            "observed_coverage": 0.8802,
+            "observed_coverage_pct": 88.02,
+            "clopper_pearson_l95": 0.8257,
+            "clopper_pearson_u95": 0.9225,
+            "verdict": "FAIL (under-coverage)"
+          }
+        },
+        "matched": {
+          "future_6m_9m_12m_observations_count": 134,
+          "without_adaptation_hmw_rmse_pp": 0.15544,
+          "with_0_1_3m_adaptation_hmw_rmse_pp": 0.08826,
+          "without_adaptation_pi95_coverage": {
+            "k": 134,
+            "n": 134,
+            "k_over_n": "134/134",
+            "observed_coverage": 1.0,
+            "observed_coverage_pct": 100.0,
+            "clopper_pearson_l95": 0.9728,
+            "clopper_pearson_u95": 1.0,
+            "verdict": "conservative / intervals too wide"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_before_recal": {
+            "k": 134,
+            "n": 134,
+            "k_over_n": "134/134",
+            "observed_coverage": 1.0,
+            "observed_coverage_pct": 100.0,
+            "clopper_pearson_l95": 0.9728,
+            "clopper_pearson_u95": 1.0,
+            "verdict": "conservative / intervals too wide"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_recal_overall_cal": {
+            "k": 134,
+            "n": 134,
+            "k_over_n": "134/134",
+            "observed_coverage": 1.0,
+            "observed_coverage_pct": 100.0,
+            "clopper_pearson_l95": 0.9728,
+            "clopper_pearson_u95": 1.0,
+            "verdict": "conservative / intervals too wide"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_recal_matched_cal": {
+            "k": 131,
+            "n": 134,
+            "k_over_n": "131/134",
+            "observed_coverage": 0.9776,
+            "observed_coverage_pct": 97.76,
+            "clopper_pearson_l95": 0.936,
+            "clopper_pearson_u95": 0.9954,
+            "verdict": "PASS"
+          }
+        },
+        "mismatched": {
+          "future_6m_9m_12m_observations_count": 58,
+          "without_adaptation_hmw_rmse_pp": 0.30603,
+          "with_0_1_3m_adaptation_hmw_rmse_pp": 0.38524,
+          "without_adaptation_pi95_coverage": {
+            "k": 48,
+            "n": 58,
+            "k_over_n": "48/58",
+            "observed_coverage": 0.8276,
+            "observed_coverage_pct": 82.76,
+            "clopper_pearson_l95": 0.7057,
+            "clopper_pearson_u95": 0.9141,
+            "verdict": "FAIL (under-coverage)"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_before_recal": {
+            "k": 45,
+            "n": 58,
+            "k_over_n": "45/58",
+            "observed_coverage": 0.7759,
+            "observed_coverage_pct": 77.59,
+            "clopper_pearson_l95": 0.6473,
+            "clopper_pearson_u95": 0.8749,
+            "verdict": "FAIL (under-coverage)"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_recal_overall_cal": {
+            "k": 45,
+            "n": 58,
+            "k_over_n": "45/58",
+            "observed_coverage": 0.7759,
+            "observed_coverage_pct": 77.59,
+            "clopper_pearson_l95": 0.6473,
+            "clopper_pearson_u95": 0.8749,
+            "verdict": "FAIL (under-coverage)"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_recal_matched_cal": {
+            "k": 38,
+            "n": 58,
+            "k_over_n": "38/58",
+            "observed_coverage": 0.6552,
+            "observed_coverage_pct": 65.52,
+            "clopper_pearson_l95": 0.5188,
+            "clopper_pearson_u95": 0.7751,
+            "verdict": "FAIL (under-coverage)"
+          }
+        }
+      },
+      "oot_25c_operating_characteristics": {
+        "6M_25C": {
+          "matched_false_alarm_rate": {
+            "n": 28,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 0,
+              "k_over_n": "0/28",
+              "rate_pct": 0.0,
+              "clopper_pearson_95_ci_pct": [
+                0.0,
+                12.34
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 1,
+              "k_over_n": "1/28",
+              "rate_pct": 3.57,
+              "clopper_pearson_95_ci_pct": [
+                0.09,
+                18.35
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 4,
+              "k_over_n": "4/28",
+              "rate_pct": 14.29,
+              "clopper_pearson_95_ci_pct": [
+                4.03,
+                32.67
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 8,
+              "k_over_n": "8/28",
+              "rate_pct": 28.57,
+              "clopper_pearson_95_ci_pct": [
+                13.22,
+                48.67
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 4,
+              "k_over_n": "4/28",
+              "rate_pct": 14.29,
+              "clopper_pearson_95_ci_pct": [
+                4.03,
+                32.67
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 8,
+              "k_over_n": "8/28",
+              "rate_pct": 28.57,
+              "clopper_pearson_95_ci_pct": [
+                13.22,
+                48.67
+              ]
+            }
+          },
+          "mismatched_all_detection_rate": {
+            "n": 12,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 2,
+              "k_over_n": "2/12",
+              "rate_pct": 16.67,
+              "clopper_pearson_95_ci_pct": [
+                2.09,
+                48.41
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 4,
+              "k_over_n": "4/12",
+              "rate_pct": 33.33,
+              "clopper_pearson_95_ci_pct": [
+                9.92,
+                65.11
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 9,
+              "k_over_n": "9/12",
+              "rate_pct": 75.0,
+              "clopper_pearson_95_ci_pct": [
+                42.81,
+                94.51
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 9,
+              "k_over_n": "9/12",
+              "rate_pct": 75.0,
+              "clopper_pearson_95_ci_pct": [
+                42.81,
+                94.51
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 8,
+              "k_over_n": "8/12",
+              "rate_pct": 66.67,
+              "clopper_pearson_95_ci_pct": [
+                34.89,
+                90.08
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 9,
+              "k_over_n": "9/12",
+              "rate_pct": 75.0,
+              "clopper_pearson_95_ci_pct": [
+                42.81,
+                94.51
+              ]
+            }
+          },
+          "mismatched_ps80_only_detection_rate": {
+            "n": 6,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 1,
+              "k_over_n": "1/6",
+              "rate_pct": 16.67,
+              "clopper_pearson_95_ci_pct": [
+                0.42,
+                64.12
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 2,
+              "k_over_n": "2/6",
+              "rate_pct": 33.33,
+              "clopper_pearson_95_ci_pct": [
+                4.33,
+                77.72
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 5,
+              "k_over_n": "5/6",
+              "rate_pct": 83.33,
+              "clopper_pearson_95_ci_pct": [
+                35.88,
+                99.58
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 5,
+              "k_over_n": "5/6",
+              "rate_pct": 83.33,
+              "clopper_pearson_95_ci_pct": [
+                35.88,
+                99.58
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 4,
+              "k_over_n": "4/6",
+              "rate_pct": 66.67,
+              "clopper_pearson_95_ci_pct": [
+                22.28,
+                95.67
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 5,
+              "k_over_n": "5/6",
+              "rate_pct": 83.33,
+              "clopper_pearson_95_ci_pct": [
+                35.88,
+                99.58
+              ]
+            }
+          },
+          "mismatched_full_detection_rate": {
+            "n": 6,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 1,
+              "k_over_n": "1/6",
+              "rate_pct": 16.67,
+              "clopper_pearson_95_ci_pct": [
+                0.42,
+                64.12
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 2,
+              "k_over_n": "2/6",
+              "rate_pct": 33.33,
+              "clopper_pearson_95_ci_pct": [
+                4.33,
+                77.72
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 4,
+              "k_over_n": "4/6",
+              "rate_pct": 66.67,
+              "clopper_pearson_95_ci_pct": [
+                22.28,
+                95.67
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 4,
+              "k_over_n": "4/6",
+              "rate_pct": 66.67,
+              "clopper_pearson_95_ci_pct": [
+                22.28,
+                95.67
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 4,
+              "k_over_n": "4/6",
+              "rate_pct": 66.67,
+              "clopper_pearson_95_ci_pct": [
+                22.28,
+                95.67
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 4,
+              "k_over_n": "4/6",
+              "rate_pct": 66.67,
+              "clopper_pearson_95_ci_pct": [
+                22.28,
+                95.67
+              ]
+            }
+          }
+        },
+        "9M_25C": {
+          "matched_false_alarm_rate": {
+            "n": 11,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 0,
+              "k_over_n": "0/11",
+              "rate_pct": 0.0,
+              "clopper_pearson_95_ci_pct": [
+                0.0,
+                28.49
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 0,
+              "k_over_n": "0/11",
+              "rate_pct": 0.0,
+              "clopper_pearson_95_ci_pct": [
+                0.0,
+                28.49
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 3,
+              "k_over_n": "3/11",
+              "rate_pct": 27.27,
+              "clopper_pearson_95_ci_pct": [
+                6.02,
+                60.97
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 4,
+              "k_over_n": "4/11",
+              "rate_pct": 36.36,
+              "clopper_pearson_95_ci_pct": [
+                10.93,
+                69.21
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 4,
+              "k_over_n": "4/11",
+              "rate_pct": 36.36,
+              "clopper_pearson_95_ci_pct": [
+                10.93,
+                69.21
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 4,
+              "k_over_n": "4/11",
+              "rate_pct": 36.36,
+              "clopper_pearson_95_ci_pct": [
+                10.93,
+                69.21
+              ]
+            }
+          },
+          "mismatched_all_detection_rate": {
+            "n": 5,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            }
+          },
+          "mismatched_ps80_only_detection_rate": {
+            "n": 3,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 3,
+              "k_over_n": "3/3",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                29.24,
+                100.0
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 3,
+              "k_over_n": "3/3",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                29.24,
+                100.0
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 3,
+              "k_over_n": "3/3",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                29.24,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 3,
+              "k_over_n": "3/3",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                29.24,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 3,
+              "k_over_n": "3/3",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                29.24,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 3,
+              "k_over_n": "3/3",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                29.24,
+                100.0
+              ]
+            }
+          },
+          "mismatched_full_detection_rate": {
+            "n": 2,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 2,
+              "k_over_n": "2/2",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                15.81,
+                100.0
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 2,
+              "k_over_n": "2/2",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                15.81,
+                100.0
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 2,
+              "k_over_n": "2/2",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                15.81,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 2,
+              "k_over_n": "2/2",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                15.81,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 2,
+              "k_over_n": "2/2",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                15.81,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 2,
+              "k_over_n": "2/2",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                15.81,
+                100.0
+              ]
+            }
+          }
+        },
+        "12M_25C": {
+          "matched_false_alarm_rate": {
+            "n": 11,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 0,
+              "k_over_n": "0/11",
+              "rate_pct": 0.0,
+              "clopper_pearson_95_ci_pct": [
+                0.0,
+                28.49
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 0,
+              "k_over_n": "0/11",
+              "rate_pct": 0.0,
+              "clopper_pearson_95_ci_pct": [
+                0.0,
+                28.49
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 3,
+              "k_over_n": "3/11",
+              "rate_pct": 27.27,
+              "clopper_pearson_95_ci_pct": [
+                6.02,
+                60.97
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 4,
+              "k_over_n": "4/11",
+              "rate_pct": 36.36,
+              "clopper_pearson_95_ci_pct": [
+                10.93,
+                69.21
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 4,
+              "k_over_n": "4/11",
+              "rate_pct": 36.36,
+              "clopper_pearson_95_ci_pct": [
+                10.93,
+                69.21
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 4,
+              "k_over_n": "4/11",
+              "rate_pct": 36.36,
+              "clopper_pearson_95_ci_pct": [
+                10.93,
+                69.21
+              ]
+            }
+          },
+          "mismatched_all_detection_rate": {
+            "n": 5,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            }
+          },
+          "mismatched_ps80_only_detection_rate": {
+            "n": 3,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 3,
+              "k_over_n": "3/3",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                29.24,
+                100.0
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 3,
+              "k_over_n": "3/3",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                29.24,
+                100.0
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 3,
+              "k_over_n": "3/3",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                29.24,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 3,
+              "k_over_n": "3/3",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                29.24,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 3,
+              "k_over_n": "3/3",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                29.24,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 3,
+              "k_over_n": "3/3",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                29.24,
+                100.0
+              ]
+            }
+          },
+          "mismatched_full_detection_rate": {
+            "n": 2,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 2,
+              "k_over_n": "2/2",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                15.81,
+                100.0
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 2,
+              "k_over_n": "2/2",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                15.81,
+                100.0
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 2,
+              "k_over_n": "2/2",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                15.81,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 2,
+              "k_over_n": "2/2",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                15.81,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 2,
+              "k_over_n": "2/2",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                15.81,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 2,
+              "k_over_n": "2/2",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                15.81,
+                100.0
+              ]
+            }
+          }
+        },
+        "all_6M_9M_12M_25C": {
+          "matched_false_alarm_rate": {
+            "n": 50,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 0,
+              "k_over_n": "0/50",
+              "rate_pct": 0.0,
+              "clopper_pearson_95_ci_pct": [
+                0.0,
+                7.11
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 1,
+              "k_over_n": "1/50",
+              "rate_pct": 2.0,
+              "clopper_pearson_95_ci_pct": [
+                0.05,
+                10.65
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 10,
+              "k_over_n": "10/50",
+              "rate_pct": 20.0,
+              "clopper_pearson_95_ci_pct": [
+                10.03,
+                33.72
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 16,
+              "k_over_n": "16/50",
+              "rate_pct": 32.0,
+              "clopper_pearson_95_ci_pct": [
+                19.52,
+                46.7
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 12,
+              "k_over_n": "12/50",
+              "rate_pct": 24.0,
+              "clopper_pearson_95_ci_pct": [
+                13.06,
+                38.17
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 16,
+              "k_over_n": "16/50",
+              "rate_pct": 32.0,
+              "clopper_pearson_95_ci_pct": [
+                19.52,
+                46.7
+              ]
+            }
+          },
+          "mismatched_all_detection_rate": {
+            "n": 22,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 12,
+              "k_over_n": "12/22",
+              "rate_pct": 54.55,
+              "clopper_pearson_95_ci_pct": [
+                32.21,
+                75.61
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 14,
+              "k_over_n": "14/22",
+              "rate_pct": 63.64,
+              "clopper_pearson_95_ci_pct": [
+                40.66,
+                82.8
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 19,
+              "k_over_n": "19/22",
+              "rate_pct": 86.36,
+              "clopper_pearson_95_ci_pct": [
+                65.09,
+                97.09
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 19,
+              "k_over_n": "19/22",
+              "rate_pct": 86.36,
+              "clopper_pearson_95_ci_pct": [
+                65.09,
+                97.09
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 18,
+              "k_over_n": "18/22",
+              "rate_pct": 81.82,
+              "clopper_pearson_95_ci_pct": [
+                59.72,
+                94.81
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 19,
+              "k_over_n": "19/22",
+              "rate_pct": 86.36,
+              "clopper_pearson_95_ci_pct": [
+                65.09,
+                97.09
+              ]
+            }
+          },
+          "mismatched_ps80_only_detection_rate": {
+            "n": 12,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 7,
+              "k_over_n": "7/12",
+              "rate_pct": 58.33,
+              "clopper_pearson_95_ci_pct": [
+                27.67,
+                84.83
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 8,
+              "k_over_n": "8/12",
+              "rate_pct": 66.67,
+              "clopper_pearson_95_ci_pct": [
+                34.89,
+                90.08
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 11,
+              "k_over_n": "11/12",
+              "rate_pct": 91.67,
+              "clopper_pearson_95_ci_pct": [
+                61.52,
+                99.79
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 11,
+              "k_over_n": "11/12",
+              "rate_pct": 91.67,
+              "clopper_pearson_95_ci_pct": [
+                61.52,
+                99.79
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 10,
+              "k_over_n": "10/12",
+              "rate_pct": 83.33,
+              "clopper_pearson_95_ci_pct": [
+                51.59,
+                97.91
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 11,
+              "k_over_n": "11/12",
+              "rate_pct": 91.67,
+              "clopper_pearson_95_ci_pct": [
+                61.52,
+                99.79
+              ]
+            }
+          },
+          "mismatched_full_detection_rate": {
+            "n": 10,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 5,
+              "k_over_n": "5/10",
+              "rate_pct": 50.0,
+              "clopper_pearson_95_ci_pct": [
+                18.71,
+                81.29
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 6,
+              "k_over_n": "6/10",
+              "rate_pct": 60.0,
+              "clopper_pearson_95_ci_pct": [
+                26.24,
+                87.84
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 8,
+              "k_over_n": "8/10",
+              "rate_pct": 80.0,
+              "clopper_pearson_95_ci_pct": [
+                44.39,
+                97.48
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 8,
+              "k_over_n": "8/10",
+              "rate_pct": 80.0,
+              "clopper_pearson_95_ci_pct": [
+                44.39,
+                97.48
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 8,
+              "k_over_n": "8/10",
+              "rate_pct": 80.0,
+              "clopper_pearson_95_ci_pct": [
+                44.39,
+                97.48
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 8,
+              "k_over_n": "8/10",
+              "rate_pct": 80.0,
+              "clopper_pearson_95_ci_pct": [
+                44.39,
+                97.48
+              ]
+            }
+          }
+        }
+      }
+    },
+    "test_lots_6m_9m_12m_forecasts": {
+      "coverage_and_rmse_by_group": {
+        "overall": {
+          "future_6m_9m_12m_observations_count": 480,
+          "without_adaptation_hmw_rmse_pp": 0.37656,
+          "with_0_1_3m_adaptation_hmw_rmse_pp": 0.36938,
+          "without_adaptation_pi95_coverage": {
+            "k": 448,
+            "n": 480,
+            "k_over_n": "448/480",
+            "observed_coverage": 0.9333,
+            "observed_coverage_pct": 93.33,
+            "clopper_pearson_l95": 0.9072,
+            "clopper_pearson_u95": 0.954,
+            "verdict": "PASS"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_before_recal": {
+            "k": 447,
+            "n": 480,
+            "k_over_n": "447/480",
+            "observed_coverage": 0.9313,
+            "observed_coverage_pct": 93.12,
+            "clopper_pearson_l95": 0.9048,
+            "clopper_pearson_u95": 0.9522,
+            "verdict": "PASS"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_recal_overall_cal": {
+            "k": 449,
+            "n": 480,
+            "k_over_n": "449/480",
+            "observed_coverage": 0.9354,
+            "observed_coverage_pct": 93.54,
+            "clopper_pearson_l95": 0.9096,
+            "clopper_pearson_u95": 0.9557,
+            "verdict": "PASS"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_recal_matched_cal": {
+            "k": 414,
+            "n": 480,
+            "k_over_n": "414/480",
+            "observed_coverage": 0.8625,
+            "observed_coverage_pct": 86.25,
+            "clopper_pearson_l95": 0.8284,
+            "clopper_pearson_u95": 0.892,
+            "verdict": "FAIL (under-coverage)"
+          }
+        },
+        "matched": {
+          "future_6m_9m_12m_observations_count": 336,
+          "without_adaptation_hmw_rmse_pp": 0.14005,
+          "with_0_1_3m_adaptation_hmw_rmse_pp": 0.09766,
+          "without_adaptation_pi95_coverage": {
+            "k": 332,
+            "n": 336,
+            "k_over_n": "332/336",
+            "observed_coverage": 0.9881,
+            "observed_coverage_pct": 98.81,
+            "clopper_pearson_l95": 0.9698,
+            "clopper_pearson_u95": 0.9967,
+            "verdict": "conservative / intervals too wide"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_before_recal": {
+            "k": 334,
+            "n": 336,
+            "k_over_n": "334/336",
+            "observed_coverage": 0.994,
+            "observed_coverage_pct": 99.4,
+            "clopper_pearson_l95": 0.9787,
+            "clopper_pearson_u95": 0.9993,
+            "verdict": "conservative / intervals too wide"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_recal_overall_cal": {
+            "k": 336,
+            "n": 336,
+            "k_over_n": "336/336",
+            "observed_coverage": 1.0,
+            "observed_coverage_pct": 100.0,
+            "clopper_pearson_l95": 0.9891,
+            "clopper_pearson_u95": 1.0,
+            "verdict": "conservative / intervals too wide"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_recal_matched_cal": {
+            "k": 314,
+            "n": 336,
+            "k_over_n": "314/336",
+            "observed_coverage": 0.9345,
+            "observed_coverage_pct": 93.45,
+            "clopper_pearson_l95": 0.9025,
+            "clopper_pearson_u95": 0.9585,
+            "verdict": "PASS"
+          }
+        },
+        "mismatched": {
+          "future_6m_9m_12m_observations_count": 144,
+          "without_adaptation_hmw_rmse_pp": 0.65337,
+          "with_0_1_3m_adaptation_hmw_rmse_pp": 0.65768,
+          "without_adaptation_pi95_coverage": {
+            "k": 116,
+            "n": 144,
+            "k_over_n": "116/144",
+            "observed_coverage": 0.8056,
+            "observed_coverage_pct": 80.56,
+            "clopper_pearson_l95": 0.7314,
+            "clopper_pearson_u95": 0.8667,
+            "verdict": "FAIL (under-coverage)"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_before_recal": {
+            "k": 113,
+            "n": 144,
+            "k_over_n": "113/144",
+            "observed_coverage": 0.7847,
+            "observed_coverage_pct": 78.47,
+            "clopper_pearson_l95": 0.7086,
+            "clopper_pearson_u95": 0.8488,
+            "verdict": "FAIL (under-coverage)"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_recal_overall_cal": {
+            "k": 113,
+            "n": 144,
+            "k_over_n": "113/144",
+            "observed_coverage": 0.7847,
+            "observed_coverage_pct": 78.47,
+            "clopper_pearson_l95": 0.7086,
+            "clopper_pearson_u95": 0.8488,
+            "verdict": "FAIL (under-coverage)"
+          },
+          "with_0_1_3m_adaptation_pi95_coverage_recal_matched_cal": {
+            "k": 100,
+            "n": 144,
+            "k_over_n": "100/144",
+            "observed_coverage": 0.6944,
+            "observed_coverage_pct": 69.44,
+            "clopper_pearson_l95": 0.6123,
+            "clopper_pearson_u95": 0.7684,
+            "verdict": "FAIL (under-coverage)"
+          }
+        }
+      },
+      "oot_25c_operating_characteristics": {
+        "6M_25C": {
+          "matched_false_alarm_rate": {
+            "n": 70,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 0,
+              "k_over_n": "0/70",
+              "rate_pct": 0.0,
+              "clopper_pearson_95_ci_pct": [
+                0.0,
+                5.13
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 1,
+              "k_over_n": "1/70",
+              "rate_pct": 1.43,
+              "clopper_pearson_95_ci_pct": [
+                0.04,
+                7.7
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 11,
+              "k_over_n": "11/70",
+              "rate_pct": 15.71,
+              "clopper_pearson_95_ci_pct": [
+                8.11,
+                26.38
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 14,
+              "k_over_n": "14/70",
+              "rate_pct": 20.0,
+              "clopper_pearson_95_ci_pct": [
+                11.39,
+                31.27
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 9,
+              "k_over_n": "9/70",
+              "rate_pct": 12.86,
+              "clopper_pearson_95_ci_pct": [
+                6.05,
+                23.01
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 14,
+              "k_over_n": "14/70",
+              "rate_pct": 20.0,
+              "clopper_pearson_95_ci_pct": [
+                11.39,
+                31.27
+              ]
+            }
+          },
+          "mismatched_all_detection_rate": {
+            "n": 30,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 9,
+              "k_over_n": "9/30",
+              "rate_pct": 30.0,
+              "clopper_pearson_95_ci_pct": [
+                14.73,
+                49.4
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 15,
+              "k_over_n": "15/30",
+              "rate_pct": 50.0,
+              "clopper_pearson_95_ci_pct": [
+                31.3,
+                68.7
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 18,
+              "k_over_n": "18/30",
+              "rate_pct": 60.0,
+              "clopper_pearson_95_ci_pct": [
+                40.6,
+                77.34
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 23,
+              "k_over_n": "23/30",
+              "rate_pct": 76.67,
+              "clopper_pearson_95_ci_pct": [
+                57.72,
+                90.07
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 18,
+              "k_over_n": "18/30",
+              "rate_pct": 60.0,
+              "clopper_pearson_95_ci_pct": [
+                40.6,
+                77.34
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 23,
+              "k_over_n": "23/30",
+              "rate_pct": 76.67,
+              "clopper_pearson_95_ci_pct": [
+                57.72,
+                90.07
+              ]
+            }
+          },
+          "mismatched_ps80_only_detection_rate": {
+            "n": 15,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 6,
+              "k_over_n": "6/15",
+              "rate_pct": 40.0,
+              "clopper_pearson_95_ci_pct": [
+                16.34,
+                67.71
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 10,
+              "k_over_n": "10/15",
+              "rate_pct": 66.67,
+              "clopper_pearson_95_ci_pct": [
+                38.38,
+                88.18
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 11,
+              "k_over_n": "11/15",
+              "rate_pct": 73.33,
+              "clopper_pearson_95_ci_pct": [
+                44.9,
+                92.21
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 13,
+              "k_over_n": "13/15",
+              "rate_pct": 86.67,
+              "clopper_pearson_95_ci_pct": [
+                59.54,
+                98.34
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 11,
+              "k_over_n": "11/15",
+              "rate_pct": 73.33,
+              "clopper_pearson_95_ci_pct": [
+                44.9,
+                92.21
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 13,
+              "k_over_n": "13/15",
+              "rate_pct": 86.67,
+              "clopper_pearson_95_ci_pct": [
+                59.54,
+                98.34
+              ]
+            }
+          },
+          "mismatched_full_detection_rate": {
+            "n": 15,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 3,
+              "k_over_n": "3/15",
+              "rate_pct": 20.0,
+              "clopper_pearson_95_ci_pct": [
+                4.33,
+                48.09
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 5,
+              "k_over_n": "5/15",
+              "rate_pct": 33.33,
+              "clopper_pearson_95_ci_pct": [
+                11.82,
+                61.62
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 7,
+              "k_over_n": "7/15",
+              "rate_pct": 46.67,
+              "clopper_pearson_95_ci_pct": [
+                21.27,
+                73.41
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 10,
+              "k_over_n": "10/15",
+              "rate_pct": 66.67,
+              "clopper_pearson_95_ci_pct": [
+                38.38,
+                88.18
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 7,
+              "k_over_n": "7/15",
+              "rate_pct": 46.67,
+              "clopper_pearson_95_ci_pct": [
+                21.27,
+                73.41
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 10,
+              "k_over_n": "10/15",
+              "rate_pct": 66.67,
+              "clopper_pearson_95_ci_pct": [
+                38.38,
+                88.18
+              ]
+            }
+          }
+        },
+        "9M_25C": {
+          "matched_false_alarm_rate": {
+            "n": 28,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 0,
+              "k_over_n": "0/28",
+              "rate_pct": 0.0,
+              "clopper_pearson_95_ci_pct": [
+                0.0,
+                12.34
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 2,
+              "k_over_n": "2/28",
+              "rate_pct": 7.14,
+              "clopper_pearson_95_ci_pct": [
+                0.88,
+                23.5
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 4,
+              "k_over_n": "4/28",
+              "rate_pct": 14.29,
+              "clopper_pearson_95_ci_pct": [
+                4.03,
+                32.67
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 8,
+              "k_over_n": "8/28",
+              "rate_pct": 28.57,
+              "clopper_pearson_95_ci_pct": [
+                13.22,
+                48.67
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 5,
+              "k_over_n": "5/28",
+              "rate_pct": 17.86,
+              "clopper_pearson_95_ci_pct": [
+                6.06,
+                36.89
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 8,
+              "k_over_n": "8/28",
+              "rate_pct": 28.57,
+              "clopper_pearson_95_ci_pct": [
+                13.22,
+                48.67
+              ]
+            }
+          },
+          "mismatched_all_detection_rate": {
+            "n": 12,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 10,
+              "k_over_n": "10/12",
+              "rate_pct": 83.33,
+              "clopper_pearson_95_ci_pct": [
+                51.59,
+                97.91
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 11,
+              "k_over_n": "11/12",
+              "rate_pct": 91.67,
+              "clopper_pearson_95_ci_pct": [
+                61.52,
+                99.79
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 12,
+              "k_over_n": "12/12",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                73.54,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 12,
+              "k_over_n": "12/12",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                73.54,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 12,
+              "k_over_n": "12/12",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                73.54,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 12,
+              "k_over_n": "12/12",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                73.54,
+                100.0
+              ]
+            }
+          },
+          "mismatched_ps80_only_detection_rate": {
+            "n": 5,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 4,
+              "k_over_n": "4/5",
+              "rate_pct": 80.0,
+              "clopper_pearson_95_ci_pct": [
+                28.36,
+                99.49
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            }
+          },
+          "mismatched_full_detection_rate": {
+            "n": 7,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 6,
+              "k_over_n": "6/7",
+              "rate_pct": 85.71,
+              "clopper_pearson_95_ci_pct": [
+                42.13,
+                99.64
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 6,
+              "k_over_n": "6/7",
+              "rate_pct": 85.71,
+              "clopper_pearson_95_ci_pct": [
+                42.13,
+                99.64
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 7,
+              "k_over_n": "7/7",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                59.04,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 7,
+              "k_over_n": "7/7",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                59.04,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 7,
+              "k_over_n": "7/7",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                59.04,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 7,
+              "k_over_n": "7/7",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                59.04,
+                100.0
+              ]
+            }
+          }
+        },
+        "12M_25C": {
+          "matched_false_alarm_rate": {
+            "n": 28,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 0,
+              "k_over_n": "0/28",
+              "rate_pct": 0.0,
+              "clopper_pearson_95_ci_pct": [
+                0.0,
+                12.34
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 2,
+              "k_over_n": "2/28",
+              "rate_pct": 7.14,
+              "clopper_pearson_95_ci_pct": [
+                0.88,
+                23.5
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 3,
+              "k_over_n": "3/28",
+              "rate_pct": 10.71,
+              "clopper_pearson_95_ci_pct": [
+                2.27,
+                28.23
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 7,
+              "k_over_n": "7/28",
+              "rate_pct": 25.0,
+              "clopper_pearson_95_ci_pct": [
+                10.69,
+                44.87
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 4,
+              "k_over_n": "4/28",
+              "rate_pct": 14.29,
+              "clopper_pearson_95_ci_pct": [
+                4.03,
+                32.67
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 7,
+              "k_over_n": "7/28",
+              "rate_pct": 25.0,
+              "clopper_pearson_95_ci_pct": [
+                10.69,
+                44.87
+              ]
+            }
+          },
+          "mismatched_all_detection_rate": {
+            "n": 12,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 11,
+              "k_over_n": "11/12",
+              "rate_pct": 91.67,
+              "clopper_pearson_95_ci_pct": [
+                61.52,
+                99.79
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 12,
+              "k_over_n": "12/12",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                73.54,
+                100.0
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 12,
+              "k_over_n": "12/12",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                73.54,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 12,
+              "k_over_n": "12/12",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                73.54,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 12,
+              "k_over_n": "12/12",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                73.54,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 12,
+              "k_over_n": "12/12",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                73.54,
+                100.0
+              ]
+            }
+          },
+          "mismatched_ps80_only_detection_rate": {
+            "n": 5,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 5,
+              "k_over_n": "5/5",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                47.82,
+                100.0
+              ]
+            }
+          },
+          "mismatched_full_detection_rate": {
+            "n": 7,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 6,
+              "k_over_n": "6/7",
+              "rate_pct": 85.71,
+              "clopper_pearson_95_ci_pct": [
+                42.13,
+                99.64
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 7,
+              "k_over_n": "7/7",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                59.04,
+                100.0
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 7,
+              "k_over_n": "7/7",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                59.04,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 7,
+              "k_over_n": "7/7",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                59.04,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 7,
+              "k_over_n": "7/7",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                59.04,
+                100.0
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 7,
+              "k_over_n": "7/7",
+              "rate_pct": 100.0,
+              "clopper_pearson_95_ci_pct": [
+                59.04,
+                100.0
+              ]
+            }
+          }
+        },
+        "all_6M_9M_12M_25C": {
+          "matched_false_alarm_rate": {
+            "n": 126,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 0,
+              "k_over_n": "0/126",
+              "rate_pct": 0.0,
+              "clopper_pearson_95_ci_pct": [
+                0.0,
+                2.89
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 5,
+              "k_over_n": "5/126",
+              "rate_pct": 3.97,
+              "clopper_pearson_95_ci_pct": [
+                1.3,
+                9.02
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 18,
+              "k_over_n": "18/126",
+              "rate_pct": 14.29,
+              "clopper_pearson_95_ci_pct": [
+                8.69,
+                21.63
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 29,
+              "k_over_n": "29/126",
+              "rate_pct": 23.02,
+              "clopper_pearson_95_ci_pct": [
+                15.99,
+                31.35
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 18,
+              "k_over_n": "18/126",
+              "rate_pct": 14.29,
+              "clopper_pearson_95_ci_pct": [
+                8.69,
+                21.63
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 29,
+              "k_over_n": "29/126",
+              "rate_pct": 23.02,
+              "clopper_pearson_95_ci_pct": [
+                15.99,
+                31.35
+              ]
+            }
+          },
+          "mismatched_all_detection_rate": {
+            "n": 54,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 30,
+              "k_over_n": "30/54",
+              "rate_pct": 55.56,
+              "clopper_pearson_95_ci_pct": [
+                41.4,
+                69.08
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 38,
+              "k_over_n": "38/54",
+              "rate_pct": 70.37,
+              "clopper_pearson_95_ci_pct": [
+                56.39,
+                82.02
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 42,
+              "k_over_n": "42/54",
+              "rate_pct": 77.78,
+              "clopper_pearson_95_ci_pct": [
+                64.4,
+                87.96
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 47,
+              "k_over_n": "47/54",
+              "rate_pct": 87.04,
+              "clopper_pearson_95_ci_pct": [
+                75.1,
+                94.63
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 42,
+              "k_over_n": "42/54",
+              "rate_pct": 77.78,
+              "clopper_pearson_95_ci_pct": [
+                64.4,
+                87.96
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 47,
+              "k_over_n": "47/54",
+              "rate_pct": 87.04,
+              "clopper_pearson_95_ci_pct": [
+                75.1,
+                94.63
+              ]
+            }
+          },
+          "mismatched_ps80_only_detection_rate": {
+            "n": 25,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 15,
+              "k_over_n": "15/25",
+              "rate_pct": 60.0,
+              "clopper_pearson_95_ci_pct": [
+                38.67,
+                78.87
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 20,
+              "k_over_n": "20/25",
+              "rate_pct": 80.0,
+              "clopper_pearson_95_ci_pct": [
+                59.3,
+                93.17
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 21,
+              "k_over_n": "21/25",
+              "rate_pct": 84.0,
+              "clopper_pearson_95_ci_pct": [
+                63.92,
+                95.46
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 23,
+              "k_over_n": "23/25",
+              "rate_pct": 92.0,
+              "clopper_pearson_95_ci_pct": [
+                73.97,
+                99.02
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 21,
+              "k_over_n": "21/25",
+              "rate_pct": 84.0,
+              "clopper_pearson_95_ci_pct": [
+                63.92,
+                95.46
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 23,
+              "k_over_n": "23/25",
+              "rate_pct": 92.0,
+              "clopper_pearson_95_ci_pct": [
+                73.97,
+                99.02
+              ]
+            }
+          },
+          "mismatched_full_detection_rate": {
+            "n": 29,
+            "recalibrated_adapted_hybrid_pi_overall_cal": {
+              "k": 15,
+              "k_over_n": "15/29",
+              "rate_pct": 51.72,
+              "clopper_pearson_95_ci_pct": [
+                32.53,
+                70.55
+              ]
+            },
+            "recalibrated_adapted_hybrid_pi_matched_cal": {
+              "k": 18,
+              "k_over_n": "18/29",
+              "rate_pct": 62.07,
+              "clopper_pearson_95_ci_pct": [
+                42.26,
+                79.31
+              ]
+            },
+            "classic_linear_reg_pi95_with_slope_uncertainty": {
+              "k": 21,
+              "k_over_n": "21/29",
+              "rate_pct": 72.41,
+              "clopper_pearson_95_ci_pct": [
+                52.76,
+                87.27
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_035": {
+              "k": 24,
+              "k_over_n": "24/29",
+              "rate_pct": 82.76,
+              "clopper_pearson_95_ci_pct": [
+                64.23,
+                94.15
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd_sd_050": {
+              "k": 21,
+              "k_over_n": "21/29",
+              "rate_pct": 72.41,
+              "clopper_pearson_95_ci_pct": [
+                52.76,
+                87.27
+              ]
+            },
+            "classic_linear_0_3m_plus_3sd": {
+              "k": 24,
+              "k_over_n": "24/29",
+              "rate_pct": 82.76,
+              "clopper_pearson_95_ci_pct": [
+                64.23,
+                94.15
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "test_set_coverage_and_recovery": {
+    "coverage_by_group": {
+      "overall": {
+        "lots_count": 100,
+        "observations_count": 1780,
+        "hmw_rmse_pp": 0.35416,
+        "hmw_mae_pp": 0.1335,
+        "identifiable_quantities_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+        "identifiable_quantities": {
+          "dG_eff_ref_kj_mol": {
+            "k": 96,
+            "n": 100,
+            "k_over_n": "96/100",
+            "observed_coverage": 0.96,
+            "observed_coverage_pct": 96.0,
+            "clopper_pearson_l95": 0.9007,
+            "clopper_pearson_u95": 0.989,
+            "verdict": "PASS",
+            "mae": 0.14326,
+            "mape_pct": 0.12,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "k_eff_5c_per_h": {
+            "k": 96,
+            "n": 100,
+            "k_over_n": "96/100",
+            "observed_coverage": 0.96,
+            "observed_coverage_pct": 96.0,
+            "clopper_pearson_l95": 0.9007,
+            "clopper_pearson_u95": 0.989,
+            "verdict": "PASS",
+            "mae": 0.0,
+            "mape_pct": 6.2,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "k_eff_25c_per_h": {
+            "k": 98,
+            "n": 100,
+            "k_over_n": "98/100",
+            "observed_coverage": 0.98,
+            "observed_coverage_pct": 98.0,
+            "clopper_pearson_l95": 0.9296,
+            "clopper_pearson_u95": 0.9976,
+            "verdict": "PASS",
+            "mae": 0.0,
+            "mape_pct": 7.79,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "k_eff_40c_per_h": {
+            "k": 97,
+            "n": 100,
+            "k_over_n": "97/100",
+            "observed_coverage": 0.97,
+            "observed_coverage_pct": 97.0,
+            "clopper_pearson_l95": 0.9148,
+            "clopper_pearson_u95": 0.9938,
+            "verdict": "PASS",
+            "mae": 0.0,
+            "mape_pct": 9.69,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "apparent_ea_5_40c_kj_mol": {
+            "k": 99,
+            "n": 100,
+            "k_over_n": "99/100",
+            "observed_coverage": 0.99,
+            "observed_coverage_pct": 99.0,
+            "clopper_pearson_l95": 0.9455,
+            "clopper_pearson_u95": 0.9997,
+            "verdict": "PASS",
+            "mae": 1.28457,
+            "mape_pct": 1.71,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          }
+        },
+        "observation_pi_per_lot_simultaneous": {
+          "k": 94,
+          "n": 100,
+          "k_over_n": "94/100",
+          "observed_coverage": 0.94,
+          "observed_coverage_pct": 94.0,
+          "clopper_pearson_l95": 0.874,
+          "clopper_pearson_u95": 0.9777,
+          "verdict": "PASS",
+          "role": "PRIMARY_PASS_FAIL_GATE (independent lot-level binomial trials)"
+        },
+        "observation_pi_per_observation_pointwise": {
+          "k": 1689,
+          "n": 1780,
+          "k_over_n": "1689/1780",
+          "observed_coverage": 0.9489,
+          "observed_coverage_pct": 94.89,
+          "clopper_pearson_l95": 0.9376,
+          "clopper_pearson_u95": 0.9586,
+          "verdict": "PASS",
+          "role": "DESCRIPTIVE_ONLY (observations within a lot are correlated; use lot-level result for pass/fail)"
+        },
+        "observation_pi_level_scaled_per_lot_simultaneous": {
+          "k": 86,
+          "n": 100,
+          "k_over_n": "86/100",
+          "observed_coverage": 0.86,
+          "observed_coverage_pct": 86.0,
+          "clopper_pearson_l95": 0.7763,
+          "clopper_pearson_u95": 0.9213,
+          "verdict": "FAIL (under-coverage)"
+        },
+        "observation_pi_level_scaled_per_observation_descriptive": {
+          "k": 1672,
+          "n": 1780,
+          "k_over_n": "1672/1780",
+          "observed_coverage": 0.9393,
+          "observed_coverage_pct": 93.93,
+          "clopper_pearson_l95": 0.9272,
+          "clopper_pearson_u95": 0.95,
+          "verdict": "FAIL (under-coverage)"
+        },
+        "lots_with_all_observations_inside_pointwise_pi": {
+          "k": 62,
+          "n": 100,
+          "k_over_n": "62/100",
+          "observed_pct": 62.0
+        }
+      },
+      "matched": {
+        "lots_count": 70,
+        "observations_count": 1246,
+        "hmw_rmse_pp": 0.15781,
+        "hmw_mae_pp": 0.0864,
+        "identifiable_quantities_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+        "identifiable_quantities": {
+          "dG_eff_ref_kj_mol": {
+            "k": 68,
+            "n": 70,
+            "k_over_n": "68/70",
+            "observed_coverage": 0.9714,
+            "observed_coverage_pct": 97.14,
+            "clopper_pearson_l95": 0.9006,
+            "clopper_pearson_u95": 0.9965,
+            "verdict": "PASS",
+            "mae": 0.13434,
+            "mape_pct": 0.11,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "k_eff_5c_per_h": {
+            "k": 68,
+            "n": 70,
+            "k_over_n": "68/70",
+            "observed_coverage": 0.9714,
+            "observed_coverage_pct": 97.14,
+            "clopper_pearson_l95": 0.9006,
+            "clopper_pearson_u95": 0.9965,
+            "verdict": "PASS",
+            "mae": 0.0,
+            "mape_pct": 5.85,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "k_eff_25c_per_h": {
+            "k": 69,
+            "n": 70,
+            "k_over_n": "69/70",
+            "observed_coverage": 0.9857,
+            "observed_coverage_pct": 98.57,
+            "clopper_pearson_l95": 0.923,
+            "clopper_pearson_u95": 0.9996,
+            "verdict": "PASS",
+            "mae": 0.0,
+            "mape_pct": 7.43,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "k_eff_40c_per_h": {
+            "k": 68,
+            "n": 70,
+            "k_over_n": "68/70",
+            "observed_coverage": 0.9714,
+            "observed_coverage_pct": 97.14,
+            "clopper_pearson_l95": 0.9006,
+            "clopper_pearson_u95": 0.9965,
+            "verdict": "PASS",
+            "mae": 0.0,
+            "mape_pct": 9.58,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "apparent_ea_5_40c_kj_mol": {
+            "k": 69,
+            "n": 70,
+            "k_over_n": "69/70",
+            "observed_coverage": 0.9857,
+            "observed_coverage_pct": 98.57,
+            "clopper_pearson_l95": 0.923,
+            "clopper_pearson_u95": 0.9996,
+            "verdict": "PASS",
+            "mae": 1.3598,
+            "mape_pct": 1.82,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          }
+        },
+        "observation_pi_per_lot_simultaneous": {
+          "k": 70,
+          "n": 70,
+          "k_over_n": "70/70",
+          "observed_coverage": 1.0,
+          "observed_coverage_pct": 100.0,
+          "clopper_pearson_l95": 0.9487,
+          "clopper_pearson_u95": 1.0,
+          "verdict": "PASS",
+          "role": "PRIMARY_PASS_FAIL_GATE (independent lot-level binomial trials)"
+        },
+        "observation_pi_per_observation_pointwise": {
+          "k": 1232,
+          "n": 1246,
+          "k_over_n": "1232/1246",
+          "observed_coverage": 0.9888,
+          "observed_coverage_pct": 98.88,
+          "clopper_pearson_l95": 0.9812,
+          "clopper_pearson_u95": 0.9938,
+          "verdict": "conservative / intervals too wide",
+          "role": "DESCRIPTIVE_ONLY (observations within a lot are correlated; use lot-level result for pass/fail)"
+        },
+        "observation_pi_level_scaled_per_lot_simultaneous": {
+          "k": 67,
+          "n": 70,
+          "k_over_n": "67/70",
+          "observed_coverage": 0.9571,
+          "observed_coverage_pct": 95.71,
+          "clopper_pearson_l95": 0.8798,
+          "clopper_pearson_u95": 0.9911,
+          "verdict": "PASS"
+        },
+        "observation_pi_level_scaled_per_observation_descriptive": {
+          "k": 1213,
+          "n": 1246,
+          "k_over_n": "1213/1246",
+          "observed_coverage": 0.9735,
+          "observed_coverage_pct": 97.35,
+          "clopper_pearson_l95": 0.963,
+          "clopper_pearson_u95": 0.9817,
+          "verdict": "conservative / intervals too wide"
+        },
+        "lots_with_all_observations_inside_pointwise_pi": {
+          "k": 59,
+          "n": 70,
+          "k_over_n": "59/70",
+          "observed_pct": 84.29
+        }
+      },
+      "mismatched": {
+        "lots_count": 30,
+        "observations_count": 534,
+        "hmw_rmse_pp": 0.59998,
+        "hmw_mae_pp": 0.24341,
+        "identifiable_quantities_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+        "identifiable_quantities": {
+          "dG_eff_ref_kj_mol": {
+            "k": 28,
+            "n": 30,
+            "k_over_n": "28/30",
+            "observed_coverage": 0.9333,
+            "observed_coverage_pct": 93.33,
+            "clopper_pearson_l95": 0.7793,
+            "clopper_pearson_u95": 0.9918,
+            "verdict": "PASS",
+            "mae": 0.16407,
+            "mape_pct": 0.14,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "k_eff_5c_per_h": {
+            "k": 28,
+            "n": 30,
+            "k_over_n": "28/30",
+            "observed_coverage": 0.9333,
+            "observed_coverage_pct": 93.33,
+            "clopper_pearson_l95": 0.7793,
+            "clopper_pearson_u95": 0.9918,
+            "verdict": "PASS",
+            "mae": 0.0,
+            "mape_pct": 7.02,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "k_eff_25c_per_h": {
+            "k": 29,
+            "n": 30,
+            "k_over_n": "29/30",
+            "observed_coverage": 0.9667,
+            "observed_coverage_pct": 96.67,
+            "clopper_pearson_l95": 0.8278,
+            "clopper_pearson_u95": 0.9992,
+            "verdict": "PASS",
+            "mae": 0.0,
+            "mape_pct": 8.63,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "k_eff_40c_per_h": {
+            "k": 29,
+            "n": 30,
+            "k_over_n": "29/30",
+            "observed_coverage": 0.9667,
+            "observed_coverage_pct": 96.67,
+            "clopper_pearson_l95": 0.8278,
+            "clopper_pearson_u95": 0.9992,
+            "verdict": "PASS",
+            "mae": 0.0,
+            "mape_pct": 9.95,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "apparent_ea_5_40c_kj_mol": {
+            "k": 30,
+            "n": 30,
+            "k_over_n": "30/30",
+            "observed_coverage": 1.0,
+            "observed_coverage_pct": 100.0,
+            "clopper_pearson_l95": 0.8843,
+            "clopper_pearson_u95": 1.0,
+            "verdict": "PASS",
+            "mae": 1.10902,
+            "mape_pct": 1.46,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          }
+        },
+        "observation_pi_per_lot_simultaneous": {
+          "k": 24,
+          "n": 30,
+          "k_over_n": "24/30",
+          "observed_coverage": 0.8,
+          "observed_coverage_pct": 80.0,
+          "clopper_pearson_l95": 0.6143,
+          "clopper_pearson_u95": 0.9229,
+          "verdict": "FAIL (under-coverage)",
+          "role": "PRIMARY_PASS_FAIL_GATE (independent lot-level binomial trials)"
+        },
+        "observation_pi_per_observation_pointwise": {
+          "k": 457,
+          "n": 534,
+          "k_over_n": "457/534",
+          "observed_coverage": 0.8558,
+          "observed_coverage_pct": 85.58,
+          "clopper_pearson_l95": 0.8231,
+          "clopper_pearson_u95": 0.8845,
+          "verdict": "FAIL (under-coverage)",
+          "role": "DESCRIPTIVE_ONLY (observations within a lot are correlated; use lot-level result for pass/fail)"
+        },
+        "observation_pi_level_scaled_per_lot_simultaneous": {
+          "k": 19,
+          "n": 30,
+          "k_over_n": "19/30",
+          "observed_coverage": 0.6333,
+          "observed_coverage_pct": 63.33,
+          "clopper_pearson_l95": 0.4386,
+          "clopper_pearson_u95": 0.8007,
+          "verdict": "FAIL (under-coverage)"
+        },
+        "observation_pi_level_scaled_per_observation_descriptive": {
+          "k": 459,
+          "n": 534,
+          "k_over_n": "459/534",
+          "observed_coverage": 0.8596,
+          "observed_coverage_pct": 85.96,
+          "clopper_pearson_l95": 0.8272,
+          "clopper_pearson_u95": 0.8879,
+          "verdict": "FAIL (under-coverage)"
+        },
+        "lots_with_all_observations_inside_pointwise_pi": {
+          "k": 3,
+          "n": 30,
+          "k_over_n": "3/30",
+          "observed_pct": 10.0
+        }
+      },
+      "mismatched_ps80_only": {
+        "lots_count": 15,
+        "observations_count": 265,
+        "hmw_rmse_pp": 0.55855,
+        "hmw_mae_pp": 0.23148,
+        "identifiable_quantities_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+        "identifiable_quantities": {
+          "dG_eff_ref_kj_mol": {
+            "k": 13,
+            "n": 15,
+            "k_over_n": "13/15",
+            "observed_coverage": 0.8667,
+            "observed_coverage_pct": 86.67,
+            "clopper_pearson_l95": 0.5954,
+            "clopper_pearson_u95": 0.9834,
+            "verdict": "PASS",
+            "mae": 0.20444,
+            "mape_pct": 0.17,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "k_eff_5c_per_h": {
+            "k": 13,
+            "n": 15,
+            "k_over_n": "13/15",
+            "observed_coverage": 0.8667,
+            "observed_coverage_pct": 86.67,
+            "clopper_pearson_l95": 0.5954,
+            "clopper_pearson_u95": 0.9834,
+            "verdict": "PASS",
+            "mae": 0.0,
+            "mape_pct": 8.48,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "k_eff_25c_per_h": {
+            "k": 14,
+            "n": 15,
+            "k_over_n": "14/15",
+            "observed_coverage": 0.9333,
+            "observed_coverage_pct": 93.33,
+            "clopper_pearson_l95": 0.6805,
+            "clopper_pearson_u95": 0.9983,
+            "verdict": "PASS",
+            "mae": 0.0,
+            "mape_pct": 8.39,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "k_eff_40c_per_h": {
+            "k": 14,
+            "n": 15,
+            "k_over_n": "14/15",
+            "observed_coverage": 0.9333,
+            "observed_coverage_pct": 93.33,
+            "clopper_pearson_l95": 0.6805,
+            "clopper_pearson_u95": 0.9983,
+            "verdict": "PASS",
+            "mae": 0.0,
+            "mape_pct": 9.77,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "apparent_ea_5_40c_kj_mol": {
+            "k": 15,
+            "n": 15,
+            "k_over_n": "15/15",
+            "observed_coverage": 1.0,
+            "observed_coverage_pct": 100.0,
+            "clopper_pearson_l95": 0.782,
+            "clopper_pearson_u95": 1.0,
+            "verdict": "PASS",
+            "mae": 1.06247,
+            "mape_pct": 1.44,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          }
+        },
+        "observation_pi_per_lot_simultaneous": {
+          "k": 12,
+          "n": 15,
+          "k_over_n": "12/15",
+          "observed_coverage": 0.8,
+          "observed_coverage_pct": 80.0,
+          "clopper_pearson_l95": 0.5191,
+          "clopper_pearson_u95": 0.9567,
+          "verdict": "PASS",
+          "role": "PRIMARY_PASS_FAIL_GATE (independent lot-level binomial trials)"
+        },
+        "observation_pi_per_observation_pointwise": {
+          "k": 226,
+          "n": 265,
+          "k_over_n": "226/265",
+          "observed_coverage": 0.8528,
+          "observed_coverage_pct": 85.28,
+          "clopper_pearson_l95": 0.8043,
+          "clopper_pearson_u95": 0.8932,
+          "verdict": "FAIL (under-coverage)",
+          "role": "DESCRIPTIVE_ONLY (observations within a lot are correlated; use lot-level result for pass/fail)"
+        },
+        "observation_pi_level_scaled_per_lot_simultaneous": {
+          "k": 9,
+          "n": 15,
+          "k_over_n": "9/15",
+          "observed_coverage": 0.6,
+          "observed_coverage_pct": 60.0,
+          "clopper_pearson_l95": 0.3229,
+          "clopper_pearson_u95": 0.8366,
+          "verdict": "FAIL (under-coverage)"
+        },
+        "observation_pi_level_scaled_per_observation_descriptive": {
+          "k": 222,
+          "n": 265,
+          "k_over_n": "222/265",
+          "observed_coverage": 0.8377,
+          "observed_coverage_pct": 83.77,
+          "clopper_pearson_l95": 0.7877,
+          "clopper_pearson_u95": 0.88,
+          "verdict": "FAIL (under-coverage)"
+        },
+        "lots_with_all_observations_inside_pointwise_pi": {
+          "k": 2,
+          "n": 15,
+          "k_over_n": "2/15",
+          "observed_pct": 13.33
+        }
+      },
+      "mismatched_full": {
+        "lots_count": 15,
+        "observations_count": 269,
+        "hmw_rmse_pp": 0.63817,
+        "hmw_mae_pp": 0.25517,
+        "identifiable_quantities_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+        "identifiable_quantities": {
+          "dG_eff_ref_kj_mol": {
+            "k": 15,
+            "n": 15,
+            "k_over_n": "15/15",
+            "observed_coverage": 1.0,
+            "observed_coverage_pct": 100.0,
+            "clopper_pearson_l95": 0.782,
+            "clopper_pearson_u95": 1.0,
+            "verdict": "PASS",
+            "mae": 0.12371,
+            "mape_pct": 0.1,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "k_eff_5c_per_h": {
+            "k": 15,
+            "n": 15,
+            "k_over_n": "15/15",
+            "observed_coverage": 1.0,
+            "observed_coverage_pct": 100.0,
+            "clopper_pearson_l95": 0.782,
+            "clopper_pearson_u95": 1.0,
+            "verdict": "PASS",
+            "mae": 0.0,
+            "mape_pct": 5.57,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "k_eff_25c_per_h": {
+            "k": 15,
+            "n": 15,
+            "k_over_n": "15/15",
+            "observed_coverage": 1.0,
+            "observed_coverage_pct": 100.0,
+            "clopper_pearson_l95": 0.782,
+            "clopper_pearson_u95": 1.0,
+            "verdict": "PASS",
+            "mae": 0.0,
+            "mape_pct": 8.88,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "k_eff_40c_per_h": {
+            "k": 15,
+            "n": 15,
+            "k_over_n": "15/15",
+            "observed_coverage": 1.0,
+            "observed_coverage_pct": 100.0,
+            "clopper_pearson_l95": 0.782,
+            "clopper_pearson_u95": 1.0,
+            "verdict": "PASS",
+            "mae": 0.0,
+            "mape_pct": 10.14,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          },
+          "apparent_ea_5_40c_kj_mol": {
+            "k": 15,
+            "n": 15,
+            "k_over_n": "15/15",
+            "observed_coverage": 1.0,
+            "observed_coverage_pct": 100.0,
+            "clopper_pearson_l95": 0.782,
+            "clopper_pearson_u95": 1.0,
+            "verdict": "PASS",
+            "mae": 1.15558,
+            "mape_pct": 1.49,
+            "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable"
+          }
+        },
+        "observation_pi_per_lot_simultaneous": {
+          "k": 12,
+          "n": 15,
+          "k_over_n": "12/15",
+          "observed_coverage": 0.8,
+          "observed_coverage_pct": 80.0,
+          "clopper_pearson_l95": 0.5191,
+          "clopper_pearson_u95": 0.9567,
+          "verdict": "PASS",
+          "role": "PRIMARY_PASS_FAIL_GATE (independent lot-level binomial trials)"
+        },
+        "observation_pi_per_observation_pointwise": {
+          "k": 231,
+          "n": 269,
+          "k_over_n": "231/269",
+          "observed_coverage": 0.8587,
+          "observed_coverage_pct": 85.87,
+          "clopper_pearson_l95": 0.8113,
+          "clopper_pearson_u95": 0.8981,
+          "verdict": "FAIL (under-coverage)",
+          "role": "DESCRIPTIVE_ONLY (observations within a lot are correlated; use lot-level result for pass/fail)"
+        },
+        "observation_pi_level_scaled_per_lot_simultaneous": {
+          "k": 10,
+          "n": 15,
+          "k_over_n": "10/15",
+          "observed_coverage": 0.6667,
+          "observed_coverage_pct": 66.67,
+          "clopper_pearson_l95": 0.3838,
+          "clopper_pearson_u95": 0.8818,
+          "verdict": "FAIL (under-coverage)"
+        },
+        "observation_pi_level_scaled_per_observation_descriptive": {
+          "k": 237,
+          "n": 269,
+          "k_over_n": "237/269",
+          "observed_coverage": 0.881,
+          "observed_coverage_pct": 88.1,
+          "clopper_pearson_l95": 0.8362,
+          "clopper_pearson_u95": 0.9172,
+          "verdict": "FAIL (under-coverage)"
+        },
+        "lots_with_all_observations_inside_pointwise_pi": {
+          "k": 1,
+          "n": 15,
+          "k_over_n": "1/15",
+          "observed_pct": 6.67
+        }
+      }
+    },
+    "observable_strata_coverage_temp_x_time": [
+      {
+        "temperature_c": 5.0,
+        "time_months": 1.0,
+        "n_lots_in_stratum": 100,
+        "mean_obs_hmw_pct": 0.626,
+        "standard_pi95_coverage_pct": 100.0,
+        "standard_pi95_k_over_n": "100/100",
+        "level_scaled_pi95_coverage_pct": 97.0,
+        "level_scaled_pi95_k_over_n": "97/100",
+        "matched_standard_pi95_coverage_pct": 100.0,
+        "mismatched_standard_pi95_coverage_pct": 100.0,
+        "mismatched_level_scaled_pi95_coverage_pct": 100.0
+      },
+      {
+        "temperature_c": 5.0,
+        "time_months": 3.0,
+        "n_lots_in_stratum": 100,
+        "mean_obs_hmw_pct": 0.687,
+        "standard_pi95_coverage_pct": 99.0,
+        "standard_pi95_k_over_n": "99/100",
+        "level_scaled_pi95_coverage_pct": 96.0,
+        "level_scaled_pi95_k_over_n": "96/100",
+        "matched_standard_pi95_coverage_pct": 98.57,
+        "mismatched_standard_pi95_coverage_pct": 100.0,
+        "mismatched_level_scaled_pi95_coverage_pct": 93.33
+      },
+      {
+        "temperature_c": 5.0,
+        "time_months": 6.0,
+        "n_lots_in_stratum": 100,
+        "mean_obs_hmw_pct": 0.765,
+        "standard_pi95_coverage_pct": 98.0,
+        "standard_pi95_k_over_n": "98/100",
+        "level_scaled_pi95_coverage_pct": 96.0,
+        "level_scaled_pi95_k_over_n": "96/100",
+        "matched_standard_pi95_coverage_pct": 98.57,
+        "mismatched_standard_pi95_coverage_pct": 96.67,
+        "mismatched_level_scaled_pi95_coverage_pct": 96.67
+      },
+      {
+        "temperature_c": 5.0,
+        "time_months": 9.0,
+        "n_lots_in_stratum": 100,
+        "mean_obs_hmw_pct": 0.856,
+        "standard_pi95_coverage_pct": 100.0,
+        "standard_pi95_k_over_n": "100/100",
+        "level_scaled_pi95_coverage_pct": 97.0,
+        "level_scaled_pi95_k_over_n": "97/100",
+        "matched_standard_pi95_coverage_pct": 100.0,
+        "mismatched_standard_pi95_coverage_pct": 100.0,
+        "mismatched_level_scaled_pi95_coverage_pct": 93.33
+      },
+      {
+        "temperature_c": 5.0,
+        "time_months": 12.0,
+        "n_lots_in_stratum": 100,
+        "mean_obs_hmw_pct": 0.939,
+        "standard_pi95_coverage_pct": 100.0,
+        "standard_pi95_k_over_n": "100/100",
+        "level_scaled_pi95_coverage_pct": 96.0,
+        "level_scaled_pi95_k_over_n": "96/100",
+        "matched_standard_pi95_coverage_pct": 100.0,
+        "mismatched_standard_pi95_coverage_pct": 100.0,
+        "mismatched_level_scaled_pi95_coverage_pct": 96.67
+      },
+      {
+        "temperature_c": 5.0,
+        "time_months": 18.0,
+        "n_lots_in_stratum": 100,
+        "mean_obs_hmw_pct": 1.121,
+        "standard_pi95_coverage_pct": 99.0,
+        "standard_pi95_k_over_n": "99/100",
+        "level_scaled_pi95_coverage_pct": 96.0,
+        "level_scaled_pi95_k_over_n": "96/100",
+        "matched_standard_pi95_coverage_pct": 100.0,
+        "mismatched_standard_pi95_coverage_pct": 96.67,
+        "mismatched_level_scaled_pi95_coverage_pct": 93.33
+      },
+      {
+        "temperature_c": 5.0,
+        "time_months": 24.0,
+        "n_lots_in_stratum": 100,
+        "mean_obs_hmw_pct": 1.294,
+        "standard_pi95_coverage_pct": 100.0,
+        "standard_pi95_k_over_n": "100/100",
+        "level_scaled_pi95_coverage_pct": 97.0,
+        "level_scaled_pi95_k_over_n": "97/100",
+        "matched_standard_pi95_coverage_pct": 100.0,
+        "mismatched_standard_pi95_coverage_pct": 100.0,
+        "mismatched_level_scaled_pi95_coverage_pct": 90.0
+      },
+      {
+        "temperature_c": 25.0,
+        "time_months": 1.0,
+        "n_lots_in_stratum": 100,
+        "mean_obs_hmw_pct": 0.857,
+        "standard_pi95_coverage_pct": 99.0,
+        "standard_pi95_k_over_n": "99/100",
+        "level_scaled_pi95_coverage_pct": 98.0,
+        "level_scaled_pi95_k_over_n": "98/100",
+        "matched_standard_pi95_coverage_pct": 98.57,
+        "mismatched_standard_pi95_coverage_pct": 100.0,
+        "mismatched_level_scaled_pi95_coverage_pct": 100.0
+      },
+      {
+        "temperature_c": 25.0,
+        "time_months": 3.0,
+        "n_lots_in_stratum": 100,
+        "mean_obs_hmw_pct": 1.375,
+        "standard_pi95_coverage_pct": 98.0,
+        "standard_pi95_k_over_n": "98/100",
+        "level_scaled_pi95_coverage_pct": 98.0,
+        "level_scaled_pi95_k_over_n": "98/100",
+        "matched_standard_pi95_coverage_pct": 98.57,
+        "mismatched_standard_pi95_coverage_pct": 96.67,
+        "mismatched_level_scaled_pi95_coverage_pct": 96.67
+      },
+      {
+        "temperature_c": 25.0,
+        "time_months": 6.0,
+        "n_lots_in_stratum": 100,
+        "mean_obs_hmw_pct": 2.225,
+        "standard_pi95_coverage_pct": 91.0,
+        "standard_pi95_k_over_n": "91/100",
+        "level_scaled_pi95_coverage_pct": 91.0,
+        "level_scaled_pi95_k_over_n": "91/100",
+        "matched_standard_pi95_coverage_pct": 98.57,
+        "mismatched_standard_pi95_coverage_pct": 73.33,
+        "mismatched_level_scaled_pi95_coverage_pct": 73.33
+      },
+      {
+        "temperature_c": 25.0,
+        "time_months": 9.0,
+        "n_lots_in_stratum": 40,
+        "mean_obs_hmw_pct": 3.187,
+        "standard_pi95_coverage_pct": 72.5,
+        "standard_pi95_k_over_n": "29/40",
+        "level_scaled_pi95_coverage_pct": 85.0,
+        "level_scaled_pi95_k_over_n": "34/40",
+        "matched_standard_pi95_coverage_pct": 92.86,
+        "mismatched_standard_pi95_coverage_pct": 25.0,
+        "mismatched_level_scaled_pi95_coverage_pct": 50.0
+      },
+      {
+        "temperature_c": 25.0,
+        "time_months": 12.0,
+        "n_lots_in_stratum": 40,
+        "mean_obs_hmw_pct": 4.2,
+        "standard_pi95_coverage_pct": 75.0,
+        "standard_pi95_k_over_n": "30/40",
+        "level_scaled_pi95_coverage_pct": 75.0,
+        "level_scaled_pi95_k_over_n": "30/40",
+        "matched_standard_pi95_coverage_pct": 100.0,
+        "mismatched_standard_pi95_coverage_pct": 16.67,
+        "mismatched_level_scaled_pi95_coverage_pct": 16.67
+      },
+      {
+        "temperature_c": 40.0,
+        "time_months": 0.5,
+        "n_lots_in_stratum": 100,
+        "mean_obs_hmw_pct": 1.172,
+        "standard_pi95_coverage_pct": 98.0,
+        "standard_pi95_k_over_n": "98/100",
+        "level_scaled_pi95_coverage_pct": 95.0,
+        "level_scaled_pi95_k_over_n": "95/100",
+        "matched_standard_pi95_coverage_pct": 98.57,
+        "mismatched_standard_pi95_coverage_pct": 96.67,
+        "mismatched_level_scaled_pi95_coverage_pct": 96.67
+      },
+      {
+        "temperature_c": 40.0,
+        "time_months": 1.0,
+        "n_lots_in_stratum": 100,
+        "mean_obs_hmw_pct": 1.75,
+        "standard_pi95_coverage_pct": 96.0,
+        "standard_pi95_k_over_n": "96/100",
+        "level_scaled_pi95_coverage_pct": 98.0,
+        "level_scaled_pi95_k_over_n": "98/100",
+        "matched_standard_pi95_coverage_pct": 97.14,
+        "mismatched_standard_pi95_coverage_pct": 93.33,
+        "mismatched_level_scaled_pi95_coverage_pct": 93.33
+      },
+      {
+        "temperature_c": 40.0,
+        "time_months": 2.0,
+        "n_lots_in_stratum": 100,
+        "mean_obs_hmw_pct": 3.043,
+        "standard_pi95_coverage_pct": 83.0,
+        "standard_pi95_k_over_n": "83/100",
+        "level_scaled_pi95_coverage_pct": 88.0,
+        "level_scaled_pi95_k_over_n": "88/100",
+        "matched_standard_pi95_coverage_pct": 98.57,
+        "mismatched_standard_pi95_coverage_pct": 46.67,
+        "mismatched_level_scaled_pi95_coverage_pct": 60.0
+      },
+      {
+        "temperature_c": 40.0,
+        "time_months": 3.0,
+        "n_lots_in_stratum": 100,
+        "mean_obs_hmw_pct": 4.47,
+        "standard_pi95_coverage_pct": 74.0,
+        "standard_pi95_k_over_n": "74/100",
+        "level_scaled_pi95_coverage_pct": 80.0,
+        "level_scaled_pi95_k_over_n": "80/100",
+        "matched_standard_pi95_coverage_pct": 98.57,
+        "mismatched_standard_pi95_coverage_pct": 16.67,
+        "mismatched_level_scaled_pi95_coverage_pct": 33.33
+      }
+    ],
+    "prior_driven_nonidentifiable_diagnostics": {
+      "note": "PRIOR-DRIVEN / NON-IDENTIFIABLE FROM SEC HMW DATA ALONE: dH_agg_ref, K_u(5C), and dH_u trade off inside k_eff(T) = f_U(T) * k_agg(T). Reported for diagnostic transparency only; never gated.",
+      "parameters": {
+        "dH_agg_ref_kj_mol": {
+          "ensemble_mean": 38.9019,
+          "ensemble_median": 38.75122,
+          "ensemble_p025": 35.63433,
+          "ensemble_p975": 43.19223,
+          "mean_within_lot_ensemble_sd": 1.15443
+        },
+        "ku_ref_5c": {
+          "ensemble_mean": 0.00114,
+          "ensemble_median": 0.00104,
+          "ensemble_p025": 0.00079,
+          "ensemble_p975": 0.00195,
+          "mean_within_lot_ensemble_sd": 0.0003
+        },
+        "dH_u_kj_mol": {
+          "ensemble_mean": 34.95781,
+          "ensemble_median": 34.92107,
+          "ensemble_p025": 31.74177,
+          "ensemble_p975": 38.3634,
+          "mean_within_lot_ensemble_sd": 0.95617
+        }
+      },
+      "dH_agg_vs_dS_agg_ensemble_correlation": {
+        "mean_pearson_r": 0.9078,
+        "median_pearson_r": 0.9155,
+        "min_pearson_r": 0.7676,
+        "max_pearson_r": 0.9644,
+        "explanation": "Strong positive enthalpy-entropy compensation (r ~ +0.99) arises physically because SEC data tightly constrain dG_agg_ref = dH_agg_ref - T_ref * dS_agg_ref at 5 \u00b0C while leaving the partitioning between dH_agg_ref and dH_u partially collinear."
+      }
+    }
+  },
+  "excursion_verdict_evaluation": {
+    "evaluation_subset": "test_lots_excursions_only (split='test', n=80; calibrated on val_lots_excursions, n=40)",
+    "detection_gate_2sigma_pp": 0.09899,
+    "by_group": {
+      "overall": {
+        "total_test_excursions": 80,
+        "dhmw_interval_coverage": {
+          "k": 78,
+          "n": 80,
+          "k_over_n": "78/80",
+          "observed_coverage": 0.975,
+          "observed_coverage_pct": 97.5,
+          "clopper_pearson_l95": 0.9126,
+          "clopper_pearson_u95": 0.997,
+          "verdict": "PASS"
+        },
+        "confusion_matrix": {
+          "true_below_gate": {
+            "total": 40,
+            "pred_no_detectable_change": 34,
+            "pred_inconclusive": 6,
+            "pred_detectable_change_likely": 0
+          },
+          "true_above_gate": {
+            "total": 40,
+            "pred_no_detectable_change": 0,
+            "pred_inconclusive": 8,
+            "pred_detectable_change_likely": 32
+          }
+        },
+        "false_reassurance_count": 0,
+        "false_reassurance_k_over_n": "0/40",
+        "false_reassurance_rate": 0.0,
+        "false_reassurance_clopper_pearson_95_ci": [
+          0.0,
+          0.0881
+        ],
+        "false_reassurance_clopper_pearson_u95_pct": 8.81,
+        "false_alarm_count": 0,
+        "false_alarm_k_over_n": "0/40",
+        "false_alarm_rate": 0.0,
+        "false_alarm_clopper_pearson_95_ci": [
+          0.0,
+          0.0881
+        ],
+        "false_alarm_clopper_pearson_u95_pct": 8.81,
+        "inconclusive_count": 14,
+        "inconclusive_rate": 0.175
+      },
+      "matched": {
+        "total_test_excursions": 56,
+        "dhmw_interval_coverage": {
+          "k": 55,
+          "n": 56,
+          "k_over_n": "55/56",
+          "observed_coverage": 0.9821,
+          "observed_coverage_pct": 98.21,
+          "clopper_pearson_l95": 0.9045,
+          "clopper_pearson_u95": 0.9995,
+          "verdict": "PASS"
+        },
+        "confusion_matrix": {
+          "true_below_gate": {
+            "total": 31,
+            "pred_no_detectable_change": 27,
+            "pred_inconclusive": 4,
+            "pred_detectable_change_likely": 0
+          },
+          "true_above_gate": {
+            "total": 25,
+            "pred_no_detectable_change": 0,
+            "pred_inconclusive": 5,
+            "pred_detectable_change_likely": 20
+          }
+        },
+        "false_reassurance_count": 0,
+        "false_reassurance_k_over_n": "0/25",
+        "false_reassurance_rate": 0.0,
+        "false_reassurance_clopper_pearson_95_ci": [
+          0.0,
+          0.1372
+        ],
+        "false_reassurance_clopper_pearson_u95_pct": 13.72,
+        "false_alarm_count": 0,
+        "false_alarm_k_over_n": "0/31",
+        "false_alarm_rate": 0.0,
+        "false_alarm_clopper_pearson_95_ci": [
+          0.0,
+          0.1122
+        ],
+        "false_alarm_clopper_pearson_u95_pct": 11.22,
+        "inconclusive_count": 9,
+        "inconclusive_rate": 0.1607
+      },
+      "mismatched": {
+        "total_test_excursions": 24,
+        "dhmw_interval_coverage": {
+          "k": 23,
+          "n": 24,
+          "k_over_n": "23/24",
+          "observed_coverage": 0.9583,
+          "observed_coverage_pct": 95.83,
+          "clopper_pearson_l95": 0.7888,
+          "clopper_pearson_u95": 0.9989,
+          "verdict": "PASS"
+        },
+        "confusion_matrix": {
+          "true_below_gate": {
+            "total": 9,
+            "pred_no_detectable_change": 7,
+            "pred_inconclusive": 2,
+            "pred_detectable_change_likely": 0
+          },
+          "true_above_gate": {
+            "total": 15,
+            "pred_no_detectable_change": 0,
+            "pred_inconclusive": 3,
+            "pred_detectable_change_likely": 12
+          }
+        },
+        "false_reassurance_count": 0,
+        "false_reassurance_k_over_n": "0/15",
+        "false_reassurance_rate": 0.0,
+        "false_reassurance_clopper_pearson_95_ci": [
+          0.0,
+          0.218
+        ],
+        "false_reassurance_clopper_pearson_u95_pct": 21.8,
+        "false_alarm_count": 0,
+        "false_alarm_k_over_n": "0/9",
+        "false_alarm_rate": 0.0,
+        "false_alarm_clopper_pearson_95_ci": [
+          0.0,
+          0.3363
+        ],
+        "false_alarm_clopper_pearson_u95_pct": 33.63,
+        "inconclusive_count": 5,
+        "inconclusive_rate": 0.2083
+      }
+    },
+    "nominal_benchmark_comparison": {
+      "36h_at_28C": {
+        "nominal_dhmw_pp": 0.016007,
+        "nominal_placeholder_verdict": "no detectable change",
+        "ensemble_mean_dhmw_pp": 0.013764,
+        "ensemble_sd_dhmw_pp": 0.001532,
+        "ensemble_l95_dhmw_pp": 0.010568,
+        "ensemble_u95_dhmw_pp": 0.016959,
+        "ensemble_verdict": "no detectable change",
+        "differs_from_nominal": false
+      },
+      "2h_at_28C": {
+        "nominal_dhmw_pp": 0.000889,
+        "nominal_placeholder_verdict": "no detectable change",
+        "ensemble_mean_dhmw_pp": 0.000765,
+        "ensemble_sd_dhmw_pp": 8.5e-05,
+        "ensemble_l95_dhmw_pp": 0.000587,
+        "ensemble_u95_dhmw_pp": 0.000942,
+        "ensemble_verdict": "no detectable change",
+        "differs_from_nominal": false
+      },
+      "48h_at_38C": {
+        "nominal_dhmw_pp": 0.05546,
+        "nominal_placeholder_verdict": "no detectable change",
+        "ensemble_mean_dhmw_pp": 0.048231,
+        "ensemble_sd_dhmw_pp": 0.006153,
+        "ensemble_l95_dhmw_pp": 0.035654,
+        "ensemble_u95_dhmw_pp": 0.060807,
+        "ensemble_verdict": "no detectable change",
+        "differs_from_nominal": false
+      },
+      "72h_at_40C": {
+        "nominal_dhmw_pp": 0.099947,
+        "nominal_placeholder_verdict": "inconclusive",
+        "ensemble_mean_dhmw_pp": 0.087112,
+        "ensemble_sd_dhmw_pp": 0.011397,
+        "ensemble_l95_dhmw_pp": 0.063893,
+        "ensemble_u95_dhmw_pp": 0.110331,
+        "ensemble_verdict": "inconclusive",
+        "differs_from_nominal": false
+      },
+      "7d_at_40C": {
+        "nominal_dhmw_pp": 0.233053,
+        "nominal_placeholder_verdict": "detectable change likely",
+        "ensemble_mean_dhmw_pp": 0.203141,
+        "ensemble_sd_dhmw_pp": 0.026558,
+        "ensemble_l95_dhmw_pp": 0.149029,
+        "ensemble_u95_dhmw_pp": 0.257252,
+        "ensemble_verdict": "detectable change likely",
+        "differs_from_nominal": false
+      },
+      "14d_at_40C": {
+        "nominal_dhmw_pp": 0.465559,
+        "nominal_placeholder_verdict": "detectable change likely",
+        "ensemble_mean_dhmw_pp": 0.405859,
+        "ensemble_sd_dhmw_pp": 0.052995,
+        "ensemble_l95_dhmw_pp": 0.297867,
+        "ensemble_u95_dhmw_pp": 0.513851,
+        "ensemble_verdict": "detectable change likely",
+        "differs_from_nominal": false
+      }
+    }
+  },
+  "physical_validity_and_15c_audit": {
+    "training_protocol": "Models trained strictly on pulls <= 3.0 months (0, 0.5, 1, 2, 3M) of the 100 training lots",
+    "late_time_extrapolation_test_6m_to_24m_hmw_rmse_pp": {
+      "hybrid_lumry_eyring_ode": {
+        "overall": 0.34165,
+        "matched": 0.11057,
+        "mismatched": 0.60045
+      },
+      "tuned_blackbox_mlp": {
+        "overall": 7.55173,
+        "matched": 7.60055,
+        "mismatched": 7.43656
+      }
+    },
+    "unseen_15c_accuracy_vs_generator_3state_radau_truth_1m_to_24m": {
+      "trained_on_early_pulls_le_3m": {
+        "hybrid_lumry_eyring_ode": {
+          "overall_rmse_pp": 0.23698,
+          "overall_mae_pp": 0.09718,
+          "matched_rmse_pp": 0.08094,
+          "matched_mae_pp": 0.04937,
+          "mismatched_rmse_pp": 0.41463,
+          "mismatched_mae_pp": 0.20871
+        },
+        "tuned_blackbox_mlp": {
+          "overall_rmse_pp": 7.88225,
+          "overall_mae_pp": 4.67063,
+          "matched_rmse_pp": 7.98667,
+          "matched_mae_pp": 4.73692,
+          "mismatched_rmse_pp": 7.63303,
+          "mismatched_mae_pp": 4.51597
+        }
+      },
+      "trained_on_full_schedule_0_to_24m": {
+        "hybrid_25_member_ensemble": {
+          "overall_rmse_pp": 0.21719,
+          "overall_mae_pp": 0.09195,
+          "matched_rmse_pp": 0.08866,
+          "matched_mae_pp": 0.05271,
+          "mismatched_rmse_pp": 0.37269,
+          "mismatched_mae_pp": 0.1835
+        },
+        "tuned_blackbox_mlp": {
+          "overall_rmse_pp": 0.37269,
+          "overall_mae_pp": 0.23647,
+          "matched_rmse_pp": 0.27979,
+          "matched_mae_pp": 0.19695,
+          "mismatched_rmse_pp": 0.52947,
+          "mismatched_mae_pp": 0.32867
+        }
+      }
+    },
+    "physical_violation_counts_across_100_test_lots_5c_15c_25c_40c": {
+      "hybrid_lumry_eyring_ode": {
+        "purity_increase_or_negative_rate_violations": 0,
+        "total_time_steps_checked": 3200,
+        "non_monotone_temperature_rate_violations_incl_15c": 0,
+        "total_temperature_order_pairs_checked": 2400,
+        "note": "Zero physical violations by construction (strictly positive Lumry-Eyring rate constants and bounded positive dH_agg / dH_u)."
+      },
+      "tuned_blackbox_mlp": {
+        "purity_increase_or_negative_rate_violations": 308,
+        "total_time_steps_checked": 3200,
+        "non_monotone_temperature_rate_violations_incl_15c": 130,
+        "total_temperature_order_pairs_checked": 2400
+      }
+    }
+  },
+  "shelf_life_vs_truth_100_test_lots": {
+    "temperature_c": 5.0,
+    "spec_limit_hmw_pct": 2.0,
+    "regulatory_extrapolation_cap_months_beyond_observed": 6.0,
+    "ich_q5c_q1e_regulatory_note": "ICH Q5C is the primary regulatory standard for therapeutic biologics (requiring real-time, real-temperature stability data); ICH Q1E statistical confidence-bound and ANCOVA batch-poolability (p=0.25) methods are capped at observed_months + 6.0 months.",
+    "shelf_life_validity_statement": "Extrapolation guard enforces strict capping at observed + 6 months per ICH Q1E; late-pull residual checks evaluate ongoing model adequacy.",
+    "by_group": {
+      "overall": {
+        "n_lots": 100,
+        "model_adequacy_demonstrated_count": 74,
+        "model_adequacy_not_demonstrated_count": 26,
+        "model_adequacy_not_demonstrated_rate_pct": 26.0,
+        "model_adequacy_not_demonstrated_clopper_pearson_95_ci_pct": [
+          17.74,
+          35.73
+        ],
+        "mean_true_shelf_life_months": 49.79,
+        "min_true_shelf_life_months": 26.47,
+        "max_true_shelf_life_months": 111.98,
+        "classic_linear_q1e_before_30m_cap": {
+          "n_lots": 100,
+          "unsafe_exceedance_count": 25,
+          "unsafe_k_over_n": "25/100",
+          "unsafe_rate_pct": 25.0,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            16.88,
+            34.66
+          ],
+          "mean_estimated_months": 46.37,
+          "mean_true_months": 49.79,
+          "mae_vs_truth_months": 5.48,
+          "mean_signed_bias_months": -3.43,
+          "ratio_estimated_over_true_median": 0.9151,
+          "ratio_estimated_over_true_p25": 0.8694,
+          "ratio_estimated_over_true_p75": 0.9975,
+          "ratio_estimated_over_true_iqr": 0.1281
+        },
+        "hybrid_95ub_before_30m_cap": {
+          "n_lots": 100,
+          "unsafe_exceedance_count": 19,
+          "unsafe_k_over_n": "19/100",
+          "unsafe_rate_pct": 19.0,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            11.84,
+            28.07
+          ],
+          "mean_estimated_months": 45.32,
+          "mean_true_months": 49.79,
+          "mae_vs_truth_months": 6.41,
+          "mean_signed_bias_months": -4.47,
+          "ratio_estimated_over_true_median": 0.895,
+          "ratio_estimated_over_true_p25": 0.8417,
+          "ratio_estimated_over_true_p75": 0.9418,
+          "ratio_estimated_over_true_iqr": 0.1002
+        },
+        "classic_linear_q1e_after_30m_cap": {
+          "n_lots": 100,
+          "unsafe_exceedance_count": 2,
+          "unsafe_k_over_n": "2/100",
+          "unsafe_rate_pct": 2.0,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            0.24,
+            7.04
+          ],
+          "mean_estimated_months": 29.88,
+          "mean_true_months": 49.79,
+          "mae_vs_truth_months": 19.93,
+          "mean_signed_bias_months": -19.92,
+          "ratio_estimated_over_true_median": 0.6347,
+          "ratio_estimated_over_true_p25": 0.5273,
+          "ratio_estimated_over_true_p75": 0.7411,
+          "ratio_estimated_over_true_iqr": 0.2139
+        },
+        "hybrid_95ub_after_30m_cap": {
+          "n_lots": 100,
+          "unsafe_exceedance_count": 0,
+          "unsafe_k_over_n": "0/100",
+          "unsafe_rate_pct": 0.0,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            0.0,
+            3.62
+          ],
+          "mean_estimated_months": 29.69,
+          "mean_true_months": 49.79,
+          "mae_vs_truth_months": 20.11,
+          "mean_signed_bias_months": -20.11,
+          "ratio_estimated_over_true_median": 0.6347,
+          "ratio_estimated_over_true_p25": 0.5273,
+          "ratio_estimated_over_true_p75": 0.7411,
+          "ratio_estimated_over_true_iqr": 0.2139
+        }
+      },
+      "matched": {
+        "n_lots": 70,
+        "model_adequacy_demonstrated_count": 51,
+        "model_adequacy_not_demonstrated_count": 19,
+        "model_adequacy_not_demonstrated_rate_pct": 27.14,
+        "model_adequacy_not_demonstrated_clopper_pearson_95_ci_pct": [
+          17.2,
+          39.1
+        ],
+        "mean_true_shelf_life_months": 51.86,
+        "min_true_shelf_life_months": 26.47,
+        "max_true_shelf_life_months": 111.98,
+        "classic_linear_q1e_before_30m_cap": {
+          "n_lots": 70,
+          "unsafe_exceedance_count": 2,
+          "unsafe_k_over_n": "2/70",
+          "unsafe_rate_pct": 2.86,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            0.35,
+            9.94
+          ],
+          "mean_estimated_months": 45.67,
+          "mean_true_months": 51.86,
+          "mae_vs_truth_months": 6.22,
+          "mean_signed_bias_months": -6.19,
+          "ratio_estimated_over_true_median": 0.8951,
+          "ratio_estimated_over_true_p25": 0.8591,
+          "ratio_estimated_over_true_p75": 0.9206,
+          "ratio_estimated_over_true_iqr": 0.0615
+        },
+        "hybrid_95ub_before_30m_cap": {
+          "n_lots": 70,
+          "unsafe_exceedance_count": 1,
+          "unsafe_k_over_n": "1/70",
+          "unsafe_rate_pct": 1.43,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            0.04,
+            7.7
+          ],
+          "mean_estimated_months": 44.69,
+          "mean_true_months": 51.86,
+          "mae_vs_truth_months": 7.18,
+          "mean_signed_bias_months": -7.17,
+          "ratio_estimated_over_true_median": 0.8666,
+          "ratio_estimated_over_true_p25": 0.835,
+          "ratio_estimated_over_true_p75": 0.906,
+          "ratio_estimated_over_true_iqr": 0.071
+        },
+        "classic_linear_q1e_after_30m_cap": {
+          "n_lots": 70,
+          "unsafe_exceedance_count": 2,
+          "unsafe_k_over_n": "2/70",
+          "unsafe_rate_pct": 2.86,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            0.35,
+            9.94
+          ],
+          "mean_estimated_months": 29.82,
+          "mean_true_months": 51.86,
+          "mae_vs_truth_months": 22.07,
+          "mean_signed_bias_months": -22.04,
+          "ratio_estimated_over_true_median": 0.5999,
+          "ratio_estimated_over_true_p25": 0.5154,
+          "ratio_estimated_over_true_p75": 0.7099,
+          "ratio_estimated_over_true_iqr": 0.1944
+        },
+        "hybrid_95ub_after_30m_cap": {
+          "n_lots": 70,
+          "unsafe_exceedance_count": 0,
+          "unsafe_k_over_n": "0/70",
+          "unsafe_rate_pct": 0.0,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            0.0,
+            5.13
+          ],
+          "mean_estimated_months": 29.63,
+          "mean_true_months": 51.86,
+          "mae_vs_truth_months": 22.24,
+          "mean_signed_bias_months": -22.24,
+          "ratio_estimated_over_true_median": 0.5999,
+          "ratio_estimated_over_true_p25": 0.5154,
+          "ratio_estimated_over_true_p75": 0.7099,
+          "ratio_estimated_over_true_iqr": 0.1944
+        }
+      },
+      "mismatched": {
+        "n_lots": 30,
+        "model_adequacy_demonstrated_count": 23,
+        "model_adequacy_not_demonstrated_count": 7,
+        "model_adequacy_not_demonstrated_rate_pct": 23.33,
+        "model_adequacy_not_demonstrated_clopper_pearson_95_ci_pct": [
+          9.93,
+          42.28
+        ],
+        "mean_true_shelf_life_months": 44.96,
+        "min_true_shelf_life_months": 31.61,
+        "max_true_shelf_life_months": 75.35,
+        "classic_linear_q1e_before_30m_cap": {
+          "n_lots": 30,
+          "unsafe_exceedance_count": 23,
+          "unsafe_k_over_n": "23/30",
+          "unsafe_rate_pct": 76.67,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            57.72,
+            90.07
+          ],
+          "mean_estimated_months": 47.98,
+          "mean_true_months": 44.96,
+          "mae_vs_truth_months": 3.74,
+          "mean_signed_bias_months": 3.03,
+          "ratio_estimated_over_true_median": 1.0442,
+          "ratio_estimated_over_true_p25": 1.0066,
+          "ratio_estimated_over_true_p75": 1.1168,
+          "ratio_estimated_over_true_iqr": 0.1102
+        },
+        "hybrid_95ub_before_30m_cap": {
+          "n_lots": 30,
+          "unsafe_exceedance_count": 18,
+          "unsafe_k_over_n": "18/30",
+          "unsafe_rate_pct": 60.0,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            40.6,
+            77.34
+          ],
+          "mean_estimated_months": 46.79,
+          "mean_true_months": 44.96,
+          "mae_vs_truth_months": 4.6,
+          "mean_signed_bias_months": 1.83,
+          "ratio_estimated_over_true_median": 1.0354,
+          "ratio_estimated_over_true_p25": 0.9275,
+          "ratio_estimated_over_true_p75": 1.1183,
+          "ratio_estimated_over_true_iqr": 0.1907
+        },
+        "classic_linear_q1e_after_30m_cap": {
+          "n_lots": 30,
+          "unsafe_exceedance_count": 0,
+          "unsafe_k_over_n": "0/30",
+          "unsafe_rate_pct": 0.0,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            0.0,
+            11.57
+          ],
+          "mean_estimated_months": 30.0,
+          "mean_true_months": 44.96,
+          "mae_vs_truth_months": 14.96,
+          "mean_signed_bias_months": -14.96,
+          "ratio_estimated_over_true_median": 0.698,
+          "ratio_estimated_over_true_p25": 0.6258,
+          "ratio_estimated_over_true_p75": 0.8072,
+          "ratio_estimated_over_true_iqr": 0.1814
+        },
+        "hybrid_95ub_after_30m_cap": {
+          "n_lots": 30,
+          "unsafe_exceedance_count": 0,
+          "unsafe_k_over_n": "0/30",
+          "unsafe_rate_pct": 0.0,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            0.0,
+            11.57
+          ],
+          "mean_estimated_months": 29.82,
+          "mean_true_months": 44.96,
+          "mae_vs_truth_months": 15.14,
+          "mean_signed_bias_months": -15.14,
+          "ratio_estimated_over_true_median": 0.698,
+          "ratio_estimated_over_true_p25": 0.6258,
+          "ratio_estimated_over_true_p75": 0.8072,
+          "ratio_estimated_over_true_iqr": 0.1814
+        }
+      },
+      "mismatched_ps80_only": {
+        "n_lots": 15,
+        "model_adequacy_demonstrated_count": 9,
+        "model_adequacy_not_demonstrated_count": 6,
+        "model_adequacy_not_demonstrated_rate_pct": 40.0,
+        "model_adequacy_not_demonstrated_clopper_pearson_95_ci_pct": [
+          16.34,
+          67.71
+        ],
+        "mean_true_shelf_life_months": 45.23,
+        "min_true_shelf_life_months": 33.44,
+        "max_true_shelf_life_months": 75.35,
+        "classic_linear_q1e_before_30m_cap": {
+          "n_lots": 15,
+          "unsafe_exceedance_count": 11,
+          "unsafe_k_over_n": "11/15",
+          "unsafe_rate_pct": 73.33,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            44.9,
+            92.21
+          ],
+          "mean_estimated_months": 48.31,
+          "mean_true_months": 45.23,
+          "mae_vs_truth_months": 4.21,
+          "mean_signed_bias_months": 3.08,
+          "ratio_estimated_over_true_median": 1.0621,
+          "ratio_estimated_over_true_p25": 1.0079,
+          "ratio_estimated_over_true_p75": 1.1167,
+          "ratio_estimated_over_true_iqr": 0.1088
+        },
+        "hybrid_95ub_before_30m_cap": {
+          "n_lots": 15,
+          "unsafe_exceedance_count": 12,
+          "unsafe_k_over_n": "12/15",
+          "unsafe_rate_pct": 80.0,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            51.91,
+            95.67
+          ],
+          "mean_estimated_months": 48.85,
+          "mean_true_months": 45.23,
+          "mae_vs_truth_months": 5.41,
+          "mean_signed_bias_months": 3.62,
+          "ratio_estimated_over_true_median": 1.1012,
+          "ratio_estimated_over_true_p25": 1.0205,
+          "ratio_estimated_over_true_p75": 1.1595,
+          "ratio_estimated_over_true_iqr": 0.139
+        },
+        "classic_linear_q1e_after_30m_cap": {
+          "n_lots": 15,
+          "unsafe_exceedance_count": 0,
+          "unsafe_k_over_n": "0/15",
+          "unsafe_rate_pct": 0.0,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            0.0,
+            21.8
+          ],
+          "mean_estimated_months": 30.0,
+          "mean_true_months": 45.23,
+          "mae_vs_truth_months": 15.23,
+          "mean_signed_bias_months": -15.23,
+          "ratio_estimated_over_true_median": 0.6898,
+          "ratio_estimated_over_true_p25": 0.6278,
+          "ratio_estimated_over_true_p75": 0.7523,
+          "ratio_estimated_over_true_iqr": 0.1245
+        },
+        "hybrid_95ub_after_30m_cap": {
+          "n_lots": 15,
+          "unsafe_exceedance_count": 0,
+          "unsafe_k_over_n": "0/15",
+          "unsafe_rate_pct": 0.0,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            0.0,
+            21.8
+          ],
+          "mean_estimated_months": 30.0,
+          "mean_true_months": 45.23,
+          "mae_vs_truth_months": 15.23,
+          "mean_signed_bias_months": -15.23,
+          "ratio_estimated_over_true_median": 0.6898,
+          "ratio_estimated_over_true_p25": 0.6278,
+          "ratio_estimated_over_true_p75": 0.7523,
+          "ratio_estimated_over_true_iqr": 0.1245
+        }
+      },
+      "mismatched_full": {
+        "n_lots": 15,
+        "model_adequacy_demonstrated_count": 14,
+        "model_adequacy_not_demonstrated_count": 1,
+        "model_adequacy_not_demonstrated_rate_pct": 6.67,
+        "model_adequacy_not_demonstrated_clopper_pearson_95_ci_pct": [
+          0.17,
+          31.95
+        ],
+        "mean_true_shelf_life_months": 44.69,
+        "min_true_shelf_life_months": 31.61,
+        "max_true_shelf_life_months": 68.87,
+        "classic_linear_q1e_before_30m_cap": {
+          "n_lots": 15,
+          "unsafe_exceedance_count": 12,
+          "unsafe_k_over_n": "12/15",
+          "unsafe_rate_pct": 80.0,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            51.91,
+            95.67
+          ],
+          "mean_estimated_months": 47.66,
+          "mean_true_months": 44.69,
+          "mae_vs_truth_months": 3.27,
+          "mean_signed_bias_months": 2.97,
+          "ratio_estimated_over_true_median": 1.0354,
+          "ratio_estimated_over_true_p25": 1.0128,
+          "ratio_estimated_over_true_p75": 1.1098,
+          "ratio_estimated_over_true_iqr": 0.0971
+        },
+        "hybrid_95ub_before_30m_cap": {
+          "n_lots": 15,
+          "unsafe_exceedance_count": 6,
+          "unsafe_k_over_n": "6/15",
+          "unsafe_rate_pct": 40.0,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            16.34,
+            67.71
+          ],
+          "mean_estimated_months": 44.72,
+          "mean_true_months": 44.69,
+          "mae_vs_truth_months": 3.8,
+          "mean_signed_bias_months": 0.03,
+          "ratio_estimated_over_true_median": 0.9499,
+          "ratio_estimated_over_true_p25": 0.9239,
+          "ratio_estimated_over_true_p75": 1.0544,
+          "ratio_estimated_over_true_iqr": 0.1305
+        },
+        "classic_linear_q1e_after_30m_cap": {
+          "n_lots": 15,
+          "unsafe_exceedance_count": 0,
+          "unsafe_k_over_n": "0/15",
+          "unsafe_rate_pct": 0.0,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            0.0,
+            21.8
+          ],
+          "mean_estimated_months": 30.0,
+          "mean_true_months": 44.69,
+          "mae_vs_truth_months": 14.69,
+          "mean_signed_bias_months": -14.69,
+          "ratio_estimated_over_true_median": 0.7302,
+          "ratio_estimated_over_true_p25": 0.5969,
+          "ratio_estimated_over_true_p75": 0.8508,
+          "ratio_estimated_over_true_iqr": 0.2539
+        },
+        "hybrid_95ub_after_30m_cap": {
+          "n_lots": 15,
+          "unsafe_exceedance_count": 0,
+          "unsafe_k_over_n": "0/15",
+          "unsafe_rate_pct": 0.0,
+          "unsafe_clopper_pearson_95_ci_pct": [
+            0.0,
+            21.8
+          ],
+          "mean_estimated_months": 29.64,
+          "mean_true_months": 44.69,
+          "mae_vs_truth_months": 15.05,
+          "mean_signed_bias_months": -15.05,
+          "ratio_estimated_over_true_median": 0.7302,
+          "ratio_estimated_over_true_p25": 0.5969,
+          "ratio_estimated_over_true_p75": 0.8373,
+          "ratio_estimated_over_true_iqr": 0.2404
+        }
+      }
+    }
+  }
+}

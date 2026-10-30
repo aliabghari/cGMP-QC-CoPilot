@@ -1,0 +1,83 @@
+{
+  "facility": "Example Biologics Site — QC Project Management Office (PMO)",
+  "stakeholders": [
+    {
+      "stakeholder_id": "SH-01",
+      "role_title": "Director of Quality Control (Example Biologics Site Site Head)",
+      "persona_name": "Dr. Marcus Vance, Ph.D.",
+      "organization": "Example Biologics Site (Internal Executive)",
+      "communication_channel": "Daily Tier-3 Visual Management Standup & Executive Flash Email",
+      "cadence": "Daily / Escalation-Driven",
+      "primary_kpis": [
+        "Weekly Skid Utilization <=85% LEAN Ceiling",
+        "Zero Testing-into-Compliance / FDA 483 Readiness",
+        "Dual-Stream Right-First-Time (RFT > 98.5%) & FMEA RPN Reduction"
+      ]
+    },
+    {
+      "stakeholder_id": "SH-02",
+      "role_title": "Peer QC Project Managers (Commercial & Clinical Portfolio)",
+      "persona_name": "Elena Rostova, PMP & David Chen, MS",
+      "organization": "Example Biologics Site QC PMO",
+      "communication_channel": "Weekly Heijunka Capacity Leveling Board & Teams Channel",
+      "cadence": "Bi-Weekly (Tue/Thu)",
+      "primary_kpis": [
+        "Equitable UPLC/Maurice/Bioassay Skid Sharing",
+        "Site-Defined Pull Window Coordination (example ±7 d)",
+        "Shift A / Shift B Cross-Trained Analyst Balancing"
+      ]
+    },
+    {
+      "stakeholder_id": "SH-03",
+      "role_title": "Internal Global CMC Lead (Captive Pipeline Pipeline)",
+      "persona_name": "Dr. Stefan Lindqvist (Biberach / Ridgefield Global CMC)",
+      "organization": "Example Biopharma Global CMC",
+      "communication_channel": "Global CMC Matrix Sync & eCTD 3.2.P.8 Readiness Dossier",
+      "cadence": "Weekly",
+      "primary_kpis": [
+        "Zero-Float Protection for BI-CAP-101 & BI-CAP-102 Fill-Finish Slots",
+        "eCTD Module 3.2.P.8 Stability Table Completeness",
+        "Early OOT Trend Notification"
+      ]
+    },
+    {
+      "stakeholder_id": "SH-04",
+      "role_title": "External Client VP of CMC & Quality (Example CDMO Partner)",
+      "persona_name": "Dr. Priya Nair, VP Technical Operations (OncoVax / NeuroShield Partner)",
+      "organization": "External Example CDMO Partner",
+      "communication_channel": "Formal QTA Portal Notification + Joint Project Team (JPT) Brief",
+      "cadence": "Weekly JPT / <=24h QTA Event SLA",
+      "primary_kpis": [
+        "PPQ Lot #2 Release Turnaround SLA (<=10 Business Days)",
+        "24-Hour Transparent Phase I OOS/OOT Telemetry Briefing",
+        "Modular ATTP Co-Validation & SOW Change Order Clarity"
+      ]
+    },
+    {
+      "stakeholder_id": "SH-05",
+      "role_title": "Internal MSAT Upstream / Downstream Lead",
+      "persona_name": " Dr. Kenji Takahashi, Principal MSAT Engineer",
+      "organization": "Example Biologics Site MSAT (USP Bioreactor / DSP Suites, fictional example)",
+      "communication_channel": "Manufacturing-QC Handoff Tracker & Phase II RCA War Room",
+      "cadence": "Per Harvest / Campaign Batch",
+      "primary_kpis": [
+        "Contemporaneous UF/DF Pool Delivery & LIMS CoC Handoff",
+        "Bioreactor pH/DO & Protein A Viral Inactivation Data Sharing for OOS Phase II",
+        "Advance Warning of Harvest Schedule Slippages"
+      ]
+    },
+    {
+      "stakeholder_id": "SH-06",
+      "role_title": "External CRO Study Director (Outsourced Safety & Adventitious Agents)",
+      "persona_name": "Sarah Jenkins, Associate Director of Biologics Testing",
+      "organization": "Cedar Ridge / Northbay Contract Testing Lab",
+      "communication_channel": "Encrypted LIMS Portal & Weekly Outsourced TAT Ping",
+      "cadence": "Twice Weekly (Mon/Thu)",
+      "primary_kpis": [
+        "Cold-Chain Dry-Ice CoC Receipt Verification within 4h",
+        "On-Time CoA Delivery for Sterility, Endotoxin & qPCR Mycoplasma",
+        "Zero Unannounced Assay Repeat Delays"
+      ]
+    }
+  ]
+}

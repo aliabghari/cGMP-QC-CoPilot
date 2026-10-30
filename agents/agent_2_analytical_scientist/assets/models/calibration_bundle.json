@@ -1,0 +1,65 @@
+{
+  "calibration_lots_count": 60,
+  "calibration_observations_count": 1068,
+  "alpha": 0.05,
+  "gamma_lot_trajectory": 0.06,
+  "q_obs_pointwise_95": 1.87431,
+  "q_obs_simultaneous_lot_95": 5.23888,
+  "adapted_future_pi_calibration": {
+    "calibration_lots_count": 60,
+    "future_6m_9m_12m_observations_count": 288,
+    "residual_gamma_scale_factor": 0.25,
+    "q_adapted_future_overall_95": 2.04287,
+    "q_adapted_future_matched_95": 1.34132
+  },
+  "level_scaled_pi": {
+    "level_scale_beta": 0.35,
+    "q_obs_level_scaled_pointwise_95": 1.38153,
+    "q_obs_level_scaled_simultaneous_lot_95": 2.22502
+  },
+  "identifiable_parameters_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+  "identifiable_parameters": {
+    "dG_eff_ref_kj_mol": {
+      "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+      "scale_mode": "absolute",
+      "lot_effect_sd": 0.07898035991751634,
+      "conformal_multiplier_q95": 2.021637392123507,
+      "cal_rms_error": 0.1936215033427612
+    },
+    "k_eff_5c_per_h": {
+      "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+      "scale_mode": "relative",
+      "lot_effect_sd": 0.029826307380661898,
+      "conformal_multiplier_q95": 2.0495728393418746,
+      "cal_rms_error": 0.08227370053162608
+    },
+    "k_eff_25c_per_h": {
+      "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+      "scale_mode": "relative",
+      "lot_effect_sd": 0.04540406414671058,
+      "conformal_multiplier_q95": 2.0329270841484255,
+      "cal_rms_error": 0.11181922688184412
+    },
+    "k_eff_40c_per_h": {
+      "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+      "scale_mode": "relative",
+      "lot_effect_sd": 0.057298966787976864,
+      "conformal_multiplier_q95": 1.971556917891881,
+      "cal_rms_error": 0.13795553356523024
+    },
+    "apparent_ea_5_40c_kj_mol": {
+      "observability_note": "calibration possible only in synthetic data; on real lots these parameters are unobservable",
+      "scale_mode": "absolute",
+      "lot_effect_sd": 1.3494047058182455,
+      "conformal_multiplier_q95": 2.0326937491991695,
+      "cal_rms_error": 1.9901912642889925
+    }
+  },
+  "excursion_calibration_from_val_lots": {
+    "calibration_source": "validation_lots_excursions_only (split='val', n=40; test lots strictly held-out, n=80)",
+    "note": "The 60 isothermal calibration lots have no excursions; excursion dHMW intervals [L95, U95] are calibrated on the 40 validation-lot excursions using score |true_dhmw_pp - mean_pp| / sqrt(ens_sd_pp^2 + (lot_rel_sd_floor * mean_pp)^2), and evaluated strictly on the 80 held-out test-lot excursions.",
+    "val_excursions_count": 40,
+    "lot_rel_sd_floor": 0.05,
+    "conformal_multiplier_q95_val_excursions": 1.90303
+  }
+}

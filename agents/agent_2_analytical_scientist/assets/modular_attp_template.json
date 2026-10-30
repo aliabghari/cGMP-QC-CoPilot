@@ -1,0 +1,56 @@
+{
+  "protocol_id": "ATTP-EXAMPLE-2026-CEX-204",
+  "title": "Modular 'Lego' Analytical Tech Transfer Protocol (ATTP) — CEX-HPLC to CEX-UPLC",
+  "regulatory_basis": [
+    "ICH Q14 Analytical Procedure Development (ATP & Established Conditions)",
+    "ICH Q2(R2) Validation of Analytical Procedures (Co-Validation Bridging)",
+    "USP <621> Chromatography (Permitted Gradient Dwell-Volume Adjustments)"
+  ],
+  "transfer_parties": {
+    "donor_laboratory": "Example CDMO Client Partner R&D Lab (Boston, MA) — Agilent 1260 Infinity II Quaternary HPLC",
+    "receiving_laboratory": "Example Commercial QC Lab — UPLC Fleet (fictional example)"
+  },
+  "lego_modules": [
+    {
+      "module_code": "MOD-01-ATP",
+      "module_name": "Analytical Target Profile (ATP) & CQA Link",
+      "mandatory": true,
+      "objective": "Quantify Charge Variants (Acidic, Main, Basic %) of IgG mAb with baseline resolution Rs >= 1.5.",
+      "acceptance_gate": "Precision %RSD <= 2.0% for Main Peak; <= 5.0% for Acidic/Basic Groups."
+    },
+    {
+      "module_code": "MOD-02-FLUIDICS-VD",
+      "module_name": "Mechanistic Dwell-Volume (V_D) & LSS/SMA Compensation",
+      "mandatory": true,
+      "donor_parameters": {
+        "system": "Agilent 1260 Infinity II Quaternary HPLC",
+        "dwell_volume_mL": 1.15,
+        "flow_rate_mL_min": 0.80,
+        "column_dimensions": "4.6 x 100 mm, 5 µm Sulfopropyl CEX",
+        "initial_isocratic_hold_min": 2.00
+      },
+      "receiver_parameters": {
+        "system": "Waters Acquity H-Class Bio Quaternary UPLC",
+        "dwell_volume_mL": 0.32,
+        "flow_rate_mL_min": 0.80,
+        "column_dimensions": "4.6 x 100 mm, 5 µm Sulfopropyl CEX",
+        "adjusted_isocratic_hold_min": 3.04
+      },
+      "acceptance_gate": "Main Peak retention time shift |Δt_R| <= 0.15 min relative to Donor Reference Chromatogram."
+    },
+    {
+      "module_code": "MOD-03-SUITABILITY",
+      "module_name": "System Suitability & Forced Degradation Specificity Check",
+      "mandatory": true,
+      "objective": "Verify resolution of thermally stressed Asn-deamidated pre-peaks and Carboxypeptidase-B treated basic peaks.",
+      "acceptance_gate": "USP Tailing Factor 0.8 - 1.5; Theoretical Plates N >= 8,000; Resolution Rs >= 1.5."
+    },
+    {
+      "module_code": "MOD-04-EQUIVALENCE",
+      "module_name": "Two-Site Co-Validation & TOST Equivalence Design",
+      "mandatory": true,
+      "objective": "2 Analysts x 3 Days x 3 Independent Preparations across Reference Standard and 1 Stressed Lot.",
+      "acceptance_gate": "90% Confidence Interval of inter-site mean difference within ±1.5% absolute for Main Peak."
+    }
+  ]
+}

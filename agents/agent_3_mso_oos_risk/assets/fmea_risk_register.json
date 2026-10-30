@@ -1,0 +1,76 @@
+{
+  "register_id": "FMEA-EXAMPLE-QC-2026-Q4",
+  "regulatory_standard": "ICH Q9(R1) Quality Risk Management — Failure Mode and Effects Analysis (FMEA)",
+  "rpn_thresholds": {
+    "high_critical_redline": 100,
+    "medium_watch_band": 45,
+    "low_acceptable_ceiling": 44
+  },
+  "failure_modes": [
+    {
+      "fmea_id": "FM-01",
+      "process_area": "CEX-UPLC Charge Variant Analysis (TC-CEX-204)",
+      "failure_mode": "Unattended weekend sequence pause (>24h) + Sample Manager Peltier chiller drift (>15°C) causing on-tray Asn deamidation artifact",
+      "effect_of_failure": "False OOS on Acidic Peak Group; potential PPQ/BLA batch delay or improper Phase I re-testing risk",
+      "pre_severity": 8,
+      "pre_occurrence": 6,
+      "pre_detection": 5,
+      "capa_mitigation": "Empower Max Sequence Timeout hard-coded at 24h; automated LIMS IoT alert on Sample Manager >8.0°C or >250 bar backpressure; mandatory preventive in-line filter swap every 80 injections.",
+      "post_severity": 8,
+      "post_occurrence": 2,
+      "post_detection": 2
+    },
+    {
+      "fmea_id": "FM-02",
+      "process_area": "Analytical Tech Transfer (HPLC to UPLC Gradient Methods)",
+      "failure_mode": "Uncompensated system dwell volume deficit (ΔV_D = -0.83 mL) shifting CEX/RP retention times and compressing pre-peak resolution",
+      "effect_of_failure": "Co-validation failure; delayed Example CDMO Client partner timeline and repeat method bridging executions",
+      "pre_severity": 7,
+      "pre_occurrence": 5,
+      "pre_detection": 4,
+      "capa_mitigation": "Mandatory LSS/SMA mechanistic dwell-volume calculator execution in Modular ATTP Module MOD-02 prior to bench execution.",
+      "post_severity": 7,
+      "post_occurrence": 1,
+      "post_detection": 2
+    },
+    {
+      "fmea_id": "FM-03",
+      "process_area": "96-Well Cell-Based Potency Bioassay (TC-BIO-309)",
+      "failure_mode": "Evaporative edge effect in outer 36 perimeter wells (Rows A/H, Cols 1/12) during 37°C incubation distorting 4-PL Hill slope",
+      "effect_of_failure": "High assay invalidation rate (>18%) due to USP <1034> parallelism gate failures; W42 Bioassay skid bottleneck",
+      "pre_severity": 7,
+      "pre_occurrence": 6,
+      "pre_detection": 4,
+      "capa_mitigation": "Standardized Hamilton STAR liquid handler script to Inner-60 Well layout with 200 µL sterile PBS moat in Outer-36 perimeter wells.",
+      "post_severity": 7,
+      "post_occurrence": 2,
+      "post_detection": 2
+    },
+    {
+      "fmea_id": "FM-04",
+      "process_area": "Dual-Stream QC Capacity Scheduling (W42 Wave Loading)",
+      "failure_mode": "Simultaneous arrival of zero-float PPQ/BLA release lots and routine ICH Q1A stability pulls exceeding 100% UPLC skid capacity",
+      "effect_of_failure": "Analyst overtime burnout, elevated human bench error rate, and CDMO QTA turnaround SLA breach risk",
+      "pre_severity": 8,
+      "pre_occurrence": 7,
+      "pre_detection": 3,
+      "capa_mitigation": "Automated weekly Heijunka capacity leveling shifting routine 6M/9M/12M stability pulls within site-defined pull windows (example ±7 d).",
+      "post_severity": 8,
+      "post_occurrence": 2,
+      "post_detection": 2
+    },
+    {
+      "fmea_id": "FM-05",
+      "process_area": "DSP Protein A Elution & Low-pH Viral Inactivation (Phase II Interface)",
+      "failure_mode": "pH probe calibration drift during pH 3.5 viral inactivation hold causing local pH 3.2 exposure and soluble dimer/oligomer nucleation",
+      "effect_of_failure": "True batch OOS on SEC-UPLC HMW% (>2.0%) or delayed 6M 25°C OOT stability aggregation inflection",
+      "pre_severity": 9,
+      "pre_occurrence": 4,
+      "pre_detection": 4,
+      "capa_mitigation": "Dual redundant optical/glass pH probes on DSP viral inactivation skid + Hybrid Eyring+ANN-TVP early OOT stability screening at 3M/6M.",
+      "post_severity": 9,
+      "post_occurrence": 2,
+      "post_detection": 2
+    }
+  ]
+}

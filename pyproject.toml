@@ -1,0 +1,34 @@
+[project]
+name = "cGMP-QC-CoPilot"
+version = "2.0.0"
+description = "Multi-Agent cGMP Quality Control Project Management CoPilot"
+requires-python = ">=3.13, <3.15"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+exclude = [
+    ".git",
+    ".pytest_cache",
+    ".venv",
+    "venv",
+    "__pycache__",
+    "results",
+    "data",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
+ignore = [
+    "E402",  # Module level import not at top of file (Streamlit sys.path configuration)
+    "E501",  # Line too long (handled by line-length, ignored for comments/equations)
+    "E741",  # Ambiguous variable name (e.g. l for length/liquid in ODEs)
+    "F401",  # Unused imports (permitted in __init__ and UI imports)
+    "F841",  # Unused local variable (temporary extraction/unpacking)
+    "W291",  # Trailing whitespace (markdown block text)
+    "W293",  # Blank line whitespace (markdown multiline strings)
+]
